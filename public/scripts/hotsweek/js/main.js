@@ -1,11 +1,13 @@
 var presets
 var dataGlobal
+var dataRanking
 var dataPersonal
 var playerInfo
 // var timestamp = Math.round(new Date().getTime() / 1000)
 // var weekNumber = Math.trunc((timestamp + 345600) / 604800) + 1;
 var urlPresets = '/week/api/report/presets'
 var urlGlobal = '/week/api/report/global/' + weekNumber
+var urlRanking = '/week/api/report/ranking/' + weekNumber
 var urlPersonal = '/week/api/report/personal/' + weekNumber + '/' + playerID
 
 var fetchData = function (url, params = null) {
@@ -59,17 +61,21 @@ var matchPresets = function (_data) {
 Promise.all([
     fetchData(urlPresets),
     fetchData(urlGlobal),
+    fetchData(urlRanking),
     fetchData(urlPersonal),
 ]).then(function ({
     0: presets,
     1: dataGlobal,
-    2: dataPersonal
+    2: dataRanking,
+    3: dataPersonal
 }) {
 	window.playerInfo = dataPersonal.PlayerInfo
     window.presets = presets
     window.dataGlobal = parseFields(dataGlobal)
+    window.dataRanking = parseFields(dataRanking)
 	window.dataPersonal = parseFields(dataPersonal)
     console.log(window.dataGlobal)
+    console.log(window.dataRanking)
     console.log(window.dataPersonal)
     main()
 })
