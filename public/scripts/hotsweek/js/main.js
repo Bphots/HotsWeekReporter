@@ -89,7 +89,9 @@ var main = function () {
         var item = counter[i]
 		var title = item[0]
 		var content = item[1]()
-        document.write(title[lang] + ': ' + content[lang] + "<br />")
+		if(content !== false) {
+            document.write(title[lang] + ': ' + content[lang] + "<br />")
+        }
     }
 	for (var i in events) {
         var item = events[i]
