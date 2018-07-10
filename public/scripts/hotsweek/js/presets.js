@@ -1036,6 +1036,152 @@ var counter = {
             ]
         }
     ],
+    'WeekGlobalMostUsed': [
+        ['Global Most Used Heroes', '全球使用最多的英雄'],
+        function () {
+            var item = dataGlobal.PlayerHeroes._sumMax.game_total
+            var heroID = item[0]
+            var times = item[1]
+            return [
+                'Hero ' + heroID + ' was used ' + times + ' times',
+                '英雄 ' + heroID + ' 被使用了 ' + times + ' 次'
+            ]
+        }
+    ],
+    'WeekGlobalTimes': [
+        ['Global Times', '全球场次'],
+        function () {
+            var count = dataGlobal.PlayerBase.game_total.sum
+            return [
+                count + ' times',
+                count + ' 局'
+            ]
+        }
+    ],
+    'WeekGlobalLength': [
+        ['Global Length', '全球时长'],
+        function () {
+            var data = Math.round(dataGlobal.PlayerBase.game_length.sum / 60)
+            return [
+                data + ' minutes',
+                data + ' 分钟'
+            ]
+        }
+    ],
+    'WeekGlobalWin': [
+        ['Global Win', '全球胜场'],
+        function () {
+            var data = dataGlobal.PlayerBase.game_win.sum 
+            return [
+                data + ' times',
+                data + ' 局'
+            ]
+        }
+    ],
+    'WeekGlobalMostWinInHeroLeague': [
+        ['Global Most Win Heroes In Hero League', '英雄联赛全球胜率最高的英雄'],
+        function () {
+            var heroID = 0
+            var winRate = 0
+            var gloheroArr = []
+            for(var i in dataGlobal.PlayerHeroes){
+                gloheroArr.push(dataGlobal.PlayerHeroes[i])
+            }
+             for(var hero in gloheroArr){
+                 if(gloheroArr[hero].game_total_HeroLeague.sum > 0) {
+                     var Rate = (gloheroArr[hero].game_win_HeroLeague.sum / gloheroArr[hero].game_total_HeroLeague.sum * 100).toFixed(2)
+                     if ( Rate > winRate) {
+                         winRate = Rate
+                         heroID = parseInt(hero) + 1
+                     }
+                 }
+            }
+            if(winRate <= 0)
+                return false
+            return [
+                'Hero ' + heroID + ' Hero League WinRate is  ' + winRate + '%',
+                '英雄 ' + heroID + ' 英雄联赛胜率是 ' + winRate + '%'
+            ]
+        }
+    ],
+    'WeekGlobalMostWinInTeamLeague': [
+        ['Global Most Win Heroes In Team League', '团队联赛全球胜率最高的英雄'],
+        function () {
+            var heroID = 0
+            var winRate = 0
+            var gloheroArr = []
+            for(var i in dataGlobal.PlayerHeroes){
+                gloheroArr.push(dataGlobal.PlayerHeroes[i])
+            }
+            for(var hero in gloheroArr){
+                if(gloheroArr[hero].game_total_TeamLeague.sum>0) {
+                    var Rate = (gloheroArr[hero].game_win_TeamLeague.sum / gloheroArr[hero].game_total_TeamLeague.sum * 100).toFixed(2)
+                    if ( Rate > winRate) {
+                        winRate = Rate
+                        heroID = parseInt(hero) + 1
+                    }
+                }
+            }
+            if(winRate <= 0)
+                return false
+            return [
+                'Hero ' + heroID + ' Team League WinRate is  ' + winRate + '%',
+                '英雄 ' + heroID + ' 团队联赛胜率是 ' + winRate + '%'
+            ]
+        }
+    ],
+    'WeekGlobalMostWinInQuickMatch': [
+        ['Global Most Win Heroes In Quick Match', '快速比赛全球胜率最高的英雄'],
+        function () {
+            var heroID = 0
+            var winRate = 0
+            var gloheroArr = []
+            for(var i in dataGlobal.PlayerHeroes){
+                gloheroArr.push(dataGlobal.PlayerHeroes[i])
+            }
+            for(var hero in gloheroArr){
+                if(gloheroArr[hero].game_total_QuickMatch.sum>0) {
+                    var Rate = (gloheroArr[hero].game_win_QuickMatch.sum / gloheroArr[hero].game_total_QuickMatch.sum * 100).toFixed(2)
+                    if (Rate > winRate) {
+                        winRate = Rate
+                        heroID = parseInt(hero) + 1
+                    }
+                }
+            }
+            if(winRate <= 0)
+                return false
+            return [
+                'Hero ' + heroID + ' Quick Match WinRate is  ' + winRate + '%',
+                '英雄 ' + heroID + ' 快速比赛胜率是 ' + winRate + '%'
+            ]
+        }
+    ],
+    'WeekGlobalMostWinInUnrankedDraft': [
+        ['Global Most Win Heroes In Unranked Draft', '非排名模式全球胜率最高的英雄'],
+        function () {
+            var heroID = 0
+            var winRate = 0
+            var gloheroArr = []
+            for(var i in dataGlobal.PlayerHeroes){
+                gloheroArr.push(dataGlobal.PlayerHeroes[i])
+            }
+            for(var hero in gloheroArr){
+                if(gloheroArr[hero].game_total_UnrankedDraft.sum>0) {
+                    var Rate = (gloheroArr[hero].game_win_UnrankedDraft.sum / gloheroArr[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
+                    if (Rate > winRate) {
+                        winRate = Rate
+                        heroID = parseInt(hero) + 1
+                    }
+                }
+            }
+            if(winRate <= 0)
+                return false
+            return [
+                'Hero ' + heroID + ' Unranked Draft WinRate is  ' + winRate + '%',
+                '英雄 ' + heroID + ' 非排名模式胜率是 ' + winRate + '%'
+            ]
+        }
+    ],
 }
 
 var events = {
@@ -1225,6 +1371,33 @@ var events = {
             return limit?[
                 'On Tomb Of The Spider Queen, you Turned In ' + TurnedIn + ' per game, you are the very loyal servant of The sipder queen',
                 '蛛后墓地图中，你平均每场上交了 '+ TurnedIn + ' 宝石，蛛后的忠心的仆从就是你啦',
+            ]:false
+        }
+    ],
+    'TheLoverHero': [
+        ['The Hero', '本命英雄'],
+        function () {
+            var item = dataPersonal.PlayerHeroes._sumMax.game_total
+            var heroID = item[0]
+            var times = item[1]
+            var winRate = ( dataPersonal.PlayerHeroes[heroID].game_win / dataPersonal.PlayerHeroes[heroID].game_total ).toFixed(2)
+            var limit = winRate > 0.5
+            return limit?[
+                'You played Hero ' + heroID  + ' for' + times + 'times,with the '+ winRate + '% WinRate ',
+                '你使用了英雄 ' + heroID + ' 上场了 '+ times + '次，胜率达到了' + winRate + '%',
+            ]:false
+        }
+    ],
+    'VengeanceAngel': [
+        ['VengeanceAngel', '复仇天使'],
+        function () {
+            var times_per = ( dataPersonal.PlayerBase.VengeancesPerformed.sum / dataPersonal.PlayerBase.game_total.sum ).toFixed(2)
+            var times_glo = ( dataGlobal.PlayerBase.VengeancesPerformed.sum / dataGlobal.PlayerBase.game_total.sum ).toFixed(2)
+            var times=dataPersonal.PlayerBase.VengeancesPerformed.sum
+            var limit = times_per > times_glo
+            return limit?[
+                'You have revenge ' + times + ' times, on average '+ times_per + ' times',
+                '你复仇了 ' + times + ' 次，平均每场 '+ times_per + ' 次',
             ]:false
         }
     ],
