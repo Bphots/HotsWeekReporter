@@ -602,7 +602,7 @@ var counter = {
         }
     ],
     'WinsWarrior': [
-        ['Wins Warrior', '战斗型胜场'],
+        ['Wins Warrior', '战斗型英雄胜场'],
         function () {
             var times = dataPersonal.PlayerBase.WinsWarrior.sum
             return[
@@ -612,7 +612,7 @@ var counter = {
         }
     ],
     'WinsAssassin': [
-        ['Wins Assassin', '刺杀型胜场'],
+        ['Wins Assassin', '刺杀型英雄胜场'],
         function () {
             var times = dataPersonal.PlayerBase.WinsAssassin.sum
             return[
@@ -622,7 +622,7 @@ var counter = {
         }
     ],
     'WinsSupport': [
-        ['Wins Support', '辅助型胜场'],
+        ['Wins Support', '辅助型英雄胜场'],
         function () {
             var times = dataPersonal.PlayerBase.WinsAssassin.sum
             return[
@@ -632,7 +632,7 @@ var counter = {
         }
     ],
     'WinsSpecialist': [
-        ['Wins Specialist', '专业型胜场'],
+        ['Wins Specialist', '专业型英雄胜场'],
         function () {
             var times = dataPersonal.PlayerBase.WinsSpecialist.sum
             return[
@@ -691,7 +691,6 @@ var counter = {
             ]
         }
     ],
-
     'GamesOfWarrior': [
         ['Tanks Played', '战斗型英雄局数'],
         function () {
@@ -713,7 +712,7 @@ var counter = {
         }
     ],
     'GamesOfSupport': [
-        ['Plays Support', '治疗型英雄局数'],
+        ['Support Played', '治疗型英雄局数'],
         function () {
             var games = dataPersonal.PlayerBase.PlaysSupport.sum
             return[
@@ -723,7 +722,7 @@ var counter = {
         }
     ],
     'GamesOfSpecialist': [
-        ['Plays Specialist', '专业型英雄局数'],
+        ['Specialist Played', '专业型英雄局数'],
         function () {
             var games = dataPersonal.PlayerBase.PlaysSpecialist.sum
             return[
@@ -749,6 +748,62 @@ var counter = {
             return[
                 games + ' times',
                 games + ' 局'
+            ]
+        }
+    ],
+    'WinRateOfWarrior': [
+        ['Tanks WinRate', '战斗型英雄胜率'],
+        function () {
+            var games = dataPersonal.PlayerBase.PlaysWarrior.sum
+            if(games <= 0)
+                return false
+            var wins = dataPersonal.PlayerBase.WinsWarrior.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'WinRateOfAssassin': [
+        ['Assassins WinRate', '刺杀型英雄胜率'],
+        function () {
+            var games = dataPersonal.PlayerBase.PlaysAssassin.sum
+            if(games <= 0)
+                return false
+            var wins = dataPersonal.PlayerBase.WinsAssassin.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'WinRateOfSupport': [
+        ['Support WinRate', '治疗型英雄胜率'],
+        function () {
+            var games = dataPersonal.PlayerBase.PlaysSupport.sum
+            if(games <= 0)
+                return false
+            var wins = dataPersonal.PlayerBase.WinsSupport.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'WinRateOfSpecialist': [
+        ['Specialist WinRate', '专业型英雄胜率'],
+        function () {
+            var games = dataPersonal.PlayerBase.PlaysSpecialist.sum
+            if(games <= 0)
+                return false
+            var wins = dataPersonal.PlayerBase.WinsSpecialist.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
             ]
         }
     ],
@@ -1071,7 +1126,7 @@ var counter = {
     'WeekGlobalWin': [
         ['Global Win', '全球胜场'],
         function () {
-            var data = dataGlobal.PlayerBase.game_win.sum 
+            var data = dataGlobal.PlayerBase.game_win.sum
             return [
                 data + ' times',
                 data + ' 局'
@@ -1090,7 +1145,7 @@ var counter = {
              for(var hero in gloheroArr){
                  if(gloheroArr[hero].game_total_HeroLeague.sum > 0) {
                      var Rate = (gloheroArr[hero].game_win_HeroLeague.sum / gloheroArr[hero].game_total_HeroLeague.sum * 100).toFixed(2)
-                     if ( Rate > winRate) {
+                     if ( Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
                          winRate = Rate
                          heroID = parseInt(hero) + 1
                      }
@@ -1116,7 +1171,7 @@ var counter = {
             for(var hero in gloheroArr){
                 if(gloheroArr[hero].game_total_TeamLeague.sum>0) {
                     var Rate = (gloheroArr[hero].game_win_TeamLeague.sum / gloheroArr[hero].game_total_TeamLeague.sum * 100).toFixed(2)
-                    if ( Rate > winRate) {
+                    if ( Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
                         heroID = parseInt(hero) + 1
                     }
@@ -1142,7 +1197,7 @@ var counter = {
             for(var hero in gloheroArr){
                 if(gloheroArr[hero].game_total_QuickMatch.sum>0) {
                     var Rate = (gloheroArr[hero].game_win_QuickMatch.sum / gloheroArr[hero].game_total_QuickMatch.sum * 100).toFixed(2)
-                    if (Rate > winRate) {
+                    if (Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
                         heroID = parseInt(hero) + 1
                     }
@@ -1168,7 +1223,7 @@ var counter = {
             for(var hero in gloheroArr){
                 if(gloheroArr[hero].game_total_UnrankedDraft.sum>0) {
                     var Rate = (gloheroArr[hero].game_win_UnrankedDraft.sum / gloheroArr[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
-                    if (Rate > winRate) {
+                    if (Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
                         heroID = parseInt(hero) + 1
                     }
@@ -1179,6 +1234,142 @@ var counter = {
             return [
                 'Hero ' + heroID + ' Unranked Draft WinRate is  ' + winRate + '%',
                 '英雄 ' + heroID + ' 非排名模式胜率是 ' + winRate + '%'
+            ]
+        }
+    ],
+    'GlobalWinsWarrior': [
+        ['Global Wins Warrior', '战斗型英雄全球胜场'],
+        function () {
+            var times =dataGlobal.PlayerBase.WinsWarrior.sum
+            return[
+                times + " times",
+                times + " 局",
+            ]
+        }
+    ],
+    'GlobalWinsAssassin': [
+        ['Global Wins Assassin', '刺杀型英雄全球胜场'],
+        function () {
+            var times = dataGlobal.PlayerBase.WinsAssassin.sum
+            return[
+                times + " times",
+                times + " 局",
+            ]
+        }
+    ],
+    'GlobalWinsSupport': [
+        ['Global Wins Support', '辅助型英雄全球胜场'],
+        function () {
+            var times = dataGlobal.PlayerBase.WinsAssassin.sum
+            return[
+                times + " times",
+                times + " 局",
+            ]
+        }
+    ],
+    'GlobalWinsSpecialist': [
+        ['Global Wins Specialist', '专业型英雄全球胜场'],
+        function () {
+            var times = dataGlobal.PlayerBase.WinsSpecialist.sum
+            return[
+                times + " times",
+                times + " 局",
+            ]
+        }
+    ],
+    'GlobalGamesOfWarrior': [
+        ['Global Tanks Played', '战斗型英雄全球局数'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysWarrior.sum
+            return[
+                games + ' times',
+                games + ' 局'
+            ]
+        }
+    ],
+    'GlobalGamesOfAssassin': [
+        ['Global Assassins Played', '刺杀型英雄全球局数'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysAssassin.sum
+            return[
+                games + ' times',
+                games + ' 局'
+            ]
+        }
+    ],
+    'Global GamesOfSupport': [
+        ['Global Plays Support', '治疗型英雄全球局数'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysSupport.sum
+            return[
+                games + ' times',
+                games + ' 局'
+            ]
+        }
+    ],
+    'GlobalGamesOfSpecialist': [
+        ['Global Plays Specialist', '专业型英雄全球局数'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysSpecialist.sum
+            return[
+                games + ' times',
+                games + ' 局'
+            ]
+        }
+    ],
+    'GlobalWinRateOfWarrior': [
+        ['Global Tanks WinRate', '战斗型英雄全球胜率'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysWarrior.sum
+            if(games <= 0)
+                return false
+            var wins = dataGlobal.PlayerBase.WinsWarrior.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'GlobalWinRateOfAssassin': [
+        ['Global Assassins WinRate', '刺杀型英雄全球胜率'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysAssassin.sum
+            if(games <= 0)
+                return false
+            var wins = dataGlobal.PlayerBase.WinsAssassin.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'GlobalWinRateOfSupport': [
+        ['Global Support WinRate', '治疗型英雄全球胜率'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysSupport.sum
+            if(games <= 0)
+                return false
+            var wins = dataGlobal.PlayerBase.WinsSupport.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
+            ]
+        }
+    ],
+    'GlobalWinRateOfSpecialist': [
+        ['Global Specialist WinRate', '专业型英雄全球胜率'],
+        function () {
+            var games = dataGlobal.PlayerBase.PlaysSpecialist.sum
+            if(games <= 0)
+                return false
+            var wins = dataGlobal.PlayerBase.WinsSpecialist.sum
+            var winRate = (wins / games * 100).toFixed(2)
+            return[
+                winRate + '%',
+                winRate + '%'
             ]
         }
     ],
