@@ -1659,7 +1659,7 @@ var events = {
             var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             var AlarakGlobal = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             if(AlarakWinRate <= AlarakGlobal) {
-            var limit = Alarak > 10 && MurkyWinRate > 50
+            var limit = Alarak > 10 && AlarakWinRate > 50
             return limit?[
                 'Such a shame, I personally appeared in the ' + games + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
                 '真是丢人现眼，我亲自登场了 ' + games + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有' + AlarakGlobal + '%，不要再让我登场了！',
@@ -1667,8 +1667,8 @@ var events = {
             }
            if(AlarakWinRate > AlarakGlobal) {
            return limit?[
-                'General Performance, I personally appeared in the ' + games + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you. ',
-                '表现还行，我亲自登场了 ' + games + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑帮你的。',
+                'General Performance, I personally appeared in the ' + games + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
+                '表现还行，我亲自登场了 ' + games + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑再帮你的。',
                 ]:false
             }
       }
