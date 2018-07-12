@@ -1138,16 +1138,12 @@ var counter = {
         function () {
             var heroID = 0
             var winRate = 0
-            var gloheroArr = []
-            for(var i in dataGlobal.PlayerHeroes){
-                gloheroArr.push(dataGlobal.PlayerHeroes[i])
-            }
-             for(var hero in gloheroArr){
-                 if(gloheroArr[hero].game_total_HeroLeague.sum > 0) {
-                     var Rate = (gloheroArr[hero].game_win_HeroLeague.sum / gloheroArr[hero].game_total_HeroLeague.sum * 100).toFixed(2)
-                     if ( Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
+             for(var hero in dataGlobal.PlayerHeroes){
+                 if(dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
+                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
+                     if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
                          winRate = Rate
-                         heroID = parseInt(hero) + 1
+                         heroID = parseInt(hero)
                      }
                  }
             }
@@ -1164,16 +1160,12 @@ var counter = {
         function () {
             var heroID = 0
             var winRate = 0
-            var gloheroArr = []
-            for(var i in dataGlobal.PlayerHeroes){
-                gloheroArr.push(dataGlobal.PlayerHeroes[i])
-            }
-            for(var hero in gloheroArr){
-                if(gloheroArr[hero].game_total_TeamLeague.sum>0) {
-                    var Rate = (gloheroArr[hero].game_win_TeamLeague.sum / gloheroArr[hero].game_total_TeamLeague.sum * 100).toFixed(2)
-                    if ( Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
+            for(var hero in dataGlobal.PlayerHeroes){
+                if(dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum>0) {
+                    var Rate = (dataGlobal.PlayerHeroes[hero].game_win_TeamLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum * 100).toFixed(2)
+                    if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
-                        heroID = parseInt(hero) + 1
+                        heroID = parseInt(hero)
                     }
                 }
             }
@@ -1190,16 +1182,12 @@ var counter = {
         function () {
             var heroID = 0
             var winRate = 0
-            var gloheroArr = []
-            for(var i in dataGlobal.PlayerHeroes){
-                gloheroArr.push(dataGlobal.PlayerHeroes[i])
-            }
-            for(var hero in gloheroArr){
-                if(gloheroArr[hero].game_total_QuickMatch.sum>0) {
-                    var Rate = (gloheroArr[hero].game_win_QuickMatch.sum / gloheroArr[hero].game_total_QuickMatch.sum * 100).toFixed(2)
-                    if (Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
+            for(var hero in dataGlobal.PlayerHeroes){
+                if(dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum>0) {
+                    var Rate = (dataGlobal.PlayerHeroes[hero].game_win_QuickMatch.sum / dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum * 100).toFixed(2)
+                    if (Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
-                        heroID = parseInt(hero) + 1
+                        heroID = parseInt(hero)
                     }
                 }
             }
@@ -1216,16 +1204,12 @@ var counter = {
         function () {
             var heroID = 0
             var winRate = 0
-            var gloheroArr = []
-            for(var i in dataGlobal.PlayerHeroes){
-                gloheroArr.push(dataGlobal.PlayerHeroes[i])
-            }
-            for(var hero in gloheroArr){
-                if(gloheroArr[hero].game_total_UnrankedDraft.sum>0) {
-                    var Rate = (gloheroArr[hero].game_win_UnrankedDraft.sum / gloheroArr[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
-                    if (Rate > winRate && gloheroArr[hero].game_total_UnrankedDraft.sum>5) {
+            for(var hero in dataGlobal.PlayerHeroes){
+                if(dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>0) {
+                    var Rate = (dataGlobal.PlayerHeroes[hero].game_win_UnrankedDraft.sum / dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
+                    if (Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
                         winRate = Rate
-                        heroID = parseInt(hero) + 1
+                        heroID = parseInt(hero)
                     }
                 }
             }
@@ -1571,26 +1555,124 @@ var events = {
             var item = dataPersonal.PlayerHeroes._sumMax.game_total
             var heroID = item[0]
             var times = item[1]
-            var winRate = ( dataPersonal.PlayerHeroes[heroID].game_win / dataPersonal.PlayerHeroes[heroID].game_total ).toFixed(2)
-            var limit = winRate > 0.5
+            var winRate = ( dataPersonal.PlayerHeroes[heroID].game_win.sum / dataPersonal.PlayerHeroes[heroID].game_total.sum *100 ).toFixed(2)
+            var limit = winRate > 50
             return limit?[
                 'You played Hero ' + heroID  + ' for' + times + 'times,with the '+ winRate + '% WinRate ',
                 '你使用了英雄 ' + heroID + ' 上场了 '+ times + '次，胜率达到了' + winRate + '%',
             ]:false
         }
     ],
-    'VengeanceAngel': [
-        ['VengeanceAngel', '复仇天使'],
+    'MyLifeforaier': [
+        ['My Life For Aier', '为了艾尔'],
         function () {
-            var times_per = ( dataPersonal.PlayerBase.VengeancesPerformed.sum / dataPersonal.PlayerBase.game_total.sum ).toFixed(2)
-            var times_glo = ( dataGlobal.PlayerBase.VengeancesPerformed.sum / dataGlobal.PlayerBase.game_total.sum ).toFixed(2)
-            var times=dataPersonal.PlayerBase.VengeancesPerformed.sum
-            var limit = times_per > times_glo
+        if(dataPersonal.PlayerHeroes[1] === undefined || dataPersonal.PlayerHeroes[6] === undefined || dataPersonal.PlayerHeroes[43] === undefined ||
+           dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[64] === undefined || dataPersonal.PlayerHeroes[78] === undefined)
+            return false
+            var Zeratul = dataPersonal.PlayerHeroes[1].game_total.sum > 5
+            var Tassadar = dataPersonal.PlayerHeroes[6].game_total.sum > 2
+            var Artanis = dataPersonal.PlayerHeroes[43].game_total.sum > 5
+            var Alarak = dataPersonal.PlayerHeroes[56].game_total.sum > 5
+            var Probius = dataPersonal.PlayerHeroes[64].game_total.sum > 2
+            var Fenix = dataPersonal.PlayerHeroes[78].game_total.sum > 5
+            var limit = Zeratul && Tassadar && Artanis && Alarak && Probius && Fenix
             return limit?[
-                'You have revenge ' + times + ' times, on average '+ times_per + ' times',
-                '你复仇了 ' + times + ' 次，平均每场 '+ times_per + ' 次',
+                'En taro Tassadar! Zeratul, Tassadar,Artanis, Alarak, Probius,Fenix and other Protoss heroes have been called many times!',
+                'En taro Tassadar！泽拉图、塔萨达尔、阿塔尼斯、阿拉纳克、普罗比斯、菲尼克斯等星灵英雄多次被你征召！',
             ]:false
         }
+    ],
+    'IamTheSwarm': [
+        ['I am The Swarm', '我既是虫群'],
+        function () {
+            if(dataPersonal.PlayerHeroes[15] === undefined || dataPersonal.PlayerHeroes[22] === undefined || dataPersonal.PlayerHeroes[27] === undefined ||
+                dataPersonal.PlayerHeroes[50] === undefined || dataPersonal.PlayerHeroes[69] === undefined)
+                return false
+            var Kerrigan = dataPersonal.PlayerHeroes[15].game_total.sum > 5
+            var Abathur = dataPersonal.PlayerHeroes[22].game_total.sum > 5
+            var Zagara = dataPersonal.PlayerHeroes[27].game_total.sum > 3
+            var Dehaka = dataPersonal.PlayerHeroes[50].game_total.sum > 5
+            var Stukov = dataPersonal.PlayerHeroes[69].game_total.sum > 3
+            var limit = Kerrigan && Abathur && Zagara && Dehaka && Stukov
+            return limit?[
+                'For the Zerg!! Kerrigan, Abathur, Zagara, Dehaka, Stukov and other Zerg heroes have been called many times!',
+                '不愧是Zerg 玩家！凯瑞甘、阿巴瑟、扎加拉、德哈卡、斯图科夫等虫族英雄多次被你征召！',
+            ]:false
+        }
+    ],
+    'WingsOfLiberty': [
+        ['Wings of Liberty', '自由之翼'],
+        function () {
+            if(dataPersonal.PlayerHeroes[9] === undefined || dataPersonal.PlayerHeroes[10] === undefined || dataPersonal.PlayerHeroes[11] === undefined ||
+                dataPersonal.PlayerHeroes[23] === undefined || dataPersonal.PlayerHeroes[42] === undefined || dataPersonal.PlayerHeroes[76] === undefined)
+                return false
+            var SgtHammer = dataPersonal.PlayerHeroes[9].game_total.sum > 5
+            var Raynor = dataPersonal.PlayerHeroes[10].game_total.sum > 5
+            var Nova = dataPersonal.PlayerHeroes[11].game_total.sum > 3
+            var Tychus = dataPersonal.PlayerHeroes[23].game_total.sum > 5
+            var LtMorales = dataPersonal.PlayerHeroes[42].game_total.sum > 3
+            var Blaze = dataPersonal.PlayerHeroes[76].game_total.sum > 5
+            var limit = SgtHammer && Raynor && Nova && Tychus && LtMorales && Blaze
+            return limit?[
+                'SCV is ready！ SgtHammer,Raynor,Nova,Tychus,LtMorales,Blaze and other Terran heroes have been called many times!',
+                'SCV 准备就绪！重锤军士、雷诺、诺娃、泰凯斯、莫拉莉斯中尉、布雷泽等人族英雄多次被你征召！',
+            ]:false
+        }
+    ],
+    'DeepDarkFantasy': [
+        ['Deep ♂ Dark ♂ Fantasy', 'Deep ♂ Dark ♂ Fantasy'],
+        function () {
+            if(dataPersonal.PlayerHeroes[20] === undefined||dataPersonal.PlayerHeroes[23] === undefined||dataPersonal.PlayerHeroes[70] === undefined)
+                return false
+            var Diablo = dataPersonal.PlayerHeroes[20].game_total.sum > 5 && ( (dataPersonal.PlayerHeroes[20].game_total.sum / dataPersonal.PlayerHeroes[20].game_total.sum) >0.5 )
+            var Tychus = dataPersonal.PlayerHeroes[23].game_total.sum > 5 && ( (dataPersonal.PlayerHeroes[23].game_total.sum / dataPersonal.PlayerHeroes[23].game_total.sum) >0.5 )
+            var Garrosh = dataPersonal.PlayerHeroes[70].game_total.sum > 5 && ( (dataPersonal.PlayerHeroes[70].game_total.sum / dataPersonal.PlayerHeroes[70].game_total.sum) >0.5 )
+            var limit = Diablo && Tychus && Garrosh
+            return limit?[
+                'Boy ♂ Next ♂ Door！ Diablo,Tychus,Garrosh have been called many times! And their WinRate all beyond 50%',
+                'Boy ♂ Next ♂ Door！迪亚波罗、泰凯斯、加尔鲁什多次被你征召！并且胜率都超过了 50%',
+            ]:false
+        }
+    ],
+    'MurkyKing': [
+        ['Grglrgl！Lrgl grgrmrmlgr！', 'Grglrgl！Lrgl grgrmrmlgr！'],
+        function () {
+            if(dataPersonal.PlayerHeroes[26] === undefined || dataPersonal.PlayerHeroes[26].game_total.sum < 10)
+                return false
+            var Murky = dataPersonal.PlayerHeroes[26].game_total.sum
+            var MurkyWinRate =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var MurkyGlobal =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var limit = Murky > 10 && MurkyWinRate > 50
+            return limit?[
+                'You played '+ Murky + ' times Murky, the WinRate reached '+ MurkyWinRate + '%, the Murky global WinRate is '+MurkyGlobal + '%',
+                '你玩了 '+ Murky + '局鱼人，胜率达到了 '+ MurkyWinRate + '%，鱼人的全球胜率是 '+ MurkyGlobal + '%',
+            ]:false
+        }
+    ],
+    'Alarak': [
+        ['Krisol thok aran!', '骚骚可浪'],
+        function () {
+            if(dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[56].game_total.sum < 10)
+                return false
+            var Alarak = dataPersonal.PlayerHeroes[56].game_win.sum
+            var games = dataPersonal.PlayerHeroes[56].game_total.sum
+            var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            var AlarakGlobal = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            if(AlarakWinRate <= AlarakGlobal) {
+            var limit = Alarak > 10 && MurkyWinRate > 50
+            return limit?[
+                'Such a shame, I personally appeared in the ' + games + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
+                '真是丢人现眼，我亲自登场了 ' + games + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有' + AlarakGlobal + '%，不要再让我登场了！',
+                ]:false
+            }
+           if(AlarakWinRate > AlarakGlobal) {
+           return limit?[
+                'General Performance, I personally appeared in the ' + games + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you. ',
+                '表现还行，我亲自登场了 ' + games + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑帮你的。',
+                ]:false
+            }
+      }
+
     ],
 }
 
