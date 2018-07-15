@@ -388,7 +388,7 @@ var counter = {
     'week_min_level': [
         ['Min Level Reached', '最低等级'],
         function () {
-            var  arr = object_to_array(dataPersonal.PlayerBase.Level_count.sum)
+            var arr = object_to_array(dataPersonal.PlayerBase.Level_count.sum)
             var data = arr[0]
             return [
                 data,
@@ -985,7 +985,7 @@ var counter = {
         ['The Win Rate of 2 Premades', '两人开黑胜率'],
         function () {
             var count = dataPersonal.PlayerBase.party_total_2.sum;
-            if (count < 0)
+            if (count <= 0)
                 return false;
 
             var WinRate=(dataPersonal.PlayerBase.party_win_2.sum / dataPersonal.PlayerBase.party_total_2.sum * 100).toFixed(2)
@@ -1139,13 +1139,13 @@ var counter = {
             var heroID = 0
             var winRate = 0
              for(var hero in dataGlobal.PlayerHeroes){
-                 if(dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
-                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
-                     if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
-                         winRate = Rate
-                         heroID = parseInt(hero)
-                     }
-                 }
+                if(dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
+                    var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
+                    if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
+                        winRate = Rate
+                        heroID = parseInt(hero)
+                    }
+                }
             }
             if(winRate <= 0)
                 return false
