@@ -1654,25 +1654,111 @@ var events = {
         function () {
             if(dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[56].game_total.sum < 10)
                 return false
-            var Alarak = dataPersonal.PlayerHeroes[56].game_win.sum
-            var games = dataPersonal.PlayerHeroes[56].game_total.sum
+            var Alarakwins = dataPersonal.PlayerHeroes[56].game_win.sum
+            var Alarakgames = dataPersonal.PlayerHeroes[56].game_total.sum
             var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             var AlarakGlobal = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             if(AlarakWinRate <= AlarakGlobal) {
-            var limit = Alarak > 10 && AlarakWinRate > 50
+                var limit1 = Alarakwins > 10 && AlarakWinRate < 50
+                return limit1?[
+                    'Such a shame, I personally appeared in the ' + Alarakgames + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
+                    '真是丢人现眼，我亲自登场了 ' + Alarakgames + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有' + AlarakGlobal + '%，不要再让我登场了！',
+                ]:false
+            }
+            if(AlarakWinRate > AlarakGlobal) {
+                var limit2 = Alarakwins > 10 && AlarakWinRate > 50
+                return limit2?[
+                    'General Performance, I personally appeared in the ' + Alarakgames + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
+                    '表现还行，我亲自登场了 ' + Alarakgames + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑再帮你的。',
+                ]:false
+            }
+        }
+    ],
+    'Abathur': [
+        ['Evolution complete!', '进化完成'],
+        function () {
+            if(dataPersonal.PlayerHeroes[22] === undefined || dataPersonal.PlayerHeroes[22].game_total.sum < 10)
+                return false
+            var Abathurwins = dataPersonal.PlayerHeroes[22].game_win.sum
+            var Abathurgames = dataPersonal.PlayerHeroes[22].game_total.sum
+            var AbathurWinRate = (dataPersonal.PlayerHeroes[22].game_total.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            var AbathurGlobal = (dataPersonal.PlayerHeroes[22].game_total.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            if(AlarakWinRate > AlarakGlobal) {
+                var limit = Abathurwins > 10 && AbathurWinRate > 50
+                return limit?[
+                    'Evolution Complete! Abathur appeared in the ' + Abathurgames + ' times, winning rate reach '+ AbathurWinRate + '%, the global Abathur average WinRate is ' + AbathurGlobal + '%, good play! ',
+                    '进化成功！阿巴瑟登场了 ' + Abathurgames + '局，胜率才 '+ AbathurWinRate + '%,阿巴瑟全球胜率：' + AbathurGlobal + '%，玩的不错！',
+                ]:false
+            }
+        }
+    ],
+    'ForTheAlliance': [
+        ['For the Alliance', '为了联盟'],
+        function () {
+            if(dataPersonal.PlayerHeroes[3] === undefined || dataPersonal.PlayerHeroes[4] === undefined || dataPersonal.PlayerHeroes[13] === undefined ||
+                dataPersonal.PlayerHeroes[18] === undefined || dataPersonal.PlayerHeroes[32] === undefined || dataPersonal.PlayerHeroes[36] === undefined ||
+                dataPersonal.PlayerHeroes[47] === undefined || dataPersonal.PlayerHeroes[53] === undefined || dataPersonal.PlayerHeroes[59] === undefined ||
+                dataPersonal.PlayerHeroes[80] === undefined)
+                return false
+            var Uther = dataPersonal.PlayerHeroes[3].game_total.sum > 3
+            var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 3
+            var Muradin = dataPersonal.PlayerHeroes[13].game_total.sum > 3
+            var Falstad = dataPersonal.PlayerHeroes[18].game_total.sum > 3
+            var Jaina = dataPersonal.PlayerHeroes[32].game_total.sum > 3
+            var Kaelthas = dataPersonal.PlayerHeroes[36].game_total.sum > 3
+            var Greymane = dataPersonal.PlayerHeroes[47].game_total.sum > 3
+            var Medivh = dataPersonal.PlayerHeroes[53].game_total.sum > 3
+            var Varian = dataPersonal.PlayerHeroes[59].game_total.sum > 3
+            var Yrel = dataPersonal.PlayerHeroes[80].game_total.sum > 3
+            var limit = Uther && Tyrande && Muradin && Falstad && Jaina && Kaelthas && Greymane && Medivh && Varian && Yrel
             return limit?[
-                'Such a shame, I personally appeared in the ' + games + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
-                '真是丢人现眼，我亲自登场了 ' + games + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有' + AlarakGlobal + '%，不要再让我登场了！',
-                ]:false
+                'For the Alliance！ Alliance heroes have been called many times!',
+                '为了联盟！ 联盟将士们多次被你征召',
+            ]:false
+        }
+    ],
+    'ForTheHorde': [
+        ['For The Horde', '为了部落'],
+        function () {
+            if(dataPersonal.PlayerHeroes[19] === undefined || dataPersonal.PlayerHeroes[28] === undefined || dataPersonal.PlayerHeroes[33] === undefined ||
+                dataPersonal.PlayerHeroes[35] === undefined || dataPersonal.PlayerHeroes[41] === undefined || dataPersonal.PlayerHeroes[54] === undefined ||
+                dataPersonal.PlayerHeroes[58] === undefined || dataPersonal.PlayerHeroes[61] === undefined || dataPersonal.PlayerHeroes[70] === undefined)
+                return false
+            var ETC = dataPersonal.PlayerHeroes[19].game_total.sum > 5
+            var Rehgar = dataPersonal.PlayerHeroes[28].game_total.sum > 5
+            var Thrall = dataPersonal.PlayerHeroes[33].game_total.sum > 3
+            var Sylvanas = dataPersonal.PlayerHeroes[35].game_total.sum > 5
+            var Rexxar = dataPersonal.PlayerHeroes[41].game_total.sum > 3
+            var Guldan = dataPersonal.PlayerHeroes[54].game_total.sum > 5
+            var Samuro = dataPersonal.PlayerHeroes[58].game_total.sum > 5
+            var Zuljin = dataPersonal.PlayerHeroes[61].game_total.sum > 5
+            var Garrosh = dataPersonal.PlayerHeroes[70].game_total.sum > 5
+            var limit = ETC && Rehgar && Thrall && Sylvanas && Rexxar && Guldan && Samuro && Zuljin && Garrosh
+            return limit?[
+                'Lok\'tar ogar！ Horde heroes have been called many times!',
+                'Lok\'tar ogar！部落战士们多次被你征召！',
+            ]:false
+        }
+    ],
+    'Energetic': [
+        ['Energetic', '精力充沛'],
+        function () {
+            var games = dataPersonal.PlayerBase.game_total
+            if( games < 10 )
+                return false
+            if( 10 < games < 100) {
+                return [
+                    'Coooooool！ You played'+ games + 'times',
+                    '风暴暖暖！你总共玩了'+ games + '局',
+                ]
             }
-           if(AlarakWinRate > AlarakGlobal) {
-           return limit?[
-                'General Performance, I personally appeared in the ' + games + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
-                '表现还行，我亲自登场了 ' + games + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑再帮你的。',
-                ]:false
+            if( games > 100) {
+                return [
+                    'Amazing！ You played'+ games + 'times',
+                    '肝帝就是你啦！你总共玩了'+ games + '局',
+                ]
             }
-      }
-
+        }
     ],
 }
 
