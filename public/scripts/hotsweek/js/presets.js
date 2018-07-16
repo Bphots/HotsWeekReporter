@@ -1645,7 +1645,7 @@ var events = {
             var limit = Murky > 10 && MurkyWinRate > 50
             return limit?[
                 'You played '+ Murky + ' times Murky, the WinRate reached '+ MurkyWinRate + '%, the Murky global WinRate is '+MurkyGlobal + '%',
-                '你玩了 '+ Murky + '局鱼人，胜率达到了 '+ MurkyWinRate + '%，鱼人的全球胜率是 '+ MurkyGlobal + '%',
+                '你玩了 '+ Murky + '局小鱼人，胜率达到了 '+ MurkyWinRate + '%，小鱼人的全球胜率是 '+ MurkyGlobal + '%',
             ]:false
         }
     ],
@@ -1757,6 +1757,114 @@ var events = {
                     'Amazing！ You played'+ games + 'times',
                     '肝帝就是你啦！你总共玩了'+ games + '局',
                 ]
+            }
+        }
+    ],
+    'BoyfriendsOfJaina': [
+        ['Boyfriends Of Jaina', '吉安娜的男友们'],//阿尔萨斯，萨尔，凯尔萨斯
+        function () {
+            if (dataPersonal.PlayerHeroes[21] === undefined || dataPersonal.PlayerHeroes[33] === undefined ||
+                dataPersonal.PlayerHeroes[36] === undefined)
+                return false
+            var Arthas = dataPersonal.PlayerHeroes[21].game_total.sum > 2
+            var Thrall = dataPersonal.PlayerHeroes[33].game_total.sum > 2
+            var Kaelthas = dataPersonal.PlayerHeroes[36].game_total.sum > 2
+            var tot = (dataPersonal.PlayerHeroes[21].game_total.sum + dataPersonal.PlayerHeroes[33].game_total.sum + dataPersonal.PlayerHeroes[36].game_total.sum) >15
+            var limit = Arthas && Thrall && Kaelthas && tot
+            return limit ? [
+                'You\'ve played a lot Boyfriends of Jaina, cheer up warriors, sooner, Jaina shall be yours!',
+                '这周你玩了许多局吉安娜的男友们，加油勇士，吉安娜就快是你的了！',
+            ] : false
+        }
+    ],
+    'DiabloVillains': [
+        ['Diablo Villains', '暗黑恶棍'],//李奥瑞克，屠夫，迪亚波罗
+        function () {
+            if (dataPersonal.PlayerHeroes[39] === undefined || dataPersonal.PlayerHeroes[38] === undefined ||
+                dataPersonal.PlayerHeroes[20] === undefined)
+                return false
+            var Leoric = dataPersonal.PlayerHeroes[39].game_total.sum > 5
+            var Butcher = dataPersonal.PlayerHeroes[38].game_total.sum > 5
+            var Diablo = dataPersonal.PlayerHeroes[20].game_total.sum > 5
+
+            var limit = Leoric && Butcher && Diablo
+            return limit ? [
+                'This week, your challenges were accepted by the Diablo Villains -- Leoric, the Butcher and Diablo who fought for you for many times!',
+                '这周暗黑恶棍李奥瑞克、屠夫、迪亚波罗三人接受了你的挑战，多次为你而战！',
+            ] : false
+        }
+    ], 
+    'HappyFamily': [
+        ['Happy Family', '相亲相爱一家人'],//玛法里奥，泰兰德，伊利丹
+        function () {
+            if (dataPersonal.PlayerHeroes[14] === undefined || dataPersonal.PlayerHeroes[4] === undefined ||
+                dataPersonal.PlayerHeroes[16] === undefined)
+                return false
+            var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
+            var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
+            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
+
+            var limit = Arthas && Thrall && Kaelthas
+            return limit ? [
+                '',
+                '一家人最重要的就是整整齐齐！本周你使用玛法里奥、泰兰德和伊利丹完成了许多场战斗！',
+            ] : false
+        }
+    ],
+    'LovingAndHurting': [
+        ['Loving And Hurting', '相爱相杀'],//玛维，伊利丹
+        function () {
+            if (dataPersonal.PlayerHeroes[77] === undefined || dataPersonal.PlayerHeroes[4] === undefined )
+                return false
+
+            var Maiev = dataPersonal.PlayerHeroes[77].game_total.sum > 5
+            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
+
+            var limit = Arthas && Thrall && Kaelthas
+            return limit ? [
+                '',
+                '丹丹丹丹丹丹丹哥危险！本周玛维和伊利丹多次在你的屏幕前相爱相杀，感受这囚禁别人一万年的快乐吧！',
+            ] : false
+        }
+    ],
+    'Stormstout': [
+        ['Stormstout', '风暴烈酒'],//陈，丽丽
+        function () {
+            if (dataPersonal.PlayerHeroes[29] === undefined || dataPersonal.PlayerHeroes[24] === undefined )
+                return false
+
+            var Chen = dataPersonal.PlayerHeroes[29].game_total.sum > 5
+            var LiLi = dataPersonal.PlayerHeroes[24].game_total.sum > 5
+
+            var limit = Arthas && Thrall
+            return limit ? [
+                '',
+                '酒杯为何而举，肥肉为何而长。本周老陈和丽丽多次与你并肩作战时空枢纽。熊猫人，闹翻天！',
+            ] : false
+        }
+    ],
+    'Genji': [
+        ['Happy Darter', '快乐镖男'],//源氏
+        function () {
+            if (dataPersonal.PlayerHeroes[66] === undefined || dataPersonal.PlayerHeroes[66].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[66].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[66].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Wins > 10 && WinRate > 60
+                return limit ? [
+                    '',
+                    '玩游戏就是要赢！本周你使用源氏进行了' + Games + '场游戏，胜率竟然达到了 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
+                ] : false
+            }
+            else {
+                var limit = Wins > 0 && WinRate < 40
+                return limit ? [
+                    '',
+                    '卑微的苍蝇！本周你使用源氏进行了' + Games + '场游戏，胜率竟然才 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
+                ] : false
             }
         }
     ],

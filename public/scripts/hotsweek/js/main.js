@@ -5,10 +5,10 @@ var dataPersonal
 var playerInfo
 // var timestamp = Math.round(new Date().getTime() / 1000)
 // var weekNumber = Math.trunc((timestamp + 345600) / 604800) + 1;
-var urlPresets = '/week/api/report/presets'
-var urlGlobal = '/week/api/report/global/' + weekNumber
-var urlRanking = '/week/api/report/ranking/' + weekNumber
-var urlPersonal = '/week/api/report/personal/' + weekNumber + '/' + playerID
+var urlPresets = 'https://www.bphots.com/week/api/report/presets'
+var urlGlobal = 'https://www.bphots.com/week/api/report/global/' + weekNumber
+var urlRanking = 'https://www.bphots.com/week/api/report/ranking/' + weekNumber
+var urlPersonal = 'https://www.bphots.com/week/api/report/personal/' + weekNumber + '/' + playerID
 
 var fetchData = function (url, params = null) {
     return new Promise((resolve, reject) => {
