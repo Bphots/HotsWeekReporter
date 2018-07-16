@@ -1759,7 +1759,6 @@ var events = {
             }
         }
     ],
-<<<<<<< HEAD
     'BoyfriendsOfJaina': [
         ['Boyfriends Of Jaina', '吉安娜的男友们'],//阿尔萨斯，萨尔，凯尔萨斯
         function () {
@@ -1866,7 +1865,8 @@ var events = {
                     '卑微的苍蝇！本周你使用源氏进行了' + Games + '场游戏，胜率竟然才 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
                 ] : false
             }
-=======
+        }
+    ],
     'Undercity': [
         ['Undercity', '幽暗城'],
         function () {
@@ -1969,7 +1969,6 @@ var events = {
                 'Humph! Humble servant! ! You played ' + Assassingames + ' Assassin Heros, I only appeared poor ' + Alarakgames + ' times, it is really embarrassing! ',
                 '哼！卑微的死徒！！你玩了 ' + Assassingames + ' 次刺杀型英雄，我才登场了可怜的 ' + Alarakgames + ' 次，真是令人难堪！',
             ]:false
->>>>>>> bfb47ad41e6af566d8383b1b79b217e74ded4154
         }
     ],
 }
