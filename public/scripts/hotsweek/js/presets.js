@@ -1691,6 +1691,31 @@ var events = {
             }
         }
     ],
+    'Genji': [
+        ['Happy Darter', '快乐镖男'],//源氏
+        function () {
+            if (dataPersonal.PlayerHeroes[66] === undefined || dataPersonal.PlayerHeroes[66].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[66].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[66].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Wins > 10 && WinRate > 60
+                return limit ? [
+                    '',
+                    '玩游戏就是要赢！本周你使用源氏进行了' + Games + '场游戏，胜率竟然达到了 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
+                ] : false
+            }
+            else {
+                var limit = Wins > 0 && WinRate < 40
+                return limit ? [
+                    '',
+                    '卑微的苍蝇！本周你使用源氏进行了' + Games + '场游戏，胜率竟然才 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
+                ] : false
+            }
+        }
+    ],
     'ForTheAlliance': [
         ['For the Alliance', '为了联盟'],
         function () {
@@ -1802,8 +1827,7 @@ var events = {
             var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
             var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
-
-            var limit = Arthas && Thrall && Kaelthas
+            var limit = Malfurion && Tyrande && Illidan
             return limit ? [
                 '',
                 '一家人最重要的就是整整齐齐！本周你使用玛法里奥、泰兰德和伊利丹完成了许多场战斗！',
@@ -1815,11 +1839,9 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[77] === undefined || dataPersonal.PlayerHeroes[4] === undefined )
                 return false
-
             var Maiev = dataPersonal.PlayerHeroes[77].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
-
-            var limit = Arthas && Thrall && Kaelthas
+            var limit = Maiev && Illidan
             return limit ? [
                 '',
                 '丹丹丹丹丹丹丹哥危险！本周玛维和伊利丹多次在你的屏幕前相爱相杀，感受这囚禁别人一万年的快乐吧！',
@@ -1831,40 +1853,13 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[29] === undefined || dataPersonal.PlayerHeroes[24] === undefined )
                 return false
-
             var Chen = dataPersonal.PlayerHeroes[29].game_total.sum > 5
             var LiLi = dataPersonal.PlayerHeroes[24].game_total.sum > 5
-
-            var limit = Arthas && Thrall
+            var limit = Chen && LiLi
             return limit ? [
                 '',
                 '酒杯为何而举，肥肉为何而长。本周老陈和丽丽多次与你并肩作战时空枢纽。熊猫人，闹翻天！',
             ] : false
-        }
-    ],
-    'Genji': [
-        ['Happy Darter', '快乐镖男'],//源氏
-        function () {
-            if (dataPersonal.PlayerHeroes[66] === undefined || dataPersonal.PlayerHeroes[66].game_total.sum < 10)
-                return false
-            var Wins = dataPersonal.PlayerHeroes[66].game_win.sum
-            var Games = dataPersonal.PlayerHeroes[66].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
-            if (WinRate > GlobalWinRate) {
-                var limit = Wins > 10 && WinRate > 60
-                return limit ? [
-                    '',
-                    '玩游戏就是要赢！本周你使用源氏进行了' + Games + '场游戏，胜率竟然达到了 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
-                ] : false
-            }
-            else {
-                var limit = Wins > 0 && WinRate < 40
-                return limit ? [
-                    '',
-                    '卑微的苍蝇！本周你使用源氏进行了' + Games + '场游戏，胜率竟然才 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
-                ] : false
-            }
         }
     ],
     'Undercity': [
