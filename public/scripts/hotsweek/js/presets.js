@@ -1851,7 +1851,7 @@ var events = {
     'LovingAndHurting': [
         ['Loving And Hurting', '相爱相杀'],//玛维，伊利丹
         function () {
-            if (dataPersonal.PlayerHeroes[77] === undefined || dataPersonal.PlayerHeroes[4] === undefined )
+            if (dataPersonal.PlayerHeroes[77] === undefined || dataPersonal.PlayerHeroes[16] === undefined )
                 return false
             var Maiev = dataPersonal.PlayerHeroes[77].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
@@ -1863,9 +1863,9 @@ var events = {
         }
     ],
     'ForTheLove': [
-        ['For The Love', '因为爱情'],//伊利丹，泰兰德
+        ['For The Love', '因为爱情'],//泰兰德，伊利丹
         function () {
-            if (dataPersonal.PlayerHeroes[4] === undefined || dataPersonal.PlayerHeroes[4] === undefined )
+            if (dataPersonal.PlayerHeroes[4] === undefined || dataPersonal.PlayerHeroes[16] === undefined )
                 return false
             var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
