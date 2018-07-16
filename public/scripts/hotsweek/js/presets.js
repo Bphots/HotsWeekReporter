@@ -1716,6 +1716,36 @@ var events = {
             }
         }
     ],
+    /*   //大饼
+    'Zeratul': [//泽拉图 id:1  I appears the veil of the future, and behold only……oblivion. 
+        //我挑开了未来的面纱，却只看到了……湮灭。
+    ],
+    'Uther': [//乌瑟尔 id:3 我们是圣骑士，不要让仇恨蒙蔽了我们的双眼。
+        //We are St. Cleveland, the emotional revenge must not be allowed to occupy our consciousness.
+    ],
+    'Tyrande': [//泰兰德 id:4 愿艾露恩与你同在 愿月光女神照耀你
+    ],
+    'Illidan': [//伊利丹 id:16 我被囚禁了一万年 又被逐出了自己的故乡 现在你们胆敢闯入我的领地 你们这是自寻死路You are not prepared 有些时候，命运之手必须掌握在自己手中。
+    ],
+    'Gazlowe': [//架子芦苇 id:17 时间就是金钱我的朋友，而你两样都没有
+    ],
+    'Arthas': [//阿尔萨斯 id:21 霜之哀伤，饿了 我的眼前……一片黑暗…… 孩子， 当你出生的时候，洛丹伦的森林轻声唤出了你的名字 阿尔萨斯 而你，将加冕为王。
+    ],
+    'Chen': [//陈 id:29 护国安邦惩奸恶、道法自然除心魔
+    ],
+    'Sylvanas': [//希尔瓦纳斯 id:35 诅咒之下，欢乐何在
+    ],
+    'Leoric': [//李奥瑞克 id:39 我将与你们并肩作战，直到我生命的最后一刻
+    ],
+    'Medivh': [//麦迪文 id:53 那可真蠢 我预见到了未来,看到了即将吞噬这个世界的燃烧著的阴影
+    ],
+    'Ragnaros': [//拉格纳罗斯 id:60 死吧，虫子
+    ],
+    'Alexstrasza': [//红龙 id:74 生命总会在最黑暗的地方绽放 我带来了生命的希望
+    ],
+    'Maiev': [//玛维 id:77 一个猎手失去了猎物就会一无所有
+    ],
+    */
     'ForTheAlliance': [
         ['For the Alliance', '为了联盟'],
         function () {
@@ -1817,22 +1847,6 @@ var events = {
                 '这周暗黑恶棍李奥瑞克、屠夫、迪亚波罗三人接受了你的挑战，多次为你而战！',
             ] : false
         }
-    ], 
-    'HappyFamily': [
-        ['Happy Family', '相亲相爱一家人'],//玛法里奥，泰兰德，伊利丹
-        function () {
-            if (dataPersonal.PlayerHeroes[14] === undefined || dataPersonal.PlayerHeroes[4] === undefined ||
-                dataPersonal.PlayerHeroes[16] === undefined)
-                return false
-            var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
-            var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
-            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
-            var limit = Malfurion && Tyrande && Illidan
-            return limit ? [
-                '',
-                '一家人最重要的就是整整齐齐！本周你使用玛法里奥、泰兰德和伊利丹完成了许多场战斗！',
-            ] : false
-        }
     ],
     'LovingAndHurting': [
         ['Loving And Hurting', '相爱相杀'],//玛维，伊利丹
@@ -1844,7 +1858,21 @@ var events = {
             var limit = Maiev && Illidan
             return limit ? [
                 '',
-                '丹丹丹丹丹丹丹哥危险！本周玛维和伊利丹多次在你的屏幕前相爱相杀，感受这囚禁别人一万年的快乐吧！',
+                '丹丹丹丹丹丹丹哥危险！这周玛维和伊利丹多次在你的屏幕前相爱相杀，感受这囚禁别人一万年的快乐吧！',
+            ] : false
+        }
+    ],
+    'ForTheLove': [
+        ['For The Love', '因为爱情'],//伊利丹，泰兰德
+        function () {
+            if (dataPersonal.PlayerHeroes[4] === undefined || dataPersonal.PlayerHeroes[4] === undefined )
+                return false
+            var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
+            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
+            var limit = Tyrande && Illidan
+            return limit ? [
+                '',
+                '你知道，一万年了，泰兰德还是那么美。这周泰兰德和伊利丹多次在你这里出现，愿艾露恩与你同在！',
             ] : false
         }
     ],
@@ -1858,7 +1886,23 @@ var events = {
             var limit = Chen && LiLi
             return limit ? [
                 '',
-                '酒杯为何而举，肥肉为何而长。本周老陈和丽丽多次与你并肩作战时空枢纽。熊猫人，闹翻天！',
+                '酒杯为何而举，肥肉为何而长。这周老陈和丽丽多次与你并肩作战时空枢纽。熊猫人，闹翻天！',
+            ] : false
+        }
+    ],
+    'HappyFamily': [
+        ['Happy Family', '相亲相爱一家人'],//玛法里奥，泰兰德，伊利丹
+        function () {
+            if (dataPersonal.PlayerHeroes[14] === undefined || dataPersonal.PlayerHeroes[4] === undefined ||
+                dataPersonal.PlayerHeroes[16] === undefined)
+                return false
+            var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
+            var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
+            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
+            var limit = Malfurion && Tyrande && Illidan
+            return limit ? [
+                '',
+                '一家人最重要的就是整整齐齐！这周你使用玛法里奥、泰兰德和伊利丹完成了许多场战斗！',
             ] : false
         }
     ],
