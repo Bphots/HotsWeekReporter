@@ -1654,22 +1654,21 @@ var events = {
         function () {
             if(dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[56].game_total.sum < 10)
                 return false
-            var Alarakwins = dataPersonal.PlayerHeroes[56].game_win.sum
             var Alarakgames = dataPersonal.PlayerHeroes[56].game_total.sum
-            var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
-            var AlarakGlobal = (dataPersonal.PlayerHeroes[56].game_total.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_win.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            var AlarakGlobal = (dataGlobal.PlayerHeroes[56].game_win.sum / dataGlobal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             if(AlarakWinRate <= AlarakGlobal) {
-                var limit1 = Alarakwins > 10 && AlarakWinRate < 50
+                var limit1 = Alarakgames > 7 && AlarakWinRate < 50
                 return limit1?[
-                    'Such a shame, I personally appeared in the ' + Alarakgames + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
-                    '真是丢人现眼，我亲自登场了 ' + Alarakgames + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有' + AlarakGlobal + '%，不要再让我登场了！',
+                    'Such a shame, I personally appeared ' + Alarakgames + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
+                    '真是丢人现眼，我亲自登场了 ' + Alarakgames + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有 ' + AlarakGlobal + '%，不要再让我登场了！',
                 ]:false
             }
             if(AlarakWinRate > AlarakGlobal) {
-                var limit2 = Alarakwins > 10 && AlarakWinRate > 50
+                var limit2 = Alarakgames > 7 && AlarakWinRate > 50
                 return limit2?[
-                    'General Performance, I personally appeared in the ' + Alarakgames + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
-                    '表现还行，我亲自登场了 ' + Alarakgames + '局，胜率达到了 '+ AlarakWinRate + '%,全球的高阶领主平均胜率是' + AlarakGlobal + '%，下次我会考虑再帮你的。',
+                    'General Performance, I personally appeared ' + Alarakgames + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
+                    '表现还行，我亲自登场了 ' + Alarakgames + '局，胜率达到了 '+ AlarakWinRate + '%，全球的高阶领主平均胜率是 ' + AlarakGlobal + '%，下次我会考虑再帮你的。',
                 ]:false
             }
         }
@@ -1681,8 +1680,8 @@ var events = {
                 return false
             var Abathurwins = dataPersonal.PlayerHeroes[22].game_win.sum
             var Abathurgames = dataPersonal.PlayerHeroes[22].game_total.sum
-            var AbathurWinRate = (dataPersonal.PlayerHeroes[22].game_total.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
-            var AbathurGlobal = (dataPersonal.PlayerHeroes[22].game_total.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            var AbathurWinRate = (dataPersonal.PlayerHeroes[22].game_win.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            var AbathurGlobal = (dataGlobal.PlayerHeroes[22].game_win.sum / dataGlobal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
             if(AlarakWinRate > AlarakGlobal) {
                 var limit = Abathurwins > 10 && AbathurWinRate > 50
                 return limit?[
@@ -1743,21 +1742,125 @@ var events = {
     'Energetic': [
         ['Energetic', '精力充沛'],
         function () {
-            var games = dataPersonal.PlayerBase.game_total
+            var games = dataPersonal.PlayerBase.game_total.sum
             if( games < 10 )
                 return false
             if( 10 < games < 100) {
                 return [
-                    'Coooooool！ You played'+ games + 'times',
-                    '风暴暖暖！你总共玩了'+ games + '局',
+                    'Coooooool！ You played ' + games + ' times',
+                    '风暴暖暖！你总共玩了 ' + games + ' 局',
                 ]
             }
             if( games > 100) {
                 return [
-                    'Amazing！ You played'+ games + 'times',
-                    '肝帝就是你啦！你总共玩了'+ games + '局',
+                    'Amazing！ You played ' + games + ' times',
+                    '肝帝就是你啦！你总共玩了 ' + games + ' 局',
                 ]
             }
+        }
+    ],
+    'Undercity': [
+        ['Undercity', '幽暗城'],
+        function () {
+            if(dataPersonal.PlayerHeroes[7] === undefined || dataPersonal.PlayerHeroes[35] === undefined )
+                return false
+            var Stitches = dataPersonal.PlayerHeroes[3].game_total.sum > 5
+            var Sylvanas = dataPersonal.PlayerHeroes[35].game_total.sum > 5
+            var limit = Stitches && Sylvanas
+            return limit?[
+                'Undercity Collection! Sylvanas have been called ' + Sylvanas + ' times, And Stitches ' + Stitches + ' times',
+                '幽暗城通关！ 希尔瓦娜斯被征召了 ' + Sylvanas + ' 次，缝合怪被征召了 ' + Stitches + ' 次',
+            ]:false
+        }
+    ],
+    'StarCraftRebels': [
+        ['StarCraft Rebels', '星际叛军'],
+        function () {
+            if(dataPersonal.PlayerHeroes[10] === undefined || dataPersonal.PlayerHeroes[15] === undefined || dataPersonal.PlayerHeroes[23] === undefined)
+                return false
+            var Raynor = dataPersonal.PlayerHeroes[10].game_total.sum > 5
+            var Kerrigan = dataPersonal.PlayerHeroes[15].game_total.sum > 5
+            var Tychus = dataPersonal.PlayerHeroes[23].game_total.sum > 5
+            var limit = Raynor && Kerrigan && Tychus
+            return limit?[
+                'Triangle Relation! Reynor have been called ' + Reynor + ' times,  Tychus ' + Tychus + ' times,and Kerrigan ' + Kerrigan + ' times',
+                '三角关系！ 雷诺被征召了 ' + Reynor + ' 次，泰凯斯被征召了 ' + Tychus + ' 次，凯瑞甘被征召了 ' + Kerrigan + ' times',
+            ]:false
+        }
+    ],
+    'AngirisCouncil': [
+        ['Angiris Council', '天使议会'],
+        function () {
+            if(dataPersonal.PlayerHeroes[5] === undefined || dataPersonal.PlayerHeroes[55] === undefined || dataPersonal.PlayerHeroes[68] === undefined)
+                return false
+            var Tyrael = dataPersonal.PlayerHeroes[5].game_total.sum > 5
+            var Auriel = dataPersonal.PlayerHeroes[55].game_total.sum > 5
+            var Malthael = dataPersonal.PlayerHeroes[68].game_total.sum > 5
+            var limit = Tyrael && Auriel && Malthael
+            return limit?[
+                'We are no one! Tyrael have been called ' + Tyrael + ' times,  Auriel ' + Auriel + ' times,and Malthael ' + Malthael + ' times',
+                '我们都是无面者！ 泰瑞尔被征召了 ' + Tyrael + ' 次，奥莉尔被征召了 ' + Auriel + ' 次，马萨伊尔被征召了 ' + Malthael + ' times',
+            ]:false
+        }
+    ],
+    'UnitedProtoss': [
+        ['United Protoss', '统一星灵'],
+        function () {
+            if(dataPersonal.PlayerHeroes[1] === undefined || dataPersonal.PlayerHeroes[6] === undefined || dataPersonal.PlayerHeroes[43] === undefined)
+                return false
+            var Zeratul = dataPersonal.PlayerHeroes[1].game_total.sum > 5
+            var Tassadar = dataPersonal.PlayerHeroes[6].game_total.sum > 5
+            var Artanis = dataPersonal.PlayerHeroes[43].game_total.sum > 5
+            var limit = Zeratul && Tassadar && Artanis
+            return limit?[
+                'For Aier! Zeratul have been called ' + Zeratul + ' times,  Tassadar ' + Tassadar + ' times,and Artanis ' + Artanis + ' times',
+                '为了艾尔！ 泽拉图被征召了 ' + Zeratul + ' 次，塔萨达尔被征召了 ' + Tassadar + ' 次，阿塔尼斯被征召了 ' + Artanis + ' times',
+            ]:false
+        }
+    ],
+    'DoubleTrouble': [
+        ['Double Trouble', '双重麻烦'],
+        function () {
+            if(dataPersonal.PlayerHeroes[44] === undefined || dataPersonal.PlayerHeroes[45] === undefined )
+                return false
+            var Cho = dataPersonal.PlayerHeroes[44].game_total.sum > 5
+            var Gall = dataPersonal.PlayerHeroes[45].game_total.sum > 5
+            var limit = Cho || Gall
+            return limit?[
+                'Behold the might of the Hammer! Cho have been called ' + Cho + ' times,  Gall '+ Gall + ' times',
+                '见证暮光之锤的力量！ 古被征召了 ' + Cho + ' 次，加尔被征召了 '+ Gall + ' 次',
+            ]:false
+        }
+    ],
+    'ReignofChaos': [
+        ['Reign of Chaos', '混乱之治'],
+        function () {
+            if(dataPersonal.PlayerHeroes[3] === undefined || dataPersonal.PlayerHeroes[21] === undefined || dataPersonal.PlayerHeroes[32] === undefined
+                || dataPersonal.PlayerHeroes[33] === undefined)
+                return false
+            var Uther = dataPersonal.PlayerHeroes[3].game_total.sum > 5
+            var Arthas = dataPersonal.PlayerHeroes[21].game_total.sum > 5
+            var Jiana = dataPersonal.PlayerHeroes[32].game_total.sum > 5
+            var Thrall = dataPersonal.PlayerHeroes[33].game_total.sum > 5
+            var limit = Uther && Arthas && Jiana && Thrall
+            return limit?[
+                'Chaos! Who will be the Winner?!  Uther have been called ' + Uther + ' times,  Arthas '+ Arthas + ' times,  Jiana '+ Jiana + ' times,  Thrall '+ Thrall + ' times',
+                '竞争混乱，谁才是最后的赢家？！ 乌瑟尔被征召了 '+ Uther + ' 次，阿尔萨斯被征召了 '+ Arthas + ' 次，吉安娜被征召了 '+ Jiana + ' 次，萨尔被征召了 '+ Thrall + ' 次',
+            ]:false
+        }
+    ],
+    'AlarakAngle': [
+        ['Alarak Angle', '阿拉纳克的愤怒'],
+        function () {
+            var Assassingames = dataPersonal.PlayerBase.PlaysAssassin.sum
+            if(Assassingames < 30)
+                return false
+            var Alarakgames = dataPersonal.PlayerHeroes[56].game_total.sum
+            var limit = Alarakgames < 5
+            return limit?[
+                'Humph! Humble servant! ! You played ' + Assassingames + ' Assassin Heros, I only appeared poor ' + Alarakgames + ' times, it is really embarrassing! ',
+                '哼！卑微的死徒！！你玩了 ' + Assassingames + ' 次刺杀型英雄，我才登场了可怜的 ' + Alarakgames + ' 次，真是令人难堪！',
+            ]:false
         }
     ],
 }
