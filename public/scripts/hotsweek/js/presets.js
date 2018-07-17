@@ -1725,7 +1725,7 @@ var events = {
     ],
     'Tyrande': [//泰兰德 id:4 愿艾露恩与你同在 愿月光女神照耀你
     ],
-    'Illidan': [//伊利丹 id:16 我被囚禁了一万年 又被逐出了自己的故乡 现在你们胆敢闯入我的领地 你们这是自寻死路You are not prepared 有些时候，命运之手必须掌握在自己手中。
+    'Illidan': [//伊利丹 id:16 我被囚禁了一万年 又被逐出了自己的故乡 现在你们胆敢闯入我的领地 你们这是自寻死路You are not prepared 有些时候，命运之手必须掌握在自己手中。At sometimes , the hand of fate must be forced
     ],
     'Gazlowe': [//架子芦苇 id:17 时间就是金钱我的朋友，而你两样都没有
     ],
@@ -1857,7 +1857,7 @@ var events = {
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
             var limit = Maiev && Illidan
             return limit ? [
-                '',
+                'IIIIIIIIIlidan in danger！Maiev and Illidan have fought (and love) in front of you for many times！Embrace the pleasure of imprisoning some one for 10 thousand years!',
                 '丹丹丹丹丹丹丹哥危险！这周玛维和伊利丹多次在你的屏幕前相爱相杀，感受这囚禁别人一万年的快乐吧！',
             ] : false
         }
@@ -1876,17 +1876,17 @@ var events = {
             ] : false
         }
     ],
-    'Stormstout': [
-        ['Stormstout', '风暴烈酒'],//陈，丽丽
+    'NightElfBetrayer ': [
+        ['Night Elf Betrayer ', '暗夜精灵背叛者'],//伊利丹，玛法里奥
         function () {
-            if (dataPersonal.PlayerHeroes[29] === undefined || dataPersonal.PlayerHeroes[24] === undefined )
+            if (dataPersonal.PlayerHeroes[16] === undefined || dataPersonal.PlayerHeroes[14] === undefined )
                 return false
-            var Chen = dataPersonal.PlayerHeroes[29].game_total.sum > 5
-            var LiLi = dataPersonal.PlayerHeroes[24].game_total.sum > 5
-            var limit = Chen && LiLi
+            var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
+            var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
+            var limit = Illidan && Malfurion
             return limit ? [
-                '',
-                '酒杯为何而举，肥肉为何而长。这周老陈和丽丽多次与你并肩作战时空枢纽。熊猫人，闹翻天！',
+                'So be it, Brother.  ',
+                '那就这样吧，兄弟。这周玛法里奥和伊利丹',
             ] : false
         }
     ],
@@ -1895,14 +1895,28 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[14] === undefined || dataPersonal.PlayerHeroes[4] === undefined ||
                 dataPersonal.PlayerHeroes[16] === undefined)
-                return false
+                return false            
             var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
             var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
             var limit = Malfurion && Tyrande && Illidan
             return limit ? [
-                '',
+                'It\'s important for the family members to stay together！You have used Malfurion, Tyrande and Illidan in your battles for many times!',
                 '一家人最重要的就是整整齐齐！这周你使用玛法里奥、泰兰德和伊利丹完成了许多场战斗！',
+            ] : false
+        }
+    ],
+    'Stormstout': [
+        ['Stormstout', '风暴烈酒'],//陈，丽丽
+        function () {
+            if (dataPersonal.PlayerHeroes[29] === undefined || dataPersonal.PlayerHeroes[24] === undefined)
+                return false
+            var Chen = dataPersonal.PlayerHeroes[29].game_total.sum > 5
+            var LiLi = dataPersonal.PlayerHeroes[24].game_total.sum > 5
+            var limit = Chen && LiLi
+            return limit ? [
+                'Everyone you meet is a story. Every place you go is an adventure. Every drink you have is the best you\'ve ever tasted. Chen and Lily have fought with you for many times in the Nexus. This is not such a bad life, is it?',
+                '每个你遇到的人都应是一个故事;每个你经过的地方都应是一场冒险;每杯你或独酌或畅饮的酒水都应是琼汁玉露。这周老陈和丽丽多次与你并肩作战时空枢纽。生活，其实是美好的，不是吗？',
             ] : false
         }
     ],
