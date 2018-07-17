@@ -758,10 +758,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataPersonal.PlayerBase.WinsWarrior.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -772,10 +772,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataPersonal.PlayerBase.WinsAssassin.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -786,10 +786,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataPersonal.PlayerBase.WinsSupport.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -800,10 +800,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataPersonal.PlayerBase.WinsSpecialist.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -1137,21 +1137,21 @@ var counter = {
         ['Global Most Win Heroes In Hero League', '英雄联赛全球胜率最高的英雄'],
         function () {
             var heroID = 0
-            var winRate = 0
+            var WinRate = 0
              for(var hero in dataGlobal.PlayerHeroes){
                 if(dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
-                    if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
-                        winRate = Rate
+                    if ( Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
+                        WinRate = Rate
                         heroID = parseInt(hero)
                     }
                 }
             }
-            if(winRate <= 0)
+            if(WinRate <= 0)
                 return false
             return [
-                'Hero ' + heroID + ' Hero League WinRate is  ' + winRate + '%',
-                '英雄 ' + heroID + ' 英雄联赛胜率是 ' + winRate + '%'
+                'Hero ' + heroID + ' Hero League WinRate is  ' + WinRate + '%',
+                '英雄 ' + heroID + ' 英雄联赛胜率是 ' + WinRate + '%'
             ]
         }
     ],
@@ -1159,21 +1159,21 @@ var counter = {
         ['Global Most Win Heroes In Team League', '团队联赛全球胜率最高的英雄'],
         function () {
             var heroID = 0
-            var winRate = 0
+            var WinRate = 0
             for(var hero in dataGlobal.PlayerHeroes){
                 if(dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum>0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_TeamLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum * 100).toFixed(2)
-                    if ( Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
-                        winRate = Rate
+                    if ( Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
+                        WinRate = Rate
                         heroID = parseInt(hero)
                     }
                 }
             }
-            if(winRate <= 0)
+            if(WinRate <= 0)
                 return false
             return [
-                'Hero ' + heroID + ' Team League WinRate is  ' + winRate + '%',
-                '英雄 ' + heroID + ' 团队联赛胜率是 ' + winRate + '%'
+                'Hero ' + heroID + ' Team League WinRate is  ' + WinRate + '%',
+                '英雄 ' + heroID + ' 团队联赛胜率是 ' + WinRate + '%'
             ]
         }
     ],
@@ -1181,21 +1181,21 @@ var counter = {
         ['Global Most Win Heroes In Quick Match', '快速比赛全球胜率最高的英雄'],
         function () {
             var heroID = 0
-            var winRate = 0
+            var WinRate = 0
             for(var hero in dataGlobal.PlayerHeroes){
                 if(dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum>0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_QuickMatch.sum / dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum * 100).toFixed(2)
-                    if (Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
-                        winRate = Rate
+                    if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
+                        WinRate = Rate
                         heroID = parseInt(hero)
                     }
                 }
             }
-            if(winRate <= 0)
+            if(WinRate <= 0)
                 return false
             return [
-                'Hero ' + heroID + ' Quick Match WinRate is  ' + winRate + '%',
-                '英雄 ' + heroID + ' 快速比赛胜率是 ' + winRate + '%'
+                'Hero ' + heroID + ' Quick Match WinRate is  ' + WinRate + '%',
+                '英雄 ' + heroID + ' 快速比赛胜率是 ' + WinRate + '%'
             ]
         }
     ],
@@ -1203,21 +1203,21 @@ var counter = {
         ['Global Most Win Heroes In Unranked Draft', '非排名模式全球胜率最高的英雄'],
         function () {
             var heroID = 0
-            var winRate = 0
+            var WinRate = 0
             for(var hero in dataGlobal.PlayerHeroes){
                 if(dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_UnrankedDraft.sum / dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
-                    if (Rate > winRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
-                        winRate = Rate
+                    if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum>5) {
+                        WinRate = Rate
                         heroID = parseInt(hero)
                     }
                 }
             }
-            if(winRate <= 0)
+            if(WinRate <= 0)
                 return false
             return [
-                'Hero ' + heroID + ' Unranked Draft WinRate is  ' + winRate + '%',
-                '英雄 ' + heroID + ' 非排名模式胜率是 ' + winRate + '%'
+                'Hero ' + heroID + ' Unranked Draft WinRate is  ' + WinRate + '%',
+                '英雄 ' + heroID + ' 非排名模式胜率是 ' + WinRate + '%'
             ]
         }
     ],
@@ -1308,10 +1308,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataGlobal.PlayerBase.WinsWarrior.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -1322,10 +1322,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataGlobal.PlayerBase.WinsAssassin.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -1336,10 +1336,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataGlobal.PlayerBase.WinsSupport.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -1350,10 +1350,10 @@ var counter = {
             if(games <= 0)
                 return false
             var wins = dataGlobal.PlayerBase.WinsSpecialist.sum
-            var winRate = (wins / games * 100).toFixed(2)
+            var WinRate = (wins / games * 100).toFixed(2)
             return[
-                winRate + '%',
-                winRate + '%'
+                WinRate + '%',
+                WinRate + '%'
             ]
         }
     ],
@@ -1555,11 +1555,11 @@ var events = {
             var item = dataPersonal.PlayerHeroes._sumMax.game_total
             var heroID = item[0]
             var times = item[1]
-            var winRate = ( dataPersonal.PlayerHeroes[heroID].game_win.sum / dataPersonal.PlayerHeroes[heroID].game_total.sum *100 ).toFixed(2)
-            var limit = winRate > 50
+            var WinRate = ( dataPersonal.PlayerHeroes[heroID].game_win.sum / dataPersonal.PlayerHeroes[heroID].game_total.sum *100 ).toFixed(2)
+            var limit = WinRate > 50
             return limit?[
-                'You played Hero ' + heroID  + ' for' + times + 'times,with the '+ winRate + '% WinRate ',
-                '你使用了英雄 ' + heroID + ' 上场了 '+ times + '次，胜率达到了' + winRate + '%',
+                'You played Hero ' + heroID  + ' for' + times + 'times,with the '+ WinRate + '% WinRate ',
+                '你使用了英雄 ' + heroID + ' 上场了 '+ times + '次，胜率达到了' + WinRate + '%',
             ]:false
         }
     ],
@@ -1639,17 +1639,17 @@ var events = {
         function () {
             if(dataPersonal.PlayerHeroes[26] === undefined || dataPersonal.PlayerHeroes[26].game_total.sum < 10)
                 return false
-            var Murky = dataPersonal.PlayerHeroes[26].game_total.sum
+            var Murkygames = dataPersonal.PlayerHeroes[26].game_total.sum
             var MurkyWinRate =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
             var MurkyGlobal =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var limit = Murky > 10 && MurkyWinRate > 50
+            var limit = Murkygames > 7 && MurkyWinRate > 50
             return limit?[
-                'You played '+ Murky + ' times Murky, the WinRate reached '+ MurkyWinRate + '%, the Murky global WinRate is '+MurkyGlobal + '%',
-                '你玩了 '+ Murky + '局小鱼人，胜率达到了 '+ MurkyWinRate + '%，小鱼人的全球胜率是 '+ MurkyGlobal + '%',
+                'You played '+ Murkygames + ' times Murky, the WinRate reached '+ MurkyWinRate + '%, the Murky global WinRate is '+MurkyGlobal + '%',
+                '你玩了 '+ Murkygames + '局小鱼人，胜率达到了 '+ MurkyWinRate + '%，小鱼人的全球胜率是 '+ MurkyGlobal + '%',
             ]:false
         }
     ],
-    'Alarak': [
+    'Krisolthokaran': [
         ['Krisol thok aran!', '骚骚可浪'],
         function () {
             if(dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[56].game_total.sum < 10)
@@ -1673,8 +1673,8 @@ var events = {
             }
         }
     ],
-    'Abathur': [
-        ['Evolution complete!', '进化完成'],
+    'EvolutionComplete': [
+        ['Evolution Complete!', '进化完成'],
         function () {
             if(dataPersonal.PlayerHeroes[22] === undefined || dataPersonal.PlayerHeroes[22].game_total.sum < 10)
                 return false
@@ -1907,7 +1907,7 @@ var events = {
         }
     ],
     'Undercity': [
-        ['Undercity', '幽暗城'],
+        ['Undercity', '幽暗城'],//希尔瓦娜斯，缝合怪
         function () {
             if(dataPersonal.PlayerHeroes[7] === undefined || dataPersonal.PlayerHeroes[35] === undefined )
                 return false
@@ -1921,7 +1921,7 @@ var events = {
         }
     ],
     'StarCraftRebels': [
-        ['StarCraft Rebels', '星际叛军'],
+        ['StarCraft Rebels', '星际叛军'],//雷诺，凯瑞甘，泰凯斯
         function () {
             if(dataPersonal.PlayerHeroes[10] === undefined || dataPersonal.PlayerHeroes[15] === undefined || dataPersonal.PlayerHeroes[23] === undefined)
                 return false
@@ -1936,7 +1936,7 @@ var events = {
         }
     ],
     'AngirisCouncil': [
-        ['Angiris Council', '天使议会'],
+        ['Angiris Council', '天使议会'],//泰瑞尔，奥莉尔，马萨伊尔
         function () {
             if(dataPersonal.PlayerHeroes[5] === undefined || dataPersonal.PlayerHeroes[55] === undefined || dataPersonal.PlayerHeroes[68] === undefined)
                 return false
@@ -1951,7 +1951,7 @@ var events = {
         }
     ],
     'UnitedProtoss': [
-        ['United Protoss', '统一星灵'],
+        ['United Protoss', '统一星灵'],//泽拉图，塔萨达，阿塔尼斯
         function () {
             if(dataPersonal.PlayerHeroes[1] === undefined || dataPersonal.PlayerHeroes[6] === undefined || dataPersonal.PlayerHeroes[43] === undefined)
                 return false
@@ -1966,7 +1966,7 @@ var events = {
         }
     ],
     'DoubleTrouble': [
-        ['Double Trouble', '双重麻烦'],
+        ['Double Trouble', '双重麻烦'],//古，加尔
         function () {
             if(dataPersonal.PlayerHeroes[44] === undefined || dataPersonal.PlayerHeroes[45] === undefined )
                 return false
@@ -1980,7 +1980,7 @@ var events = {
         }
     ],
     'ReignofChaos': [
-        ['Reign of Chaos', '混乱之治'],
+        ['Reign of Chaos', '混乱之治'],//乌瑟尔，阿尔萨斯，吉安娜，萨尔
         function () {
             if(dataPersonal.PlayerHeroes[3] === undefined || dataPersonal.PlayerHeroes[21] === undefined || dataPersonal.PlayerHeroes[32] === undefined
                 || dataPersonal.PlayerHeroes[33] === undefined)
@@ -1997,7 +1997,7 @@ var events = {
         }
     ],
     'AlarakAngle': [
-        ['Alarak Angle', '阿拉纳克的愤怒'],
+        ['Alarak Angle', '阿拉纳克的愤怒'],//阿拉纳克
         function () {
             var Assassingames = dataPersonal.PlayerBase.PlaysAssassin.sum
             if(Assassingames < 30)
@@ -2007,6 +2007,45 @@ var events = {
             return limit?[
                 'Humph! Humble servant! ! You played ' + Assassingames + ' Assassin Heros, I only appeared poor ' + Alarakgames + ' times, it is really embarrassing! ',
                 '哼！卑微的死徒！！你玩了 ' + Assassingames + ' 次刺杀型英雄，我才登场了可怜的 ' + Alarakgames + ' 次，真是令人难堪！',
+            ]:false
+        }
+    ],
+    'ShimadaClan': [
+        ['Shimada Clan', '岛田家族'],//源氏，半藏
+        function () {
+            if(dataPersonal.PlayerHeroes[66] === undefined || dataPersonal.PlayerHeroes[75] === undefined )
+                return false
+            var Genji = dataPersonal.PlayerHeroes[66].game_total.sum > 5
+            var Hanzo = dataPersonal.PlayerHeroes[75].game_total.sum > 5
+            var GenjiWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var HanzoWinRate = (dataPersonal.PlayerHeroes[75].game_win.sum / dataPersonal.PlayerHeroes[75].game_total.sum * 100).toFixed(2)
+            var limit = Genji && Hanzo && GenjiWinRate > 50 && HanzoWinRate > 50
+            return limit?[
+                'The Unity Of The Dragon And The Man!  Genji have been called ' + Genji + ' times,with the ' + GenjiWinRate + '% WinRate,Hanzo have been called ' + Hanzo + ' times,with the ' + HanzoWinRate + '% WinRate',
+                '人龙合一！ 源氏被征召了 '+ Genji + ' 次，有着 '+ GenjiWinRate + '%胜率。半藏被征召了 '+ Hanzo + ' 次，有着 '+ HanzoWinRate + '%胜率。',
+            ]:false
+        }
+    ],
+    'FantasticFour': [
+        ['Fantastic Four', '神奇四侠'],//源氏，半藏，猎空，狂鼠
+        function () {
+            if(dataPersonal.PlayerHeroes[51] === undefined || dataPersonal.PlayerHeroes[66] === undefined || dataPersonal.PlayerHeroes[73] === undefined || dataPersonal.PlayerHeroes[75] === undefined)
+                return false
+            var Tracer = dataPersonal.PlayerHeroes[51].game_total.sum > 5
+            var Genji = dataPersonal.PlayerHeroes[66].game_total.sum > 5
+            var Junkrat = dataPersonal.PlayerHeroes[73].game_total.sum > 5
+            var Hanzo = dataPersonal.PlayerHeroes[75].game_total.sum > 5
+            var TracerWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[51].game_total.sum * 100).toFixed(2)
+            var GenjiWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var JunkratWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[73].game_total.sum * 100).toFixed(2)
+            var HanzoWinRate = (dataPersonal.PlayerHeroes[75].game_win.sum / dataPersonal.PlayerHeroes[75].game_total.sum * 100).toFixed(2)
+            var limit = Tracer && Genji && Junkrat && Hanzo &&   TracerWinRate > 50 && GenjiWinRate > 50 && JunkratWinRate > 50 && HanzoWinRate > 50
+            return limit?[
+                'World needs more heros!  Tracer have been called ' + Tracer + ' times,with the ' + TracerWinRate + '% WinRate,Genji have been called ' + Genji + ' times,with the ' + GenjiWinRate + '% WinRate,' +
+                'Junkrat have been called ' + Junkrat + ' times,with the ' + JunkratWinRate + '% WinRate,' + 'Hanzo have been called ' + Hanzo + ' times,with the ' + HanzoWinRate + '% WinRate',
+
+                '这个世界需要更多的英雄！猎空被征召了 '+ Tracer + ' 次，有着 '+ TracerWinRate + '%胜率。源氏被征召了 '+ Genji + ' 次，有着 '+ GenjiWinRate + '%胜率。' +
+                '狂鼠被征召了 '+ Junkrat + ' 次，有着 '+ JunkratWinRate + '%胜率。半藏被征召了 '+ Hanzo + ' 次，有着 '+ HanzoWinRate + '%胜率。',
             ]:false
         }
     ],
