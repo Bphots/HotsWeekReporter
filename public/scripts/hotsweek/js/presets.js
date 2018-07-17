@@ -2247,8 +2247,8 @@ var events = {
             var Valeera = dataPersonal.PlayerHeroes[62].game_total.sum > 5
             var limit = Zeratul && Nova && Samuro && Valeera
             return limit?[
-                'The thrill of slaughtering enemies in the shadows erodes your soul.',
-                '在阴影中屠杀敌人的快感侵蚀着你的灵魂。',
+                'The thrill of slaughtering enemies in the shadows erodes your soul.This week you have called many times Stealth hero,Zeratul,Nova,Samuro and Valeera',
+                '在阴影中屠杀敌人的快感侵蚀着你的灵魂。这周隐身系英雄，泽拉图、诺娃、萨穆罗、瓦莉拉多次被你征召',
             ]:false
         }
     ],
