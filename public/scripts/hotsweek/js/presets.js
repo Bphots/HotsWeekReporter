@@ -1871,7 +1871,7 @@ var events = {
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
             var limit = Tyrande && Illidan
             return limit ? [
-                '',
+                'You know, for ten thousand years old Tyrande still looks pretty good. Illidan and Tyrande have shown multiple times around this week. May Elune‘s around you forever.',
                 '你知道，一万年了，泰兰德还是那么美。这周泰兰德和伊利丹多次在你这里出现，愿艾露恩与你同在！',
             ] : false
         }
@@ -1885,8 +1885,8 @@ var events = {
             var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
             var limit = Illidan && Malfurion
             return limit ? [
-                'So be it, Brother.  ',
-                '那就这样吧，兄弟。这周玛法里奥和伊利丹',
+                'So be it, brother. Illidan and Malfurion have taken a lot tasks for you together in the combat. Hope to end from this day forward, let there be peace between them.',
+                '那就这样吧，兄弟。这周玛法里奥和伊利丹共同承担了你的多场战斗任务。希望从今以后他们之间能够保持和平。',
             ] : false
         }
     ],
@@ -1895,7 +1895,7 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[14] === undefined || dataPersonal.PlayerHeroes[4] === undefined ||
                 dataPersonal.PlayerHeroes[16] === undefined)
-                return false            
+                return false
             var Malfurion = dataPersonal.PlayerHeroes[14].game_total.sum > 5
             var Tyrande = dataPersonal.PlayerHeroes[4].game_total.sum > 5
             var Illidan = dataPersonal.PlayerHeroes[16].game_total.sum > 5
@@ -1982,15 +1982,16 @@ var events = {
     'DoubleTrouble': [
         ['Double Trouble', '双重麻烦'],//古，加尔
         function () {
-            if(dataPersonal.PlayerHeroes[44] === undefined || dataPersonal.PlayerHeroes[45] === undefined )
+            if (dataPersonal.PlayerHeroes[44] === undefined || dataPersonal.PlayerHeroes[45] === undefined)
                 return false
-            var Cho = dataPersonal.PlayerHeroes[44].game_total.sum > 5
-            var Gall = dataPersonal.PlayerHeroes[45].game_total.sum > 5
-            var limit = Cho || Gall
-            return limit?[
-                'Behold the might of the Hammer! Cho have been called ' + Cho + ' times,  Gall '+ Gall + ' times',
-                '见证暮光之锤的力量！ 古被征召了 ' + Cho + ' 次，加尔被征召了 '+ Gall + ' 次',
-            ]:false
+            var Cho = dataPersonal.PlayerHeroes[44].game_total.sum > 2
+            var Gall = dataPersonal.PlayerHeroes[45].game_total.sum > 2
+            var tot = (dataPersonal.PlayerHeroes[44].game_total.sum + dataPersonal.PlayerHeroes[45].game_total.sum) > 10
+            var limit = (Cho || Gall) && tot
+            return limit ? [
+                'Behold the might of the Hammer! Cho have been called ' + Cho + ' times,  Gall ' + Gall + ' times',
+                '见证暮光之锤的力量！ 古被征召了 ' + Cho + ' 次，加尔被征召了 ' + Gall + ' 次',
+            ] : false
         }
     ],
     'ReignofChaos': [
