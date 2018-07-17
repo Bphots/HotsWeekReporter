@@ -1376,7 +1376,7 @@ var events = {
 		['Amazing Win Rate', '令人惊讶的胜率'],
 		function () {
 			var myWinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-			var globalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+			var globalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(0)
 			var limit = myWinRate > 1.2 * globalWinRate
 			return limit ?
 				[
@@ -1776,16 +1776,108 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 60
                 return limit ? [
-                    'Play to win! You\'ve played Genji ' + Games + ' times , winning rate reach ' + WinRate + '%, the global Genji average WinRate is ' + GlobalWinRate + '%. You are a qualified Happy Darter.',
+                    'Play to win! You\'ve played Genji ' + Games + ' times , WinRate reach ' + WinRate + '%, the global Genji average WinRate is ' + GlobalWinRate + '%. You are a qualified Happy Darter.',
                     '玩游戏就是要赢！本周你使用源氏进行了 ' + Games + ' 场游戏，胜率竟然达到了 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + '%。你是一位合格的快乐镖男！'
                 ] : false
             }
             else {
                 var limit = Games >=10 && WinRate < 40
                 return limit ? [
-                    'Poor insect! You have used Genji to have ' + Games + ' games, I can\'t believe your winning rate is only ' + WinRate + '%. You need healing.',
+                    'Poor insect! You have used Genji to have ' + Games + ' games, I can\'t believe your WinRate is only ' + WinRate + '%. You need healing.',
                     '卑微的苍蝇！本周你使用源氏进行了 ' + Games + ' 场游戏，胜率竟然才 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + '%。哼，啊嚯噶！'
                 ] : false
+            }
+        }
+    ],
+    'Warden': [
+        ['Where is Illidan?', '伊利丹在哪？'],//马尾
+        function () {
+            if (dataPersonal.PlayerHeroes[77] === undefined || dataPersonal.PlayerHeroes[77].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[77].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[77].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[77].game_win.sum / dataPersonal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[77].game_win.sum / dataGlobal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
+            if ( WinRate > GlobalWinRate && WinRate >= 55 ) {
+                return [
+                    'You are Maiev Master! You\'ve played Maiev ' + Games + ' times , WinRate reach ' + WinRate + '%, the global Maiev average WinRate is ' + GlobalWinRate + '%. You are a qualified Happy Darter.',
+                    '玛维的取胜技巧已被你掌握，本周你使用玛维进行了 ' + Games + ' 场游戏，胜率高达 ' + WinRate + '%, 玛维全球胜率：' + GlobalWinRate + '%。'
+                ]
+            }
+            else {
+                return  [
+                    'You have used Maiev to have ' + Games + ' games, I can\'t believe your WinRate is only ' + WinRate + '%,the global Maiev average WinRate is ' + GlobalWinRate + '%.The key is master the time of her E and D,and the accuracy of her Q.',
+                    '本周你使用玛维进行了 ' + Games + ' 场游戏，胜率竟然才 ' + WinRate + '%, 玛维全球胜率：' + GlobalWinRate + '%。用好玛维的 E 和 D ，并且提高 Q 的精确度，能提高不少胜率！'
+                ]
+            }
+        }
+    ],
+    'DragonQueen': [
+        ['Dragon Queen', '龙后'],//阿莱克丝塔萨
+        function () {
+            if (dataPersonal.PlayerHeroes[74] === undefined || dataPersonal.PlayerHeroes[74].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[74].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[74].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[74].game_win.sum / dataPersonal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[74].game_win.sum / dataGlobal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
+            if ( WinRate > GlobalWinRate && WinRate >= 55 ) {
+                return [
+                    'You bing the life and hope! You\'ve played Alexstrasza ' + Games + ' times , WinRate reach ' + WinRate + '%, the global Alexstrasza average WinRate is ' + GlobalWinRate + '%',
+                    '你带来了生命与希望，本周你使用阿莱克丝塔萨进行了 ' + Games + ' 场游戏，胜率高达 ' + WinRate + '%, 阿莱克丝塔萨全球胜率：' + GlobalWinRate + '%'
+                ]
+            }
+            else {
+                return  [
+                    'You have used Alexstrasza to have ' + Games + ' games, your WinRate is only ' + WinRate + '%,the global Alexstrasza average WinRate is ' + GlobalWinRate + '%.Communicate with teammates, it is best to start a team battle when you have Dragon and R',
+                    '本周你使用阿莱克丝塔萨进行了 ' + Games + ' 场游戏，胜率才 ' + WinRate + '%, 阿莱克丝塔萨全球胜率：' + GlobalWinRate + '%。和队友沟通好，最好在你有变龙和 R 的时候再开始团战'
+                ]
+            }
+        }
+    ],
+    'TheLastGuardian': [
+        ['The Last Guardian', '最后的守护者'],//麦迪文
+        function () {
+            if (dataPersonal.PlayerHeroes[53] === undefined || dataPersonal.PlayerHeroes[53].game_total.sum < 7)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[53].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[53].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[53].game_win.sum / dataPersonal.PlayerHeroes[53].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[53].game_win.sum / dataGlobal.PlayerHeroes[53].game_total.sum * 100).toFixed(2)
+            if ( WinRate > GlobalWinRate && WinRate >= 50 ) {
+                return [
+                    'You\'ve played Medivh ' + Games + ' times , WinRate reach ' + WinRate + '%, the global Medivh average WinRate is ' + GlobalWinRate + '%.What can I say? Coooooooool play!',
+                    '本周你使用麦迪文进行了 ' + Games + ' 场游戏，胜率高达 ' + WinRate + '%, 麦迪文全球胜率：' + GlobalWinRate + '%，我还能说什么，麦迪斌玩的不错！'
+                ]
+            }
+            else {
+                return  [
+                    'That\'s stupid, I foresee the future, seeing the burning shadows that are about to swallow the world,You have used Medivh to have ' + Games + ' games, your WinRate is only ' + WinRate + '%,the globalMedivh average WinRate is ' + GlobalWinRate + '%.',
+                    '那可真蠢，我预见到了未来，看到了即将吞噬这个世界的燃烧著的阴影，本周你使用麦迪文进行了 ' + Games + ' 场游戏，胜率才 ' + WinRate + '%, 麦迪文全球胜率：' + GlobalWinRate + '%。'
+                ]
+            }
+        }
+    ],
+    'TheFirelord': [
+        ['The Firelord', '炎魔之王'],//螺丝
+        function () {
+            if (dataPersonal.PlayerHeroes[60] === undefined || dataPersonal.PlayerHeroes[60].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[60].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[60].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[60].game_win.sum / dataPersonal.PlayerHeroes[60].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[60].game_win.sum / dataGlobal.PlayerHeroes[60].game_total.sum * 100).toFixed(2)
+            if ( WinRate > GlobalWinRate && WinRate >= 55 ) {
+                return [
+                    'By fire be purged!You\'ve played Ragnaros ' + Games + ' times , WinRate reach ' + WinRate + '%, the global Ragnaros average WinRate is ' + GlobalWinRate + '%.Burn those bugs with fire!',
+                    '让火焰净化一切！本周你使用拉格纳罗斯进行了 ' + Games + ' 场游戏，胜率高达 ' + WinRate + '%, 拉格纳罗斯全球胜率：' + GlobalWinRate + '%，用火焰把那些虫子燃烧殆尽！'
+                ]
+            }
+            else {
+                return  [
+                    'You have used Ragnaros to have ' + Games + ' games, your WinRate is only ' + WinRate + '%,the global Ragnaros average WinRate is ' + GlobalWinRate + '%.Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy\'s back.',
+                    '本周你使用拉格纳罗斯进行了 ' + Games + ' 场游戏，胜率才 ' + WinRate + '%, 拉格纳罗斯全球胜率：' + GlobalWinRate + '%。掌握上坑的时机，有时候绕后上坑也是一个不错的选择'
+                ]
             }
         }
     ],
@@ -1802,14 +1894,6 @@ var events = {
     'Sylvanas': [//希尔瓦纳斯 id:35 诅咒之下，欢乐何在
     ],
     'Leoric': [//李奥瑞克 id:39 我将与你们并肩作战，直到我生命的最后一刻
-    ],
-    'Medivh': [//麦迪文 id:53 那可真蠢 我预见到了未来,看到了即将吞噬这个世界的燃烧著的阴影
-    ],
-    'Ragnaros': [//拉格纳罗斯 id:60 死吧，虫子
-    ],
-    'Alexstrasza': [//红龙 id:74 生命总会在最黑暗的地方绽放 我带来了生命的希望
-    ],
-    'Maiev': [//玛维 id:77 一个猎手失去了猎物就会一无所有
     ],
     */
     'ForTheAlliance': [
@@ -2120,7 +2204,7 @@ var events = {
             var GenjiWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
             var JunkratWinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[73].game_total.sum * 100).toFixed(2)
             var HanzoWinRate = (dataPersonal.PlayerHeroes[75].game_win.sum / dataPersonal.PlayerHeroes[75].game_total.sum * 100).toFixed(2)
-            var limit = Tracer && Genji && Junkrat && Hanzo &&   TracerWinRate > 50 && GenjiWinRate > 50 && JunkratWinRate > 50 && HanzoWinRate > 50
+            var limit = Tracer && Genji && Junkrat && Hanzo && TracerWinRate > 50 && GenjiWinRate > 50 && JunkratWinRate > 50 && HanzoWinRate > 50
             return limit?[
                 'World needs more heros!  Tracer have been called ' + Tracer + ' times,with the ' + TracerWinRate + '% WinRate,Genji have been called ' + Genji + ' times,with the ' + GenjiWinRate + '% WinRate,' +
                 'Junkrat have been called ' + Junkrat + ' times,with the ' + JunkratWinRate + '% WinRate,' + 'Hanzo have been called ' + Hanzo + ' times,with the ' + HanzoWinRate + '% WinRate',
@@ -2128,6 +2212,46 @@ var events = {
                 '这个世界需要更多的英雄！猎空被征召了 '+ Tracer + ' 次，有着 '+ TracerWinRate + '%胜率。源氏被征召了 '+ Genji + ' 次，有着 '+ GenjiWinRate + '%胜率。' +
                 '狂鼠被征召了 '+ Junkrat + ' 次，有着 '+ JunkratWinRate + '%胜率。半藏被征召了 '+ Hanzo + ' 次，有着 '+ HanzoWinRate + '%胜率。',
             ]:false
+        }
+    ],
+    'InTheShadow': [
+        ['InTheShadow', '来自阴影'],//泽拉图，诺娃，萨穆罗，瓦莉拉
+        function () {
+            if(dataPersonal.PlayerHeroes[1] === undefined || dataPersonal.PlayerHeroes[11] === undefined || dataPersonal.PlayerHeroes[58] === undefined || dataPersonal.PlayerHeroes[62] === undefined)
+                return false
+            var Zeratul = dataPersonal.PlayerHeroes[1].game_total.sum > 5
+            var Nova = dataPersonal.PlayerHeroes[11].game_total.sum > 5
+            var Samuro = dataPersonal.PlayerHeroes[58].game_total.sum > 5
+            var Valeera = dataPersonal.PlayerHeroes[62].game_total.sum > 5
+            var limit = Zeratul && Nova && Samuro && Valeera
+            return limit?[
+                'The thrill of slaughtering enemies in the shadows erodes your soul.',
+                '在阴影中屠杀敌人的快感侵蚀着你的灵魂。',
+            ]:false
+        }
+    ],
+    'MeatMeatMeat': [
+        ['Meat!Meat!Meat!', '肉！肉！肉！'],//屠夫
+        function () {
+            if(dataPersonal.PlayerHeroes[38] === undefined || dataPersonal.PlayerHeroes[38].game_total.sum <5 )
+                return false
+            var ButcherWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
+            var ButcherGlobalWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
+            if( ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
+                return [
+                    'Your Butcher\'s WinRate is ' + ButcherWinRate + '%, and the global Butcher\'s average WinRate is ' + ButcherGlobalWinRate + '%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.',
+                    '你的屠夫的胜率是 ' + ButcherWinRate + '%,而全球屠夫平均胜率是 ' + ButcherGlobalWinRate + '%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单。',
+                ]
+            }
+            if( ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate){
+                return [
+                    'There is no doubt that you have mastered the skills of using the Butcher\'s Slayer. Your Butcher\'s winning percentage is ' + ButcherWinRate + '%, while the global Butcher\'s average WinRate is ' + ButcherGlobalWinRate + '%',
+                    '毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 ' + ButcherWinRate + '%,而全球屠夫平均胜率是 ' + ButcherGlobalWinRate + '%',
+                ]
+            }
+            else{
+                return false
+            }
         }
     ],
 }
