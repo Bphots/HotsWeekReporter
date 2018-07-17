@@ -1634,19 +1634,25 @@ var events = {
             ]:false
         }
     ],
-    'MurkyKing': [
-        ['Grglrgl！Lrgl grgrmrmlgr！', 'Grglrgl！Lrgl grgrmrmlgr！'],
+    'Uther': [
+        ['Silver Hand', '白银之手'],//乌瑟尔
         function () {
-            if(dataPersonal.PlayerHeroes[26] === undefined || dataPersonal.PlayerHeroes[26].game_total.sum < 10)
+            if (dataPersonal.PlayerHeroes[3] === undefined || dataPersonal.PlayerHeroes[3].game_total.sum < 10)
                 return false
-            var Murkygames = dataPersonal.PlayerHeroes[26].game_total.sum
-            var MurkyWinRate =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var MurkyGlobal =  (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var limit = Murkygames > 7 && MurkyWinRate > 50
-            return limit?[
-                'You played '+ Murkygames + ' times Murky, the WinRate reached '+ MurkyWinRate + '%, the Murky global WinRate is '+MurkyGlobal + '%',
-                '你玩了 '+ Murkygames + '局小鱼人，胜率达到了 '+ MurkyWinRate + '%，小鱼人的全球胜率是 '+ MurkyGlobal + '%',
-            ]:false
+            var Wins = dataPersonal.PlayerHeroes[3].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[3].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[3].game_total.sum / dataPersonal.PlayerHeroes[3].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataPersonal.PlayerHeroes[3].game_total.sum / dataPersonal.PlayerHeroes[3].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Wins >= 10 && WinRate >= 50
+                return limit ? [
+                    'We are St. Cleveland! ' + Games + 'times Uther, winning rate reach ' + WinRate + '%, the global Uther average WinRate is ' + GlobalWinRate + ' %. The emotional revenge must not be allowed to occupy our consciousness',
+                    '我们是圣骑士！本周你使用乌瑟尔完成了 ' + Games + '局游戏，胜率达到了 ' + WinRate + '%, 乌瑟尔全球胜率：' + GlobalWinRate + ' %。不要让仇恨蒙蔽了我们的双眼！'
+                ] : false
+            }
+            else
+                return false
+
         }
     ],
     'Krisolthokaran': [
@@ -1658,13 +1664,13 @@ var events = {
             var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_win.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             var AlarakGlobal = (dataGlobal.PlayerHeroes[56].game_win.sum / dataGlobal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
             if(AlarakWinRate <= AlarakGlobal) {
-                var limit1 = Alarakgames > 7 && AlarakWinRate < 50
+                var limit1 = Alarakgames > 7 && AlarakWinRate <= 50
                 return limit1?[
                     'Such a shame, I personally appeared ' + Alarakgames + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
                     '真是丢人现眼，我亲自登场了 ' + Alarakgames + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有 ' + AlarakGlobal + '%，不要再让我登场了！',
                 ]:false
             }
-            if(AlarakWinRate > AlarakGlobal) {
+            else {
                 var limit2 = Alarakgames > 7 && AlarakWinRate > 50
                 return limit2?[
                     'General Performance, I personally appeared ' + Alarakgames + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
@@ -1678,17 +1684,32 @@ var events = {
         function () {
             if(dataPersonal.PlayerHeroes[22] === undefined || dataPersonal.PlayerHeroes[22].game_total.sum < 10)
                 return false
-            var Abathurwins = dataPersonal.PlayerHeroes[22].game_win.sum
-            var Abathurgames = dataPersonal.PlayerHeroes[22].game_total.sum
-            var AbathurWinRate = (dataPersonal.PlayerHeroes[22].game_win.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
-            var AbathurGlobal = (dataGlobal.PlayerHeroes[22].game_win.sum / dataGlobal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
-            if(AlarakWinRate > AlarakGlobal) {
-                var limit = Abathurwins > 10 && AbathurWinRate > 50
+            var Wins = dataPersonal.PlayerHeroes[22].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[22].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[22].game_win.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[22].game_win.sum / dataGlobal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            if (Wins > GlobalWinRate) {
+                var limit = Wins >= 10 && WinRate >= 50
                 return limit?[
-                    'Evolution Complete! Abathur appeared in the ' + Abathurgames + ' times, winning rate reach '+ AbathurWinRate + '%, the global Abathur average WinRate is ' + AbathurGlobal + '%, good play! ',
-                    '进化成功！阿巴瑟登场了 ' + Abathurgames + '局，胜率才 '+ AbathurWinRate + '%,阿巴瑟全球胜率：' + AbathurGlobal + '%，玩的不错！',
+                    'Evolution Complete! Abathur appeared in the ' + Games + ' times, winning rate reach ' + WinRate + '%, the global Abathur average WinRate is ' + GlobalWinRate + '%, good play! ',
+                    '进化成功！阿巴瑟登场了 ' + Games + '局，胜率才 ' + WinRate + '%,阿巴瑟全球胜率：' + GlobalWinRate + '%，玩的不错！',
                 ]:false
             }
+        }
+    ],
+    'MurkyKing': [
+        ['Grglrgl！Lrgl grgrmrmlgr！', 'Grglrgl！Lrgl grgrmrmlgr！'],
+        function () {
+            if (dataPersonal.PlayerHeroes[26] === undefined || dataPersonal.PlayerHeroes[26].game_total.sum < 10)
+                return false
+            var Murkygames = dataPersonal.PlayerHeroes[26].game_total.sum
+            var MurkyWinRate = (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var MurkyGlobal = (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var limit = Murkygames > 7 && MurkyWinRate > 50
+            return limit ? [
+                'You played ' + Murkygames + ' times Murky, the WinRate reached ' + MurkyWinRate + '%, the Murky global WinRate is ' + MurkyGlobal + '%',
+                '你玩了 ' + Murkygames + '局小鱼人，胜率达到了 ' + MurkyWinRate + '%，小鱼人的全球胜率是 ' + MurkyGlobal + '%',
+            ] : false
         }
     ],
     'Genji': [
@@ -1701,17 +1722,17 @@ var events = {
             var WinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
             var GlobalWinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
-                var limit = Wins > 10 && WinRate > 60
+                var limit = Wins >= 10 && WinRate >= 60
                 return limit ? [
-                    '',
-                    '玩游戏就是要赢！本周你使用源氏进行了' + Games + '场游戏，胜率竟然达到了 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
+                    'Play to win! You\'ve played ' + Games + 'times Genji, winning rate reach ' + WinRate + '%, the global Genji average WinRate is ' + GlobalWinRate + ' %. You are a qualified Happy Darter.',
+                    '玩游戏就是要赢！本周你使用源氏进行了 ' + Games + '场游戏，胜率竟然达到了 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
                 ] : false
             }
             else {
-                var limit = Wins > 0 && WinRate < 40
+                var limit = WinRate < 40
                 return limit ? [
                     '',
-                    '卑微的苍蝇！本周你使用源氏进行了' + Games + '场游戏，胜率竟然才 ' + WinRate + ' %, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
+                    '卑微的苍蝇！本周你使用源氏进行了 ' + Games + '场游戏，胜率竟然才 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
                 ] : false
             }
         }
@@ -1720,9 +1741,7 @@ var events = {
     'Zeratul': [//泽拉图 id:1  I appears the veil of the future, and behold only……oblivion. 
         //我挑开了未来的面纱，却只看到了……湮灭。
     ],
-    'Uther': [//乌瑟尔 id:3 我们是圣骑士，不要让仇恨蒙蔽了我们的双眼。
-        //We are St. Cleveland, the emotional revenge must not be allowed to occupy our consciousness.
-    ],
+
     'Tyrande': [//泰兰德 id:4 愿艾露恩与你同在 愿月光女神照耀你
     ],
     'Illidan': [//伊利丹 id:16 我被囚禁了一万年 又被逐出了自己的故乡 现在你们胆敢闯入我的领地 你们这是自寻死路You are not prepared 有些时候，命运之手必须掌握在自己手中。At sometimes , the hand of fate must be forced
@@ -1778,15 +1797,15 @@ var events = {
                 dataPersonal.PlayerHeroes[35] === undefined || dataPersonal.PlayerHeroes[41] === undefined || dataPersonal.PlayerHeroes[54] === undefined ||
                 dataPersonal.PlayerHeroes[58] === undefined || dataPersonal.PlayerHeroes[61] === undefined || dataPersonal.PlayerHeroes[70] === undefined)
                 return false
-            var ETC = dataPersonal.PlayerHeroes[19].game_total.sum > 5
-            var Rehgar = dataPersonal.PlayerHeroes[28].game_total.sum > 5
+            var ETC = dataPersonal.PlayerHeroes[19].game_total.sum > 3
+            var Rehgar = dataPersonal.PlayerHeroes[28].game_total.sum > 3
             var Thrall = dataPersonal.PlayerHeroes[33].game_total.sum > 3
-            var Sylvanas = dataPersonal.PlayerHeroes[35].game_total.sum > 5
+            var Sylvanas = dataPersonal.PlayerHeroes[35].game_total.sum > 3
             var Rexxar = dataPersonal.PlayerHeroes[41].game_total.sum > 3
-            var Guldan = dataPersonal.PlayerHeroes[54].game_total.sum > 5
-            var Samuro = dataPersonal.PlayerHeroes[58].game_total.sum > 5
-            var Zuljin = dataPersonal.PlayerHeroes[61].game_total.sum > 5
-            var Garrosh = dataPersonal.PlayerHeroes[70].game_total.sum > 5
+            var Guldan = dataPersonal.PlayerHeroes[54].game_total.sum > 3
+            var Samuro = dataPersonal.PlayerHeroes[58].game_total.sum > 3
+            var Zuljin = dataPersonal.PlayerHeroes[61].game_total.sum > 3
+            var Garrosh = dataPersonal.PlayerHeroes[70].game_total.sum > 3
             var limit = ETC && Rehgar && Thrall && Sylvanas && Rexxar && Guldan && Samuro && Zuljin && Garrosh
             return limit?[
                 'Lok\'tar ogar！ Horde heroes have been called many times!',
@@ -1984,10 +2003,10 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[44] === undefined || dataPersonal.PlayerHeroes[45] === undefined)
                 return false
-            var Cho = dataPersonal.PlayerHeroes[44].game_total.sum > 2
-            var Gall = dataPersonal.PlayerHeroes[45].game_total.sum > 2
+            var Cho = dataPersonal.PlayerHeroes[44].game_total.sum > 0
+            var Gall = dataPersonal.PlayerHeroes[45].game_total.sum > 0
             var tot = (dataPersonal.PlayerHeroes[44].game_total.sum + dataPersonal.PlayerHeroes[45].game_total.sum) > 10
-            var limit = (Cho || Gall) && tot
+            var limit = Cho && Gall && tot
             return limit ? [
                 'Behold the might of the Hammer! Cho have been called ' + Cho + ' times,  Gall ' + Gall + ' times',
                 '见证暮光之锤的力量！ 古被征召了 ' + Cho + ' 次，加尔被征召了 ' + Gall + ' 次',
