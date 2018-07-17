@@ -1642,7 +1642,7 @@ var events = {
             var Wins = dataPersonal.PlayerHeroes[3].game_win.sum
             var Games = dataPersonal.PlayerHeroes[3].game_total.sum
             var WinRate = (dataPersonal.PlayerHeroes[3].game_total.sum / dataPersonal.PlayerHeroes[3].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataPersonal.PlayerHeroes[3].game_total.sum / dataPersonal.PlayerHeroes[3].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[3].game_win.sum / dataGlobal.PlayerHeroes[3].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Wins >= 10 && WinRate >= 50
                 return limit ? [
@@ -1655,27 +1655,53 @@ var events = {
 
         }
     ],
+    'Gazlowe': [
+        ['Shelf Reed', '架子芦苇'],//架子芦苇
+        function () {
+            if (dataPersonal.PlayerHeroes[17] === undefined || dataPersonal.PlayerHeroes[17].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[17].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[17].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[17].game_win.sum / dataPersonal.PlayerHeroes[17].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[17].game_win.sum / dataGlobal.PlayerHeroes[17].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate >= 50
+                return limit ? [
+                    'Time is money, friend !' + Games + 'times Gazlowe, winning rate reach ' + WinRate + '%, the global Gazlowe average WinRate is ' + GlobalWinRate + ' %. ',
+                    '时间就是金钱我的朋友，而你全都要！本周你使用加兹鲁维完成了 ' + Games + '局游戏，胜率达到了 ' + WinRate + '%, 加兹鲁维全球胜率：' + GlobalWinRate + ' %。！'
+                ] : false
+            }
+            else {
+                var limit = Games >=10 && WinRate < 40
+                return limit ? [
+                    '!' + Games + 'times Gazlowe, winning rate reach ' + WinRate + '%, the global Gazlowe average WinRate is ' + GlobalWinRate + ' %. ',
+                    '时间就是金钱我的朋友，而你两样都没有！本周你使用加兹鲁维完成了 ' + Games + '局游戏，胜率达到了 ' + WinRate + '%, 加兹鲁维全球胜率：' + GlobalWinRate + ' %。！'
+                ] : false
+            }
+
+        }
+    ],
     'Krisolthokaran': [
         ['Krisol thok aran!', '骚骚可浪'],
         function () {
             if(dataPersonal.PlayerHeroes[56] === undefined || dataPersonal.PlayerHeroes[56].game_total.sum < 10)
                 return false
-            var Alarakgames = dataPersonal.PlayerHeroes[56].game_total.sum
-            var AlarakWinRate = (dataPersonal.PlayerHeroes[56].game_win.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
-            var AlarakGlobal = (dataGlobal.PlayerHeroes[56].game_win.sum / dataGlobal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
-            if(AlarakWinRate <= AlarakGlobal) {
-                var limit1 = Alarakgames > 7 && AlarakWinRate <= 50
-                return limit1?[
-                    'Such a shame, I personally appeared ' + Alarakgames + ' times, winning rate only '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, Plz do not pick me again! ',
-                    '真是丢人现眼，我亲自登场了 ' + Alarakgames + '局，胜率才 '+ AlarakWinRate + '%,全球的高阶领主平均胜率都有 ' + AlarakGlobal + '%，不要再让我登场了！',
+            var Games = dataPersonal.PlayerHeroes[56].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[56].game_win.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[56].game_win.sum / dataGlobal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit2 = Games > 7 && WinRate > 50
+                return limit2?[
+                    'General Performance, I personally appeared ' + Games + ' times, winning rate reach ' + WinRate + '%, the global Alarak average WinRate is ' + GlobalWinRate + '%, next time I will consider helping you again. ',
+                    '表现还行，我亲自登场了 ' + Games + '局，胜率达到了 ' + WinRate + '%，全球的高阶领主平均胜率是 ' + GlobalWinRate + '%，下次我会考虑再帮你的。',
                 ]:false
             }
             else {
-                var limit2 = Alarakgames > 7 && AlarakWinRate > 50
-                return limit2?[
-                    'General Performance, I personally appeared ' + Alarakgames + ' times, winning rate reached '+ AlarakWinRate + '%, the global Alarak average WinRate is ' + AlarakGlobal + '%, next time I will consider helping you again. ',
-                    '表现还行，我亲自登场了 ' + Alarakgames + '局，胜率达到了 '+ AlarakWinRate + '%，全球的高阶领主平均胜率是 ' + AlarakGlobal + '%，下次我会考虑再帮你的。',
-                ]:false
+                var limit1 = Games > 7 && WinRate <= 50
+                return limit1 ? [
+                    'Such a shame, I personally appeared ' + Games + ' times, winning rate only ' + WinRate + '%, the global Alarak average WinRate is ' + GlobalWinRate + '%, Plz do not pick me again! ',
+                    '真是丢人现眼，我亲自登场了 ' + Games + '局，胜率才 ' + WinRate + '%,全球的高阶领主平均胜率都有 ' + GlobalWinRate + '%，不要再让我登场了！',
+                ] : false
             }
         }
     ],
@@ -1689,10 +1715,10 @@ var events = {
             var WinRate = (dataPersonal.PlayerHeroes[22].game_win.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerHeroes[22].game_win.sum / dataGlobal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
             if (Wins > GlobalWinRate) {
-                var limit = Wins >= 10 && WinRate >= 50
+                var limit = Games >= 10 && WinRate >= 50
                 return limit?[
                     'Evolution Complete! Abathur appeared in the ' + Games + ' times, winning rate reach ' + WinRate + '%, the global Abathur average WinRate is ' + GlobalWinRate + '%, good play! ',
-                    '进化成功！阿巴瑟登场了 ' + Games + '局，胜率才 ' + WinRate + '%,阿巴瑟全球胜率：' + GlobalWinRate + '%，玩的不错！',
+                    '进化成功！阿巴瑟登场了 ' + Games + '局，胜率达到了 ' + WinRate + '%,阿巴瑟全球胜率：' + GlobalWinRate + '%，玩的不错！',
                 ]:false
             }
         }
@@ -1702,13 +1728,13 @@ var events = {
         function () {
             if (dataPersonal.PlayerHeroes[26] === undefined || dataPersonal.PlayerHeroes[26].game_total.sum < 10)
                 return false
-            var Murkygames = dataPersonal.PlayerHeroes[26].game_total.sum
-            var MurkyWinRate = (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var MurkyGlobal = (dataPersonal.PlayerHeroes[26].game_total.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var limit = Murkygames > 7 && MurkyWinRate > 50
+            var Games = dataPersonal.PlayerHeroes[26].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[26].game_win.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[26].game_win.sum / dataGlobal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var limit = Games > 7 && WinRate > 50
             return limit ? [
-                'You played ' + Murkygames + ' times Murky, the WinRate reached ' + MurkyWinRate + '%, the Murky global WinRate is ' + MurkyGlobal + '%',
-                '你玩了 ' + Murkygames + '局小鱼人，胜率达到了 ' + MurkyWinRate + '%，小鱼人的全球胜率是 ' + MurkyGlobal + '%',
+                'You played ' + Games + ' times Murky, the WinRate reached ' + WinRate + '%, the Murky global WinRate is ' + GlobalWinRate + '%',
+                '你玩了 ' + Games + '局小鱼人，胜率达到了 ' + WinRate + '%，小鱼人的全球胜率是 ' + GlobalWinRate + '%',
             ] : false
         }
     ],
@@ -1719,17 +1745,17 @@ var events = {
                 return false
             var Wins = dataPersonal.PlayerHeroes[66].game_win.sum
             var Games = dataPersonal.PlayerHeroes[66].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataPersonal.PlayerHeroes[66].game_total.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var WinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[66].game_win.sum / dataGlobal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
-                var limit = Wins >= 10 && WinRate >= 60
+                var limit = Games >= 10 && WinRate >= 60
                 return limit ? [
                     'Play to win! You\'ve played ' + Games + 'times Genji, winning rate reach ' + WinRate + '%, the global Genji average WinRate is ' + GlobalWinRate + ' %. You are a qualified Happy Darter.',
                     '玩游戏就是要赢！本周你使用源氏进行了 ' + Games + '场游戏，胜率竟然达到了 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + ' %。你是一位合格的快乐镖男！'
                 ] : false
             }
             else {
-                var limit = WinRate < 40
+                var limit = Games >=10 && WinRate < 40
                 return limit ? [
                     '',
                     '卑微的苍蝇！本周你使用源氏进行了 ' + Games + '场游戏，胜率竟然才 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + ' %。哼，啊嚯噶！'
