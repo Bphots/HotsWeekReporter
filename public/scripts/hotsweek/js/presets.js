@@ -1700,7 +1700,7 @@ var events = {
             else {
                 var limit = Games >=10 && WinRate < 40
                 return limit ? [
-                    'Time is money, friend! And you have neither! You played Gazlowe ' + Games + ' times, winning rate only ' + WinRate + '%, the global Gazlowe average WinRate is ' + GlobalWinRate + ' %. Out of the way you nubgoblin. (Gazlowe\'s said)',
+                    'Time is money, friend! And you have neither! You played Gazlowe ' + Games + ' times, winning rate only ' + WinRate + '%, the global Gazlowe average WinRate is ' + GlobalWinRate + ' %. Out of the way you nubgoblin. (Gazlowe\'s armor said)',
                     '时间就是金钱我的朋友，而你两样都没有！本周你使用加兹鲁维完成了 ' + Games + '场游戏，胜率才 ' + WinRate + '%, 加兹鲁维全球胜率：' + GlobalWinRate + ' %。你这地精还不如客厅克星！'
                 ] : false
             }
@@ -1783,12 +1783,38 @@ var events = {
             else {
                 var limit = Games >=10 && WinRate < 40
                 return limit ? [
-                    'Poor insect! You have used Genji to have ' + Games + ' games, I can\'t believe your winning rate is only ' + WinRate + '%. You need healing.',
+                    'Poor insect! You have used Genji to have ' + Games + ' games. I can\'t believe your winning rate is only ' + WinRate + '%. You need healing.',
                     '卑微的苍蝇！本周你使用源氏进行了 ' + Games + ' 场游戏，胜率竟然才 ' + WinRate + '%, 源氏全球胜率：' + GlobalWinRate + '%。哼，啊嚯噶！'
                 ] : false
             }
         }
     ],
+    'Alexstrasza': [
+        ['Life-Binder', '生命缚誓者'],//阿莱克丝塔萨
+        function () {
+            if (dataPersonal.PlayerHeroes[74] === undefined || dataPersonal.PlayerHeroes[74].game_total.sum < 10)
+                return false
+            var Wins = dataPersonal.PlayerHeroes[74].game_win.sum
+            var Games = dataPersonal.PlayerHeroes[74].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[74].game_win.sum / dataPersonal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[74].game_win.sum / dataGlobal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate >= 50
+                return limit ? [
+                    'New life blooms! You played Alexstrasza ' + Games + ' times , winning rate reach ' + WinRate + '%, the global Alexstrasza average WinRate is ' + GlobalWinRate + '%. You bring life and hope!',
+                    '新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 ' + Games + ' 场游戏，胜率竟然达到了 ' + WinRate + '%, 阿莱克丝塔萨全球胜率：' + GlobalWinRate + '%。你带来了生命和希望！'
+                ] : false
+            }
+            else {
+                var limit = Games >= 10 && WinRate < 50
+                return limit ? [
+                    'Take heart, heroes, life will always blossom from the darkest soil! You played Alexstrasza ' + Games + ' times, winning rate only ' + WinRate + '%, the global Alexstrasza average WinRate is ' + GlobalWinRate + ' %. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.',
+                    '振作起来，英雄们，生命总会在最黑暗的地方绽放！本周你使用阿莱克丝塔萨完成了 ' + Games + '场游戏，胜率只有 ' + WinRate + '%, 阿莱克丝塔萨全球胜率：' + GlobalWinRate + ' %。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望。'
+                ] : false
+            }
+        }
+    ],
+    
     /*   //大饼
     'Zeratul': [//泽拉图 id:1  I appears the veil of the future, and behold only……oblivion. 
         //我挑开了未来的面纱，却只看到了……湮灭。
@@ -1806,8 +1832,6 @@ var events = {
     'Medivh': [//麦迪文 id:53 那可真蠢 我预见到了未来,看到了即将吞噬这个世界的燃烧著的阴影
     ],
     'Ragnaros': [//拉格纳罗斯 id:60 死吧，虫子
-    ],
-    'Alexstrasza': [//红龙 id:74 生命总会在最黑暗的地方绽放 我带来了生命的希望
     ],
     'Maiev': [//玛维 id:77 一个猎手失去了猎物就会一无所有
     ],
