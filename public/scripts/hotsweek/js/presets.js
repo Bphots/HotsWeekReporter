@@ -1758,6 +1758,30 @@ var events = {
             else return false
         }
     ],
+    "LiLi": [
+        ["Banshee Queen", "嘿，一朵小花儿"],//丽丽 24
+        function () {
+            if (dataPersonal.PlayerHeroes[24] === undefined)
+                return false
+            var Games = dataPersonal.PlayerHeroes[24].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[24].game_win.sum / dataPersonal.PlayerHeroes[24].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[24].game_win.sum / dataGlobal.PlayerHeroes[24].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate >= 55
+                return limit ? [
+                    "The Dark Lady watches over you. You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
+                    "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。胜利属于被遗忘着！"
+                ] : false
+            }
+            else {
+                var limit = Games >= 10 && WinRate <= 45
+                return limit ? [
+                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
+                    "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。不要考验我的耐心！"
+                ] : false
+            }
+        }
+    ],
     "MurkyKing": [
         ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
         function () {
@@ -1916,7 +1940,7 @@ var events = {
         }
     ],
     "Garrosh": [
-        ["Life-Binder", "加尔鲁什"],//加尔鲁什
+        ["Hellscream", "地狱咆哮"],//加尔鲁什
         function () {
             if (dataPersonal.PlayerHeroes[70] === undefined)
                 return false
