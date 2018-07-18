@@ -1361,10 +1361,10 @@ var counter = {
 
 var events = {
     "ZergKiller": [
-        ["Zerg Killer", "虫群杀手"],
+        ["Zerg Killer", "虫群杀手"], //禁区
         function () {
             var avgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
-            var limit = avgDamage > 5000
+            var limit = avgDamage > 6000
             return limit ?
                 [
                     "You made " + avgDamage + " zerg damage on average in Braxis Holdout",
@@ -1372,16 +1372,32 @@ var events = {
                 ] : false
         }
     ],
+    "HoldoutRate": [
+        ["Braxis Holdout", "布莱克西斯禁区"], //禁区
+        function () {
+            if( dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
+            return false
+            var avgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
+            var limit = avgDamage <= 5000 || WinRate < GlobalWinRate
+            return limit ?
+                [
+                    "You made " + avgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%" ,
+                    "你这周布莱克西斯禁区地图胜率是 "+ WinRate +"%，你对虫群造成 " + avgDamage + " 点伤害"
+                ] : false
+        }
+    ],
     "WinRate": [
         ["Amazing Win Rate", "令人惊讶的胜率"],
         function () {
-            var myWinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var globalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(0)
-            var limit = myWinRate > 1.2 * globalWinRate
+            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(0)
+            var limit = WinRate > 1.2 * GlobalWinRate
             return limit ?
                 [
-                    "Your win rate (" + myWinRate + "%) is far higher than the global average (" + globalWinRate + "%) ",
-                    "你的胜率 (" + myWinRate + "%) 远远高于全球平均水平 (" + globalWinRate + "%) "
+                    "Your win rate (" + WinRate + "%) is far higher than the global average (" + GlobalWinRate + "%) ",
+                    "你的胜率 (" + WinRate + "%) 远远高于全球平均水平 (" + GlobalWinRate + "%) "
                 ] : false
         }
     ],
@@ -1405,17 +1421,37 @@ var events = {
         }
     ],
     "DragonRider": [
-        ["Dragon Rider", "龙骑士"],
+        ["Dragon Rider", "龙骑士"],//巨龙镇
         function () {
+            if( dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+                return false
             var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(2)
-            var globalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(2)
-            var limit = myDragon > 2 * globalDragon
-            var times = Math.round(myDragon / globalDragon)
+            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(2)
+            var limit = myDragon > 2 * GlobalDragon
+            var times = Math.round(myDragon / GlobalDragon)
             return limit ?
                 [
-                    "You are a real DragonRider with the " + times + " times more than the global average" + globalDragon + "times",
+                    "You are a real DragonRider with the " + times + " times to take dragon ,and the global average is " + GlobalDragon + "times",
                     "你开龙的次数是全球平均水平的 " + times + " 倍呢！真是个名副其实的龙骑士！"
                 ] : false
+        }
+    ],
+    "DragonShire": [
+        ["Dragon Shire", "巨龙镇"], //巨龙镇
+        function () {
+            if( dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+                return false
+            var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[7] / dataPersonal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[7] / dataGlobal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
+            var ShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            return [
+                "This week, your winning rate of Dragon Shire is "+ WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take "+ myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
+                 + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + "times",
+                    "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon+ " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + "次，全球平均占领祭坛 " + GlobalShrinesCaptured + "次",
+                ]
         }
     ],
     "Premades": [
@@ -1434,7 +1470,7 @@ var events = {
         }
     ],
     "Miser": [
-        ["Miser", "吝啬鬼"],
+        ["Miser", "吝啬鬼"],//黑心湾
         function () {
             var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
             var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
@@ -1447,7 +1483,7 @@ var events = {
         }
     ],
     "UselessRavenTributes": [
-        ["Useless Raven Tributes", "无用的乌鸦诅咒"],
+        ["Useless Raven Tributes", "无用的乌鸦诅咒"],//诅咒谷
         function () {
             var Collected = dataPersonal.PlayerBase.RavenTributesCollected.sum
             var Damage = dataPersonal.PlayerBase.CurseDamageDone.sum
@@ -2095,8 +2131,8 @@ var events = {
             ] : false
         }
     ],
-    "NightElfBetrayer ": [
-        ["Night Elf Betrayer ", "暗夜精灵背叛者"],//伊利丹，玛法里奥
+    "NightElfBetrayer": [
+        ["Night Elf Betrayer", "暗夜精灵背叛者"],//伊利丹，玛法里奥
         function () {
             if (dataPersonal.PlayerHeroes[16] === undefined || dataPersonal.PlayerHeroes[14] === undefined)
                 return false
@@ -2230,20 +2266,6 @@ var events = {
             ] : false
         }
     ],
-    "AlarakAngle": [
-        ["Alarak Angle", "阿拉纳克的愤怒"],//阿拉纳克
-        function () {
-            var Assassingames = dataPersonal.PlayerBase.PlaysAssassin.sum
-            if (Assassingames < 30)
-                return false
-            var Alarakgames = dataPersonal.PlayerHeroes[56].game_total.sum
-            var limit = Alarakgames < 5
-            return limit ? [
-                "Humph! Humble servant! ! You played " + Assassingames + " Assassin Heros, I only appeared poor " + Alarakgames + " times, it is really embarrassing! ",
-                "哼！卑微的死徒！！你玩了 " + Assassingames + " 次刺杀型英雄，我才登场了可怜的 " + Alarakgames + " 次，真是令人难堪！",
-            ] : false
-        }
-    ],
     "ShimadaClan": [
         ["Shimada Clan", "岛田家族"],//源氏，半藏
         function () {
@@ -2321,6 +2343,75 @@ var events = {
             else {
                 return false
             }
+        }
+    ],
+    "MeatMeatMeat": [
+        ["Meat!Meat!Meat!", "肉！肉！肉！"],//屠夫
+        function () {
+            if (dataPersonal.PlayerHeroes[38] === undefined || dataPersonal.PlayerHeroes[38].game_total.sum < 5)
+                return false
+            var ButcherWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
+            var ButcherGlobalWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
+            if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
+                return [
+                    "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
+                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单。",
+                ]
+            }
+            if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
+                return [
+                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + ButcherWinRate + "%, while the global Butcher's winning rate is " + ButcherGlobalWinRate + "%",
+                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%",
+                ]
+            }
+            else {
+                return false
+            }
+        }
+    ],
+    "ExperienceContributionWinRate": [
+        ["Where is my XP ?", "经验值都去哪了？"],//经验贡献
+        function () {
+            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var XP = Math.round( dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalXP = Math.round( dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
+            if ( WinRate > GlobalWinRate || XP >= GlobalXP)
+                return false
+            return [
+                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is "+ XP + ", and the average global XP contribution  is " + GlobalXP,
+                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 "+ XP + "，全球平均每场玩家贡献的经验值是 " + GlobalXP,
+            ]
+        }
+    ],
+    "CampWinRate": [
+        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
+        function () {
+            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var Camp = Math.round( dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalCamp = Math.round( dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
+            if ( WinRate > GlobalWinRate || Camp >= GlobalCamp)
+                return false
+            return [
+                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
+                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 "+ Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP +" 次",
+            ]
+        }
+    ],
+    "CampWinRate": [
+        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
+        function () {
+            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var Camp = Math.round( dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalCamp = Math.round( dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
+            if ( WinRate > GlobalWinRate || Camp >= GlobalCamp)
+                return false
+            return [
+                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
+                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 "+ Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP +" 次",
+            ]
         }
     ],
 }
