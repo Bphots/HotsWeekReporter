@@ -848,7 +848,7 @@ var counter = {
         }
     ],
     "DamageDoneOfAltar": [
-        ["Altar Damage Done", "占领天空殿祭坛造成的总伤害量"],
+        ["Altar Damage Done", "占领天空殿神殿造成的总伤害量"],
         function () {
             var dmg = dataPersonal.PlayerBase.AltarDamageDone.sum
             return [
@@ -918,7 +918,7 @@ var counter = {
         }
     ],
     "TimesInTemple": [
-        ["Time In Temple", "天空殿占领祭坛总时间"],
+        ["Time In Temple", "天空殿占领神殿总时间"],
         function () {
             var count = dataPersonal.PlayerBase.TimeInTemple.sum
             return [
@@ -1445,8 +1445,8 @@ var events = {
             var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
             var WinRate = (dataPersonal.PlayerBase.maps_win.sum[7] / dataPersonal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[7] / dataGlobal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
-            var ShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var ShrinesCaptured = (dataPersonal.PlayerBase.DragonShrinesCaptured.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptured.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
             return [
                 "This week, your winning rate of Dragon Shire is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
                 + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
@@ -1677,11 +1677,9 @@ var events = {
         ["Silver Hand", "白银之手"],//乌瑟尔
         function () {
             var HeroID = 3
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1697,11 +1695,9 @@ var events = {
         ["New Hero", "新英雄"],//雷诺
         function () {
             var HeroID = 10
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1717,11 +1713,9 @@ var events = {
         ["Tyrande’s Call", "泰兰德的呼唤"],//玛法里奥
         function () {
             var HeroID = 14
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1737,11 +1731,9 @@ var events = {
         ["You Are Not Prepared", "千送伊"],//伊利丹
         function () {
             var HeroID = 16
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 50
                 return limit ? [
@@ -1763,11 +1755,9 @@ var events = {
         ["Shelf Reed", "架子芦苇"],//加兹鲁维
         function () {
             var HeroID = 17
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1789,11 +1779,9 @@ var events = {
         ["Evolution Complete!", "进化完成"],
         function () {
             var HeroID = 22
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -1808,11 +1796,9 @@ var events = {
         ["Hey, A Flower", "嘿，一朵小花儿"],//丽丽 24
         function () {
             var HeroID = 24
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1833,11 +1819,9 @@ var events = {
         ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
         function () {
             var HeroID = 26
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (Wins > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 55
                 return limit ? [
@@ -1852,11 +1836,9 @@ var events = {
         ["Banshee Queen", "女妖之王"],//希尔瓦娜斯 35
         function () {
             var HeroID = 35
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -1877,11 +1859,9 @@ var events = {
         ["Meat!Meat!Meat!", "新鲜的肉！"],//屠夫
         function () {
             var HeroID = 38
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 5 && WinRate >= 55
                 return limit ? [
@@ -1902,12 +1882,9 @@ var events = {
         ["hahahahaha", "哈哈哈哈哈"],//露娜拉
         function () {
             var HeroID = 46
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var limit = Games >= 10 && WinRate >= 60
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1922,11 +1899,9 @@ var events = {
         ["The Last Guardian", "最后的守护者"],//麦迪文
         function () {
             var HeroID = 53
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1947,11 +1922,9 @@ var events = {
         ["Krisol thok aran!", "骚骚可浪"],
         function () {
             var HeroID = 56
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit2 = Games > 7 && WinRate > 50
                 return limit2 ? [
@@ -1972,11 +1945,9 @@ var events = {
         ["The Firelord", "炎魔之王"],//螺丝
         function () {
             var HeroID = 60
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit1 = Games >= 10 && WinRate >= 55
                 return limit1 ? [
@@ -1997,11 +1968,9 @@ var events = {
         ["Happy Darter", "快乐镖男"],//源氏
         function () {
             var HeroID = 66
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 58
                 return limit ? [
@@ -2022,11 +1991,9 @@ var events = {
         ["Hellscream", "地狱咆哮"],//加尔鲁什
         function () {
             var HeroID = 70
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -2047,11 +2014,9 @@ var events = {
         ["Life-Binder", "生命缚誓者"],//阿莱克丝塔萨
         function () {
             var HeroID = 74
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -2072,11 +2037,9 @@ var events = {
         ["Where is Illidan?", "伊利丹在哪？"],//玛维
         function () {
             var HeroID = 77
-            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
-                return false
-            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 57
                 return limit ? [
@@ -2458,7 +2421,18 @@ var events = {
         }
     ],
 }
-
+function getHeroInf(HeroID) {
+    if (dataPersonal.PlayerHeroes[HeroID] === undefined)
+        return false
+    var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+    var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+    var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+    return {
+        "Games": Games,
+        "WinRate": WinRate,
+        "GlobalWinRate": GlobalWinRate
+    }
+}
 
 
 // Todo: 排行榜，等待接口支持
