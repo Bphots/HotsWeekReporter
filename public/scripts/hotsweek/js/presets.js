@@ -2400,22 +2400,7 @@ var events = {
         }
     ],
     "CampWinRate": [
-        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
-        function () {
-            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var Camp = Math.round(dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalCamp = Math.round(dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
-            if (WinRate > GlobalWinRate || Camp >= GlobalCamp)
-                return false
-            return [
-                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
-                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 " + Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP + " 次",
-            ]
-        }
-    ],
-    "CampWinRate": [
-        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
+        ["Take The Camp!", "夺取雇佣兵！"],//雇佣兵
         function () {
             var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
