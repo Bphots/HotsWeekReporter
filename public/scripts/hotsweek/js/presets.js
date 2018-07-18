@@ -2345,30 +2345,6 @@ var events = {
             }
         }
     ],
-    "MeatMeatMeat": [
-        ["Meat!Meat!Meat!", "肉！肉！肉！"],//屠夫
-        function () {
-            if (dataPersonal.PlayerHeroes[38] === undefined || dataPersonal.PlayerHeroes[38].game_total.sum < 5)
-                return false
-            var ButcherWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            var ButcherGlobalWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
-                return [
-                    "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
-                ]
-            }
-            if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
-                return [
-                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + ButcherWinRate + "%, while the global Butcher's winning rate is " + ButcherGlobalWinRate + "%",
-                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%",
-                ]
-            }
-            else {
-                return false
-            }
-        }
-    ],
     "ExperienceContributionWinRate": [
         ["Where is my XP ?", "经验值都去哪了？"],//经验贡献
         function () {
@@ -2385,22 +2361,7 @@ var events = {
         }
     ],
     "CampWinRate": [
-        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
-        function () {
-            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var Camp = Math.round( dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalCamp = Math.round( dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
-            if ( WinRate > GlobalWinRate || Camp >= GlobalCamp)
-                return false
-            return [
-                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
-                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 "+ Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP +" 次",
-            ]
-        }
-    ],
-    "CampWinRate": [
-        ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
+        ["Take The Camp!", "夺取雇佣兵！"],//雇佣兵
         function () {
             var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
             var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
