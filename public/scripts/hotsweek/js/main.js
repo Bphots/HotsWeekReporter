@@ -11,18 +11,18 @@ var urlRanking = 'https://www.bphots.com/week/api/report/ranking/' + weekNumber
 var urlPersonal = 'https://www.bphots.com/week/api/report/personal/' + weekNumber + '/' + playerID
 
 var fetchData = function (url, params = null) {
-    return new Promise((resolve, reject) => {
-        fetch(url).then(response => response.json()).then((data) => {
-            resolve(data)
-        }, (error) => {
-            reject(error)
-        })
-    })
+	return new Promise((resolve, reject) => {
+		fetch(url).then(response => response.json()).then((data) => {
+			resolve(data)
+		}, (error) => {
+			reject(error)
+		})
+	})
 }
 
 var parseFields = function (data) {
-    var parsedObj = {}
-    for (var i in data) {
+	var parsedObj = {}
+	for (var i in data) {
 		if (i === 'PlayerBase') {
 			parsedObj[i] = matchPresets(data[i])
 		} else {
@@ -34,8 +34,8 @@ var parseFields = function (data) {
 			}
 			parsedObj[i]['_sumMax'] = _sumMax
 		}
-    }
-    return parsedObj
+	}
+	return parsedObj
 }
 
 var findMax = function (_sumMax, index, _data) {
@@ -59,46 +59,46 @@ var matchPresets = function (_data) {
 }
 
 Promise.all([
-    fetchData(urlPresets),
-    fetchData(urlGlobal),
-    fetchData(urlRanking),
-    fetchData(urlPersonal),
+	fetchData(urlPresets),
+	fetchData(urlGlobal),
+	fetchData(urlRanking),
+	fetchData(urlPersonal),
 ]).then(function ({
-    0: presets,
-    1: dataGlobal,
-    2: dataRanking,
-    3: dataPersonal
+	0: presets,
+	1: dataGlobal,
+	2: dataRanking,
+	3: dataPersonal
 }) {
 	window.playerInfo = dataPersonal.PlayerInfo
-    window.presets = presets
-    window.dataGlobal = parseFields(dataGlobal)
-    window.dataRanking = parseFields(dataRanking)
+	window.presets = presets
+	window.dataGlobal = parseFields(dataGlobal)
+	window.dataRanking = parseFields(dataRanking)
 	window.dataPersonal = parseFields(dataPersonal)
-    console.log(window.dataGlobal)
-    console.log(window.dataRanking)
-    console.log(window.dataPersonal)
-    main()
+	console.log(window.dataGlobal)
+	console.log(window.dataRanking)
+	console.log(window.dataPersonal)
+	main()
 })
 
 var main = function () {
-    // do someting
+	// do someting
 	counter = window.counter
 	events = window.events
-    document.write('<h2>Player: ' + playerInfo.name + ' (from region ' + playerInfo.region + ')</h2>' + "<br />")
-    for (var i in counter) {
-        var item = counter[i]
-		var title = item[0]
-		var content = item[1]()
-		if(content !== false) {
-            document.write(title[lang] + ': ' + content[lang] + "<br />")
-        }
-    }
-	for (var i in events) {
-        var item = events[i]
+	document.write('<h2>Player: ' + playerInfo.name + ' (from region ' + playerInfo.region + ')</h2>' + "<br />")
+	for (var i in counter) {
+		var item = counter[i]
 		var title = item[0]
 		var content = item[1]()
 		if (content !== false) {
 			document.write(title[lang] + ': ' + content[lang] + "<br />")
 		}
+	}
+	for (var i in events) {
+		var item = events[i]
+		var title = item[0]
+		var content = item[1]()
+		// if (content !== false) {
+		document.write(title[lang] + ': ' + content[lang] + "<br />")
+		// }
 	}
 }

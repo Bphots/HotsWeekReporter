@@ -1030,7 +1030,7 @@ var counter = {
             if (count <= 0)
                 return false;
 
-            var WinRate = (dataPersonal.PlayerBase.party_win_5.sum / dataPersonal.PlayerBase.party_win_5.sum * 100).toFixed(2)
+            var WinRate = (dataPersonal.PlayerBase.party_win_5.sum / dataPersonal.PlayerBase.party_total_4.sum * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1375,16 +1375,16 @@ var events = {
     "HoldoutRate": [
         ["Braxis Holdout", "布莱克西斯禁区"], //禁区
         function () {
-            if( dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
-            return false
+            if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
+                return false
             var avgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
             var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
             var limit = avgDamage <= 5000 || WinRate < GlobalWinRate
             return limit ?
                 [
-                    "You made " + avgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%" ,
-                    "你这周布莱克西斯禁区地图胜率是 "+ WinRate +"%，你对虫群造成 " + avgDamage + " 点伤害"
+                    "You made " + avgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
+                    "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + avgDamage + " 点伤害"
                 ] : false
         }
     ],
@@ -1423,7 +1423,7 @@ var events = {
     "DragonRider": [
         ["Dragon Rider", "龙骑士"],//巨龙镇
         function () {
-            if( dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
                 return false
             var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(2)
             var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(2)
@@ -1439,7 +1439,7 @@ var events = {
     "DragonShire": [
         ["Dragon Shire", "巨龙镇"], //巨龙镇
         function () {
-            if( dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
                 return false
             var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
             var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
@@ -1448,20 +1448,22 @@ var events = {
             var ShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
             var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
             return [
-                "This week, your winning rate of Dragon Shire is "+ WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take "+ myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
-                 + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
-                    "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon+ " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
-                ]
+                "This week, your winning rate of Dragon Shire is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
+                + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
+                "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon + " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
+            ]
         }
     ],
     "Premades": [
         ["The King Of Premades", "开黑小能手"],
         function () {
-            var rate_2 = (dataPersonal.PlayerBase.party_win_2.sum / dataPersonal.PlayerBase.party_win_2.sum * 100).toFixed(2)
-            var rate_3 = (dataPersonal.PlayerBase.party_win_3.sum / dataPersonal.PlayerBase.party_win_3.sum * 100).toFixed(2)
-            var rate_4 = (dataPersonal.PlayerBase.party_win_4.sum / dataPersonal.PlayerBase.party_win_4.sum * 100).toFixed(2)
-            var rate_5 = (dataPersonal.PlayerBase.party_win_5.sum / dataPersonal.PlayerBase.party_win_5.sum * 100).toFixed(2)
-            var limit = rate_2 > 0.5 && rate_3 > 0.5 && rate_4 > 0.5 && rate_5 > 0.5
+            if (dataPersonal.PlayerBase.party_total_2.sum <= 0 || dataPersonal.PlayerBase.party_total_3.sum <= 0 || dataPersonal.PlayerBase.party_total_4.sum <= 0 || dataPersonal.PlayerBase.party_total_5.sum <= 0)
+                return false
+            var rate_2 = (dataPersonal.PlayerBase.party_win_2.sum / dataPersonal.PlayerBase.party_total_2.sum * 100).toFixed(2)
+            var rate_3 = (dataPersonal.PlayerBase.party_win_3.sum / dataPersonal.PlayerBase.party_total_3.sum * 100).toFixed(2)
+            var rate_4 = (dataPersonal.PlayerBase.party_win_4.sum / dataPersonal.PlayerBase.party_total_4.sum * 100).toFixed(2)
+            var rate_5 = (dataPersonal.PlayerBase.party_win_5.sum / dataPersonal.PlayerBase.party_total_5.sum * 100).toFixed(2)
+            var limit = rate_2 >= 50 && rate_3 >= 50 && rate_4 >= 50 && rate_5 >= 50
             return limit ?
                 [
                     "Your Win Rate of Premades were all beyond 50%, nice team work!",
@@ -1519,7 +1521,7 @@ var events = {
             return limit ?
                 [
                     "Your HeroDamage (" + myHeroDamage + "%) is far higher than the global average (" + globalHeroDamage + "%) ",
-                    "你英雄伤害 (" + myHeroDamage + "%) 远远高于全球平均水平( " + globalHeroDamage + "%) "
+                    "你的英雄伤害 (" + myHeroDamage + "%) 远远高于全球平均水平( " + globalHeroDamage + "%) "
                 ] : false
         }
     ],
@@ -1531,7 +1533,7 @@ var events = {
             return limit ?
                 [
                     "You are killed by Town for " + data + " times",
-                    "您被防御塔击杀了 " + data + " 次",
+                    "你被防御塔击杀了 " + data + " 次",
                 ] : false
         }
     ],
@@ -1557,7 +1559,7 @@ var events = {
             var limit = result > 4 && WinRate > 50
             return limit ? [
                 "You averaged " + times + " MrecCampCaputers per game. Good occupiedCamp habits have made your winning rate is " + WinRate + "%.",
-                "这周你平均每场占领了 " + times + " 次雇佣兵，良好的开野习惯使你的胜率达到了 " + myWinRate + "%",
+                "你平均每场游戏占领了 " + times + " 次雇佣兵，良好的开野习惯使你的胜率达到了 " + myWinRate + "%",
             ] : false
         }
     ],
@@ -1702,7 +1704,7 @@ var events = {
                 var limit = Games >= 10 && WinRate > 50
                 return limit ? [
                     "You are not prepared! You have played Illidan for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Illidan's global winning rate: " + GlobalWinRate + "%. At sometimes , the hand of fate must be forced.",
-                    "你们这是自寻死路！本周你使用伊利丹进行了 " + Games + "场游戏，胜率达到了 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中"
+                    "你们这是自寻死路！本周你使用伊利丹进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中"
                 ] : false
             }
             else {
@@ -1727,7 +1729,7 @@ var events = {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
                     "Time is money, friend. And you own them both! You have played Gazlowe for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Gazlowe's global winning rate: " + GlobalWinRate + "%. Does this turn you on?",
-                    "时间就是金钱我的朋友，你全都要！本周你使用加兹鲁维完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，加兹鲁维全球胜率：" + GlobalWinRate + "%。这让你兴奋起来了么？"
+                    "时间就是金钱我的朋友，你全都要！本周你使用加兹鲁维完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，加兹鲁维全球胜率：" + GlobalWinRate + "%。地精科技，震撼人心！这让你兴奋起来了么？"
                 ] : false
             }
             else {
@@ -1743,11 +1745,12 @@ var events = {
     "EvolutionComplete": [
         ["Evolution Complete!", "进化完成"],
         function () {
-            if (dataPersonal.PlayerHeroes[22] === undefined)
+            var HeroID = 22
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[22].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[22].game_win.sum / dataPersonal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[22].game_win.sum / dataGlobal.PlayerHeroes[22].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -1759,25 +1762,26 @@ var events = {
         }
     ],
     "LiLi": [
-        ["Banshee Queen", "嘿，一朵小花儿"],//丽丽 24
+        ["Hey, A Flower", "嘿，一朵小花儿"],//丽丽 24
         function () {
-            if (dataPersonal.PlayerHeroes[24] === undefined)
+            var HeroID = 24
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[24].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[24].game_win.sum / dataPersonal.PlayerHeroes[24].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[24].game_win.sum / dataGlobal.PlayerHeroes[24].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
-                    "The Dark Lady watches over you. You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
-                    "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。胜利属于被遗忘着！"
+                    "Life is an adventure! You have played LiLi " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Read for adventure?",
+                    "生命在于冒险！本周你使用丽丽进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。准备好去冒险了吗？"
                 ] : false
             }
             else {
                 var limit = Games >= 10 && WinRate <= 45
                 return limit ? [
-                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
-                    "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。不要考验我的耐心！"
+                    "(Sighs) you have played LiLi " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. You make her a saaaad panda!",
+                    "哈，你这家伙就像只软脚虾。本周你使用丽丽进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。哦～真没用～"
                 ] : false
             }
         }
@@ -1785,11 +1789,12 @@ var events = {
     "MurkyKing": [
         ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
         function () {
-            if (dataPersonal.PlayerHeroes[26] === undefined)
+            var HeroID = 26
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[26].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[26].game_win.sum / dataPersonal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[26].game_win.sum / dataGlobal.PlayerHeroes[26].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (Wins > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 55
                 return limit ? [
@@ -1803,11 +1808,12 @@ var events = {
     "Sylvanas": [
         ["Banshee Queen", "女妖之王"],//希尔瓦娜斯 35
         function () {
-            if (dataPersonal.PlayerHeroes[35] === undefined)
+            var HeroID = 35
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[35].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[35].game_win.sum / dataPersonal.PlayerHeroes[35].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[35].game_win.sum / dataGlobal.PlayerHeroes[35].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -1824,14 +1830,40 @@ var events = {
             }
         }
     ],
+    "MeatMeatMeat": [
+        ["Meat!Meat!Meat!", "新鲜的肉！"],//屠夫
+        function () {
+            var HeroID = 38
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
+                return false
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 5 && WinRate >= 55
+                return limit ? [
+                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + WinRate + "%, while the Butcher's global winning rate is " + GlobalWinRate + "%",
+                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + WinRate + "%,而全球屠夫平均胜率是 " + GlobalWinRate + "%",
+                ] : false
+            }
+            else {
+                var limit = Games >= 5 && WinRate <= 45
+                return limit ? [
+                    "Your Butcher's WinRate is " + WinRate + "%, while the Butcher's global winning rate: " + GlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. P.S. At the beginning of game Butcher should try to eat XP or Gank.",
+                    "你的屠夫的胜率是 " + WinRate + "%,而全球屠夫平均胜率是 " + GlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
+                ] : false
+            }
+        }
+    ],
     "Lunara": [
         ["hahahahaha", "哈哈哈哈哈"],//露娜拉
         function () {
-            if (dataPersonal.PlayerHeroes[46] === undefined)
+            var HeroID = 46
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[46].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[46].game_win.sum / dataPersonal.PlayerHeroes[46].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[46].game_win.sum / dataGlobal.PlayerHeroes[46].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             var limit = Games >= 10 && WinRate >= 60
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
@@ -1846,11 +1878,12 @@ var events = {
     "TheLastGuardian": [
         ["The Last Guardian", "最后的守护者"],//麦迪文
         function () {
-            if (dataPersonal.PlayerHeroes[53] === undefined)
+            var HeroID = 53
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[53].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[53].game_win.sum / dataPersonal.PlayerHeroes[53].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[53].game_win.sum / dataGlobal.PlayerHeroes[53].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
@@ -1870,11 +1903,12 @@ var events = {
     "Krisolthokaran": [
         ["Krisol thok aran!", "骚骚可浪"],
         function () {
-            if (dataPersonal.PlayerHeroes[56] === undefined)
+            var HeroID = 56
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[56].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[56].game_win.sum / dataPersonal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[56].game_win.sum / dataGlobal.PlayerHeroes[56].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit2 = Games > 7 && WinRate > 50
                 return limit2 ? [
@@ -1894,11 +1928,12 @@ var events = {
     "TheFirelord": [
         ["The Firelord", "炎魔之王"],//螺丝
         function () {
-            if (dataPersonal.PlayerHeroes[60] === undefined)
+            var HeroID = 60
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[60].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[60].game_win.sum / dataPersonal.PlayerHeroes[60].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[60].game_win.sum / dataGlobal.PlayerHeroes[60].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit1 = Games >= 10 && WinRate >= 55
                 return limit1 ? [
@@ -1918,11 +1953,12 @@ var events = {
     "Genji": [
         ["Happy Darter", "快乐镖男"],//源氏
         function () {
-            if (dataPersonal.PlayerHeroes[66] === undefined)
+            var HeroID = 66
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[66].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[66].game_win.sum / dataPersonal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[66].game_win.sum / dataGlobal.PlayerHeroes[66].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 58
                 return limit ? [
@@ -1942,11 +1978,12 @@ var events = {
     "Garrosh": [
         ["Hellscream", "地狱咆哮"],//加尔鲁什
         function () {
-            if (dataPersonal.PlayerHeroes[70] === undefined)
+            var HeroID = 70
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[70].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[70].game_win.sum / dataPersonal.PlayerHeroes[70].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[70].game_win.sum / dataGlobal.PlayerHeroes[70].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
@@ -1966,16 +2003,17 @@ var events = {
     "Alexstrasza": [
         ["Life-Binder", "生命缚誓者"],//阿莱克丝塔萨
         function () {
-            if (dataPersonal.PlayerHeroes[74] === undefined)
+            var HeroID = 74
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[74].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[74].game_win.sum / dataPersonal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[74].game_win.sum / dataGlobal.PlayerHeroes[74].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
                     "New life blooms! You have played Alexstrasza " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alexstrasza's global winning rate: " + GlobalWinRate + "%. You bring life and hope!",
-                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + Games + " 场游戏，胜率竟然达到了 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。你带来了生命和希望！"
+                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。你带来了生命和希望！"
                 ] : false
             }
             else {
@@ -1990,11 +2028,12 @@ var events = {
     "Warden": [
         ["Where is Illidan?", "伊利丹在哪？"],//玛维
         function () {
-            if (dataPersonal.PlayerHeroes[77] === undefined)
+            var HeroID = 77
+            if (dataPersonal.PlayerHeroes[HeroID] === undefined)
                 return false
-            var Games = dataPersonal.PlayerHeroes[77].game_total.sum
-            var WinRate = (dataPersonal.PlayerHeroes[77].game_win.sum / dataPersonal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerHeroes[77].game_win.sum / dataGlobal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
+            var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 57
                 return limit ? [
@@ -2345,96 +2384,48 @@ var events = {
             ] : false
         }
     ],
-    "MeatMeatMeat": [
-        ["Meat!Meat!Meat!", "肉！肉！肉！"],//屠夫
-        function () {
-            if (dataPersonal.PlayerHeroes[38] === undefined || dataPersonal.PlayerHeroes[38].game_total.sum < 5)
-                return false
-            var ButcherWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            var ButcherGlobalWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
-                return [
-                    "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
-                ]
-            }
-            if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
-                return [
-                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + ButcherWinRate + "%, while the global Butcher's winning rate is " + ButcherGlobalWinRate + "%",
-                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%",
-                ]
-            }
-            else {
-                return false
-            }
-        }
-    ],
-    "MeatMeatMeat": [
-        ["Meat!Meat!Meat!", "肉！肉！肉！"],//屠夫
-        function () {
-            if (dataPersonal.PlayerHeroes[38] === undefined || dataPersonal.PlayerHeroes[38].game_total.sum < 5)
-                return false
-            var ButcherWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            var ButcherGlobalWinRate = (dataPersonal.PlayerHeroes[38].game_win.sum / dataPersonal.PlayerHeroes[38].game_total.sum * 100).toFixed(2)
-            if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
-                return [
-                    "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
-                ]
-            }
-            if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
-                return [
-                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + ButcherWinRate + "%, while the global Butcher's winning rate is " + ButcherGlobalWinRate + "%",
-                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%",
-                ]
-            }
-            else {
-                return false
-            }
-        }
-    ],
     "ExperienceContributionWinRate": [
         ["Where is my XP ?", "经验值都去哪了？"],//经验贡献
         function () {
-            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var XP = Math.round( dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalXP = Math.round( dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
-            if ( WinRate > GlobalWinRate || XP >= GlobalXP)
+            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var XP = Math.round(dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalXP = Math.round(dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
+            if (WinRate > GlobalWinRate || XP >= GlobalXP)
                 return false
             return [
-                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is "+ XP + ", and the average global XP contribution  is " + GlobalXP,
-                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 "+ XP + "，全球平均每场玩家贡献的经验值是 " + GlobalXP,
+                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is " + XP + ", and the average global XP contribution  is " + GlobalXP,
+                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 " + XP + "，全球平均每场玩家贡献的经验值是 " + GlobalXP,
             ]
         }
     ],
     "CampWinRate": [
         ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
         function () {
-            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var Camp = Math.round( dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalCamp = Math.round( dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
-            if ( WinRate > GlobalWinRate || Camp >= GlobalCamp)
+            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var Camp = Math.round(dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalCamp = Math.round(dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
+            if (WinRate > GlobalWinRate || Camp >= GlobalCamp)
                 return false
             return [
                 "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
-                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 "+ Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP +" 次",
+                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 " + Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP + " 次",
             ]
         }
     ],
     "CampWinRate": [
         ["Take The Camp!", "夺取雇佣兵！"],//经验贡献
         function () {
-            var WinRate = ( dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var GlobalWinRate = ( dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var Camp = Math.round( dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalCamp = Math.round( dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
-            if ( WinRate > GlobalWinRate || Camp >= GlobalCamp)
+            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
+            var Camp = Math.round(dataPersonal.PlayerBase.MercCampCaptures.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalCamp = Math.round(dataGlobal.PlayerBase.MercCampCaptures.sum / dataGlobal.PlayerBase.game_total.sum)
+            if (WinRate > GlobalWinRate || Camp >= GlobalCamp)
                 return false
             return [
                 "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
-                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 "+ Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP +" 次",
+                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 " + Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP + " 次",
             ]
         }
     ],
