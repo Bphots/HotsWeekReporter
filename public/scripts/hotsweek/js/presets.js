@@ -1890,15 +1890,15 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
-                    "New life blooms! You have played Alexstrasza " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alexstrasza's global winning rate: " + GlobalWinRate + "%. You bring life and hope!",
-                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + Games + " 场游戏，胜率竟然达到了 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。你带来了生命和希望！"
+                    "For Hellscream! You have played Garrosh " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Garrosh's global winning rate: " + GlobalWinRate + "%. You scream, I screams, we all scream for Hellscream!",
+                    "为了地狱咆哮！本周你使用加尔鲁什进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，加尔鲁什全球胜率：" + GlobalWinRate + "%。拿出你的血性跟我一起怒吼，向敌人释放你心中的地狱咆哮！"
                 ] : false
             }
             else {
                 var limit = Games >= 10 && WinRate < 50
                 return limit ? [
-                    "Take heart, heroes, life will always blossom from the darkest soil! You have played Alexstrasza " + Games + " times, your winning rate is only " + WinRate + "%, Alexstrasza's global winning rate is " + GlobalWinRate + "%. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.",
-                    "要么为部落效忠，要么被部落碾碎！本周你使用阿莱克丝塔萨完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望。"
+                    "You will serve the Horde, or be crushed beneath it! You have played Garrosh " + Games + " times, your winning rate is only " + WinRate + "%, Garrosh's global winning rate is " + GlobalWinRate + "%. Do you want to receive his little surprise party?",
+                    "要么为部落效忠，要么被部落碾碎！本周你使用加尔鲁什完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，加尔鲁什全球胜率：" + GlobalWinRate + "%。你也想收到加尔鲁什的惊喜派对吗？"
                 ] : false
             }
         }
