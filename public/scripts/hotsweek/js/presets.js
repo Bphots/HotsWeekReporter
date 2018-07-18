@@ -1775,7 +1775,7 @@ var events = {
 
         }
     ],
-    "EvolutionComplete": [
+    "Abathur": [
         ["Evolution Complete!", "进化完成"],
         function () {
             var HeroID = 22
@@ -1855,7 +1855,7 @@ var events = {
             }
         }
     ],
-    "MeatMeatMeat": [
+    "Butcher": [
         ["Meat!Meat!Meat!", "新鲜的肉！"],//屠夫
         function () {
             var HeroID = 38
@@ -1895,7 +1895,7 @@ var events = {
             else return false
         }
     ],
-    "TheLastGuardian": [
+    "Medivh": [
         ["The Last Guardian", "最后的守护者"],//麦迪文
         function () {
             var HeroID = 53
@@ -1918,7 +1918,7 @@ var events = {
             }
         }
     ],
-    "Krisolthokaran": [
+    "Alarak": [
         ["Krisol thok aran!", "骚骚可浪"],
         function () {
             var HeroID = 56
@@ -1926,22 +1926,45 @@ var events = {
             if (!HeroInf) return false
             var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
-                var limit2 = Games > 7 && WinRate > 50
-                return limit2 ? [
-                    "General Performance, I personally appeared " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%, next time I will consider helping you again. ",
+                var limit = Games > 7 && WinRate > 50
+                return limit ? [
+                    "General Performance, I personally appeared " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alarak's global winning rate: " + GlobalWinRate + "%, next time I will consider helping you again. ",
                     "表现还行，我亲自登场了 " + Games + " 次，胜率达到了 " + WinRate + "%，全球的高阶领主平均胜率是 " + GlobalWinRate + "%，下次我会考虑再帮你的",
                 ] : false
             }
             else {
-                var limit1 = Games > 7 && WinRate <= 50
-                return limit1 ? [
+                var limit = Games > 7 && WinRate <= 50
+                return limit ? [
                     "Such a shame, I personally appeared " + Games + " times, your winning rate is only " + WinRate + "%, Alarak's global winning rate is " + GlobalWinRate + "%, Plz do not pick me again! ",
                     "真是丢人现眼，我亲自登场了 " + Games + " 次，胜率才 " + WinRate + "%，全球的高阶领主平均胜率都有 " + GlobalWinRate + "%，不要再让我登场了！",
                 ] : false
             }
         }
     ],
-    "TheFirelord": [
+    "Varian": [
+        ["High King", "至高王"],//瓦里安
+        function () {
+            var HeroID = 59
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
+            if (WinRate > GlobalWinRate) {
+                var limit1 = Games >= 10 && WinRate >= 55
+                return limit1 ? [
+                    "Glory for the Alliance! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Justice is at hand! For Azeroth!",
+                    "联盟的荣耀！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。正义就在眼前！为了艾泽拉斯！"
+                ] : false
+            }
+            else {
+                var limit1 = Games >= 10 && WinRate <= 45
+                return limit1 ? [
+                    "Let's see how you fight! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Do what a king must do!",
+                    "让我来看看你是如何战斗的！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。做一个国王应该做的事！"
+                ] : false
+            }
+        }
+    ],
+    "Ragnaros": [
         ["The Firelord", "炎魔之王"],//螺丝
         function () {
             var HeroID = 60
@@ -1952,14 +1975,14 @@ var events = {
                 var limit1 = Games >= 10 && WinRate >= 55
                 return limit1 ? [
                     "By fire be PURGED! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
-                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
+                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
                 ] : false
             }
             else {
                 var limit1 = Games >= 10 && WinRate <= 45
                 return limit1 ? [
                     "DIE, INSECT! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy's back.",
-                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择."
+                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择"
                 ] : false
             }
         }
@@ -2033,8 +2056,8 @@ var events = {
             }
         }
     ],
-    "Warden": [
-        ["Where is Illidan?", "伊利丹在哪？"],//玛维
+    "Maiev": [
+        ["Where is Illidan?", "伊利丹在哪？"],//玛维 //Warden
         function () {
             var HeroID = 77
             var HeroInf = getHeroInf(HeroID)
