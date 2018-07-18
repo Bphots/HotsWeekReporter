@@ -1672,7 +1672,7 @@ var events = {
             else {
                 var limit = Games >= 10 && WinRate <= 50
                 return limit ? [
-                    "Feeling the...! And you have neither! You have played Illidan for " + Games + " times, your winning rate is only " + WinRate + "%, Illidan's global winning rate is " + GlobalWinRate + "%. His hatred is unending!",
+                    "Feeling the...! And you have neither! You have have played Illidan for " + Games + " times, your winning rate is only " + WinRate + "%, Illidan's global winning rate is " + GlobalWinRate + "%. His hatred is unending!",
                     "感受辶...英雄阵亡！本周你使用伊利丹进行了 " + Games + "场游戏，胜率竟然才 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。他心中的怒火无法平息无法平息！"
                 ] : false
             }
@@ -1723,7 +1723,7 @@ var events = {
         }
     ],
     "MurkyKing": [
-        ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr!"],
+        ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
         function () {
             if (dataPersonal.PlayerHeroes[26] === undefined)
                 return false
@@ -1740,6 +1740,30 @@ var events = {
             else return false
         }
     ],
+    "Sylvanas": [
+        ["Banshee Queen", "女妖之王"],//希尔瓦娜斯 35
+        function () {
+            if (dataPersonal.PlayerHeroes[35] === undefined)
+                return false
+            var Games = dataPersonal.PlayerHeroes[35].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[35].game_win.sum / dataPersonal.PlayerHeroes[35].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[35].game_win.sum / dataGlobal.PlayerHeroes[35].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate >= 50
+                return limit ? [
+                    "The Dark Lady watches over you. You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
+                    "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。胜利属于被遗忘着！"
+                ] : false
+            }
+            else {
+                var limit = Games >= 10 && WinRate <= 43
+                return limit ? [
+                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
+                    "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。不要考验我的耐心！"
+                ] : false
+            }
+        }
+    ],
     "Lunara": [
         ["hahahahaha", "哈哈哈哈哈"],//露娜拉
         function () {
@@ -1750,7 +1774,7 @@ var events = {
             var GlobalWinRate = (dataGlobal.PlayerHeroes[46].game_win.sum / dataGlobal.PlayerHeroes[46].game_total.sum * 100).toFixed(2)
             var limit = Games >= 10 && WinRate >= 60
             if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 60
+                var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
                     " Hahahahaha! Hahahahaha! You have played Lunara " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. The forest doesn't need protection, but you do (^_^)v ",
                     " 哈哈哈哈哈，哈哈哈哈哈！本周你使用露娜拉进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，露娜拉全球胜率：" + GlobalWinRate + "%。森林不需要保护，但你需要(^_^)v "
@@ -1770,14 +1794,14 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
-                    "You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. What can I say? Coooooooool play!",
-                    "本周你使用麦迪文进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%，我还能说什么，麦迪斌玩的不错！"
+                    "You are the Prophet! You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. What can I say? Coooooooool play!",
+                    "你就是先知！本周你使用麦迪文进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%。我还能说什么，麦迪斌玩的不错！"
                 ] : false
             }
             else {
                 var limit = Games >= 10 && WinRate <= 40
                 return limit ? [
-                    "That's stupid, I foresee the future, seeing the burning shadows that are about to swallow the world, You have used Medivh to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%.",
+                    "That's stupid! I foresee the future, seeing the burning shadows that are about to swallow the world, You have used Medivh to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%.",
                     "那可真蠢，我预见到了未来，看到了即将吞噬这个世界的燃烧著的阴影。本周你使用麦迪文进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%。下一位忠奸人就是你了！"
                 ] : false
             }
@@ -1818,15 +1842,15 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit1 = Games >= 10 && WinRate >= 55
                 return limit1 ? [
-                    "By fire be PURGED! You've played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
-                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%，用火焰把那些虫子燃烧殆尽！"
+                    "By fire be PURGED! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
+                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
                 ] : false
             }
             else {
                 var limit1 = Games >= 10 && WinRate <= 45
                 return limit1 ? [
                     "DIE, INSECT! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy's back.",
-                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上坑的时机，有时候绕后上坑也是一个不错的选择."
+                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择."
                 ] : false
             }
         }
@@ -1847,10 +1871,34 @@ var events = {
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 42
+                var limit = Games >= 10 && WinRate < 4
                 return limit ? [
-                    "Poor insect! You have used Genji to have " + Games + " games, I can't believe your winning rate is only " + WinRate + "%, Genji's global winning rate is " + GlobalWinRate + "%. You need healing.",
+                    "Poor insect! You have played Genji " + Games + " games, I can't believe your winning rate is only " + WinRate + "%, Genji's global winning rate is " + GlobalWinRate + "%. You need healing!",
                     "卑微的苍蝇！本周你使用源氏进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 源氏全球胜率：" + GlobalWinRate + "%。哼，啊嚯噶！"
+                ] : false
+            }
+        }
+    ],
+    "Garrosh": [
+        ["Life-Binder", "加尔鲁什"],//加尔鲁什
+        function () {
+            if (dataPersonal.PlayerHeroes[70] === undefined)
+                return false
+            var Games = dataPersonal.PlayerHeroes[70].game_total.sum
+            var WinRate = (dataPersonal.PlayerHeroes[70].game_win.sum / dataPersonal.PlayerHeroes[70].game_total.sum * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerHeroes[70].game_win.sum / dataGlobal.PlayerHeroes[70].game_total.sum * 100).toFixed(2)
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate >= 50
+                return limit ? [
+                    "New life blooms! You have played Alexstrasza " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alexstrasza's global winning rate: " + GlobalWinRate + "%. You bring life and hope!",
+                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + Games + " 场游戏，胜率竟然达到了 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。你带来了生命和希望！"
+                ] : false
+            }
+            else {
+                var limit = Games >= 10 && WinRate < 50
+                return limit ? [
+                    "Take heart, heroes, life will always blossom from the darkest soil! You have played Alexstrasza " + Games + " times, your winning rate is only " + WinRate + "%, Alexstrasza's global winning rate is " + GlobalWinRate + "%. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.",
+                    "要么为部落效忠，要么被部落碾碎！本周你使用阿莱克丝塔萨完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望。"
                 ] : false
             }
         }
@@ -1888,14 +1936,14 @@ var events = {
             var WinRate = (dataPersonal.PlayerHeroes[77].game_win.sum / dataPersonal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerHeroes[77].game_win.sum / dataGlobal.PlayerHeroes[77].game_total.sum * 100).toFixed(2)
             if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+                var limit = Games >= 10 && WinRate > 57
                 return limit ? [
                     "You are Maiev Master! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. You are a qualified Happy Darter.",
                     "玛维的取胜技巧已被你掌握，本周你使用玛维进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 45
+                var limit = Games >= 10 && WinRate < 43
                 return limit ? [
                     "The hunter is nothing without the hunted. You have played Maiev " + Games + " games, your winning rate is only " + WinRate + "%, Maiev's global winning rate is " + GlobalWinRate + "%.The key is master the time of her abilities E and D,and the accuracy of her Q.",
                     "一个猎手失去了猎物就会一无所有。本周你使用玛维进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。用好玛维的 E 和 D ，并且提高 Q 的精确度，能提高不少胜率！"
@@ -1913,8 +1961,6 @@ var events = {
     "Arthas": [//阿尔萨斯 id:21 霜之哀伤，饿了 我的眼前……一片黑暗…… 孩子， 当你出生的时候，洛丹伦的森林轻声唤出了你的名字 阿尔萨斯 而你，将加冕为王。
     ],
     "Chen": [//陈 id:29 护国安邦惩奸恶、道法自然除心魔
-    ],
-    "Sylvanas": [//希尔瓦纳斯 id:35 诅咒之下，欢乐何在
     ],
     "Leoric": [//李奥瑞克 id:39 我将与你们并肩作战，直到我生命的最后一刻
     ],
