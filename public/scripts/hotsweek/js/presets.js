@@ -1802,20 +1802,20 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
-                    "Life is an adventure! You have played LiLi " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Read for adventure?",
+                    "Life is an adventure! You have played LiLi " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than LiLi's global winning rate: " + GlobalWinRate + "%. Read for adventure?",
                     "生命在于冒险！本周你使用丽丽进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。准备好去冒险了吗？"
                 ] : false
             }
             else {
                 var limit = Games >= 10 && WinRate <= 45
                 return limit ? [
-                    "(Sighs) you have played LiLi " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. You make her a saaaad panda!",
+                    "(Sighs) you have played LiLi " + Games + " games, your winning rate is only " + WinRate + "%, LiLi's global winning rate is " + GlobalWinRate + "%. You make her a saaaad panda!",
                     "哈，你这家伙就像只软脚虾。本周你使用丽丽进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。哦～真没用～"
                 ] : false
             }
         }
     ],
-    "MurkyKing": [
+    "Murky": [
         ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
         function () {
             var HeroID = 26
@@ -1842,14 +1842,14 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 50
                 return limit ? [
-                    "The Dark Lady watches over you. You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
+                    "The Dark Lady watches over you. You have played Sylvanas " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Sylvanas's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
                     "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。胜利属于被遗忘着！"
                 ] : false
             }
             else {
                 var limit = Games >= 10 && WinRate <= 43
                 return limit ? [
-                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
+                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Sylvanas's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
                     "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。不要考验我的耐心！"
                 ] : false
             }
@@ -1905,7 +1905,7 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate >= 55
                 return limit ? [
-                    "You are the Prophet! You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. What can I say? Coooooooool play!",
+                    "You are the Prophet! You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Medivh's global winning rate: " + GlobalWinRate + "%. What can I say? Coooooooool play!",
                     "你就是先知！本周你使用麦迪文进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%。我还能说什么，麦迪斌玩的不错！"
                 ] : false
             }
@@ -1949,16 +1949,16 @@ var events = {
             if (!HeroInf) return false
             var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
-                var limit1 = Games >= 10 && WinRate >= 55
-                return limit1 ? [
-                    "Glory for the Alliance! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Justice is at hand! For Azeroth!",
+                var limit = Games >= 10 && WinRate >= 55
+                return limit ? [
+                    "Glory for the Alliance! You have played Varian " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Varian's global winning rate: " + GlobalWinRate + "%. Justice is at hand! For Azeroth!",
                     "联盟的荣耀！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。正义就在眼前！为了艾泽拉斯！"
                 ] : false
             }
             else {
-                var limit1 = Games >= 10 && WinRate <= 45
-                return limit1 ? [
-                    "Let's see how you fight! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Do what a king must do!",
+                var limit = Games >= 10 && WinRate <= 45
+                return limit ? [
+                    "Let's see how you fight! You have used Varian to have " + Games + " games, your winning rate is only " + WinRate + "%, Varian' global winning rate is " + GlobalWinRate + "%. Do what a king must do!",
                     "让我来看看你是如何战斗的！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。做一个国王应该做的事！"
                 ] : false
             }
@@ -1972,15 +1972,15 @@ var events = {
             if (!HeroInf) return false
             var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
             if (WinRate > GlobalWinRate) {
-                var limit1 = Games >= 10 && WinRate >= 55
-                return limit1 ? [
-                    "By fire be PURGED! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
+                var limit = Games >= 10 && WinRate >= 55
+                return limit ? [
+                    "By fire be PURGED! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Ragnaros's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
                     "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
                 ] : false
             }
             else {
-                var limit1 = Games >= 10 && WinRate <= 45
-                return limit1 ? [
+                var limit = Games >= 10 && WinRate <= 45
+                return limit ? [
                     "DIE, INSECT! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy's back.",
                     "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择"
                 ] : false
@@ -2066,7 +2066,7 @@ var events = {
             if (WinRate > GlobalWinRate) {
                 var limit = Games >= 10 && WinRate > 57
                 return limit ? [
-                    "You are Maiev Master! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. You are a qualified Happy Darter.",
+                    "You are Maiev Master! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Maiev's global winning rate: " + GlobalWinRate + "%. You are a qualified Happy Darter.",
                     "玛维的取胜技巧已被你掌握，本周你使用玛维进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。"
                 ] : false
             }
@@ -2075,6 +2075,29 @@ var events = {
                 return limit ? [
                     "The hunter is nothing without the hunted. You have played Maiev " + Games + " games, your winning rate is only " + WinRate + "%, Maiev's global winning rate is " + GlobalWinRate + "%.The key is master the time of her abilities E and D,and the accuracy of her Q.",
                     "一个猎手失去了猎物就会一无所有。本周你使用玛维进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。用好玛维的 E 和 D ，并且提高 Q 的精确度，能提高不少胜率！"
+                ] : false
+            }
+        }
+    ],
+    "Fenix": [
+        ["Phoenix", "凤凰骑士"],//菲尼克斯
+        function () {
+            var HeroID = 78
+            var HeroInf = getHeroInf(HeroID)
+            if (!HeroInf) return false
+            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
+            if (WinRate > GlobalWinRate) {
+                var limit = Games >= 10 && WinRate > 57
+                return limit ? [
+                    "En taro Adun! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Fenix's global winning rate: " + GlobalWinRate + "%. Never underestimate the strength of a dragoon.",
+                    "En taro Adun！本周你使用菲尼克斯进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 菲尼克斯全球胜率：" + GlobalWinRate + "%。不要低估一名龙骑士的战斗力"
+                ] : false
+            }
+            else {
+                var limit = Games >= 10 && WinRate < 43
+                return limit ? [
+                    "En taro Adun! You have played Maiev " + Games + " games, your winning rate is only " + WinRate + "%, Fenix's global winning rate is " + GlobalWinRate + "%. Drop your weapon! You have 15 seconds to comply!",
+                    "En taro Adun！本周你使用菲尼克斯进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 菲尼克斯全球胜率：" + GlobalWinRate + "%。放下武器，你还有15秒可以投降！"
                 ] : false
             }
         }
