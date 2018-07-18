@@ -1449,8 +1449,8 @@ var events = {
             var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
             return [
                 "This week, your winning rate of Dragon Shire is "+ WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take "+ myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
-                 + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + "times",
-                    "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon+ " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + "次，全球平均占领祭坛 " + GlobalShrinesCaptured + "次",
+                 + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
+                    "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon+ " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
                 ]
         }
     ],
@@ -1493,7 +1493,7 @@ var events = {
             return limit ?
                 [
                     "On Curse Valley, your curse damage was " + Damage + ", and the global average was " + Damage_gol + ". Use the curse time to get the maximum curse damage, such as pushing the line, pushing the tower, etc..",
-                    "诅咒谷地图中，你的诅咒伤害是 " + Damage + " ,而全球平均水平是 " + Damage_gol + " 要善用诅咒时间来获取最大的诅咒伤害，比如跟推吃线、推塔等等。"
+                    "诅咒谷地图中，你的诅咒伤害是 " + Damage + " ,而全球平均水平是 " + Damage_gol + " 要善用诅咒时间来获取最大的诅咒伤害，比如跟推吃线、推塔等等"
                 ] : false
         }
     ],
@@ -1557,7 +1557,7 @@ var events = {
             var limit = result > 4 && WinRate > 50
             return limit ? [
                 "You averaged " + times + " MrecCampCaputers per game. Good occupiedCamp habits have made your winning rate is " + WinRate + "%.",
-                "这周你平均每场占领了 " + times + " 次雇佣兵，良好的开野习惯使你的胜率达到了 " + myWinRate + "%。",
+                "这周你平均每场占领了 " + times + " 次雇佣兵，良好的开野习惯使你的胜率达到了 " + myWinRate + "%",
             ] : false
         }
     ],
@@ -1570,7 +1570,7 @@ var events = {
             var limit = result > 1.2
             return limit ? [
                 "You have " + times_per + " Clutch Heals per game in the assist games, and you are the most reliable partner in the team.",
-                "你在辅助型局中，平均每场有 " + times_per + " 次关键治疗，是团队中最可靠的伙伴。",
+                "你在辅助型局中，平均每场有 " + times_per + " 次关键治疗，是团队中最可靠的伙伴",
             ] : false
         }
     ],
@@ -1581,7 +1581,7 @@ var events = {
             var limit = TurnedIn > 40
             return limit ? [
                 "On Tomb Of The Spider Queen, you Turned In " + TurnedIn + " per game, you are the very loyal servant of The sipder queen.",
-                "蛛后墓地图中，你平均每场上交了 " + TurnedIn + " 宝石，蛛后的忠心的仆从就是你啦。",
+                "蛛后墓地图中，你平均每场上交了 " + TurnedIn + " 宝石，蛛后的忠心的仆从就是你啦",
             ] : false
         }
     ],
@@ -1595,7 +1595,7 @@ var events = {
             var limit = WinRate > 50
             return limit ? [
                 "You played Hero " + heroID + " for" + times + "times, with " + WinRate + "% winning rate.",
-                "你使用了英雄 " + heroID + " 上场了 " + times + "次，胜率达到了" + WinRate + "%。",
+                "你使用了英雄 " + heroID + " 上场了 " + times + "次，胜率达到了" + WinRate + "%",
             ] : false
         }
     ],
@@ -1666,7 +1666,7 @@ var events = {
             var limit = Diablo && Tychus && Garrosh
             return limit ? [
                 "Boy ♂ Next ♂ Door！ Diablo, Tychus, Garrosh have been called many times! And their winning rate are all beyond 50%.",
-                "Boy ♂ Next ♂ Door！迪亚波罗、泰凯斯、加尔鲁什多次被你征召！并且胜率都超过了 50%。",
+                "Boy ♂ Next ♂ Door！迪亚波罗、泰凯斯、加尔鲁什多次被你征召！并且胜率都超过了 50%",
             ] : false
         }
     ],
@@ -1702,7 +1702,7 @@ var events = {
                 var limit = Games >= 10 && WinRate > 50
                 return limit ? [
                     "You are not prepared! You have played Illidan for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Illidan's global winning rate: " + GlobalWinRate + "%. At sometimes , the hand of fate must be forced.",
-                    "你们这是自寻死路！本周你使用伊利丹进行了 " + Games + "场游戏，胜率达到了 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中。"
+                    "你们这是自寻死路！本周你使用伊利丹进行了 " + Games + "场游戏，胜率达到了 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中"
                 ] : false
             }
             else {
@@ -1855,7 +1855,7 @@ var events = {
                 var limit2 = Games > 7 && WinRate > 50
                 return limit2 ? [
                     "General Performance, I personally appeared " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%, next time I will consider helping you again. ",
-                    "表现还行，我亲自登场了 " + Games + " 次，胜率达到了 " + WinRate + "%，全球的高阶领主平均胜率是 " + GlobalWinRate + "%，下次我会考虑再帮你的。",
+                    "表现还行，我亲自登场了 " + Games + " 次，胜率达到了 " + WinRate + "%，全球的高阶领主平均胜率是 " + GlobalWinRate + "%，下次我会考虑再帮你的",
                 ] : false
             }
             else {
@@ -1958,7 +1958,7 @@ var events = {
                 var limit = Games >= 10 && WinRate < 50
                 return limit ? [
                     "Take heart, heroes, life will always blossom from the darkest soil! You have played Alexstrasza " + Games + " times, your winning rate is only " + WinRate + "%, Alexstrasza's global winning rate is " + GlobalWinRate + "%. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.",
-                    "振作起来，英雄们，生命总会在最黑暗的地方绽放！本周你使用阿莱克丝塔萨完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望。"
+                    "振作起来，英雄们，生命总会在最黑暗的地方绽放！本周你使用阿莱克丝塔萨完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望"
                 ] : false
             }
         }
@@ -2141,7 +2141,7 @@ var events = {
             var limit = Illidan && Malfurion
             return limit ? [
                 "So be it, brother. Illidan and Malfurion have taken a lot tasks for you together in the combat. Hope to end from this day forward, let there be peace between them.",
-                "那就这样吧，兄弟。这周玛法里奥和伊利丹共同承担了你的多场战斗任务。希望从今以后他们之间能够保持和平。",
+                "那就这样吧，兄弟。这周玛法里奥和伊利丹共同承担了你的多场战斗任务。希望从今以后他们之间能够保持和平",
             ] : false
         }
     ],
@@ -2278,7 +2278,7 @@ var events = {
             var limit = Genji && Hanzo && GenjiWinRate > 50 && HanzoWinRate > 50
             return limit ? [
                 "The Unity Of The Dragon And The Man!  Genji have been called " + Genji + " times,with the " + GenjiWinRate + "% WinRate,Hanzo have been called " + Hanzo + " times,with the " + HanzoWinRate + "% WinRate",
-                "人龙合一！ 源氏被征召了 " + Genji + " 次，有着 " + GenjiWinRate + "%胜率。半藏被征召了 " + Hanzo + " 次，有着 " + HanzoWinRate + "%胜率。",
+                "人龙合一！ 源氏被征召了 " + Genji + " 次，有着 " + GenjiWinRate + "%胜率。半藏被征召了 " + Hanzo + " 次，有着 " + HanzoWinRate + "%胜率",
             ] : false
         }
     ],
@@ -2301,7 +2301,7 @@ var events = {
                 "Junkrat have been called " + Junkrat + " times,with the " + JunkratWinRate + "% WinRate," + "Hanzo have been called " + Hanzo + " times,with the " + HanzoWinRate + "% WinRate",
 
                 "这个世界需要更多的英雄！猎空被征召了 " + Tracer + " 次，有着 " + TracerWinRate + "%胜率。源氏被征召了 " + Genji + " 次，有着 " + GenjiWinRate + "%胜率。" +
-                "狂鼠被征召了 " + Junkrat + " 次，有着 " + JunkratWinRate + "%胜率。半藏被征召了 " + Hanzo + " 次，有着 " + HanzoWinRate + "%胜率。",
+                "狂鼠被征召了 " + Junkrat + " 次，有着 " + JunkratWinRate + "%胜率。半藏被征召了 " + Hanzo + " 次，有着 " + HanzoWinRate + "%胜率",
             ] : false
         }
     ],
@@ -2331,7 +2331,7 @@ var events = {
             if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
                 return [
                     "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单。",
+                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
                 ]
             }
             if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
@@ -2355,7 +2355,7 @@ var events = {
             if (ButcherWinRate < 50 || ButcherWinRate < ButcherGlobalWinRate) {
                 return [
                     "Your Butcher's WinRate is " + ButcherWinRate + "%, and the global Butcher's winning rate is " + ButcherGlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. PS: At the  beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单。",
+                    "你的屠夫的胜率是 " + ButcherWinRate + "%,而全球屠夫平均胜率是 " + ButcherGlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
                 ]
             }
             if (ButcherWinRate >= 50 && ButcherWinRate >= ButcherGlobalWinRate) {
