@@ -20,260 +20,260 @@ var counter = {
     "WeekLength": [
         ["Length", "周时长"],
         function () {
-            var data = Math.round(dataPersonal.PlayerBase.game_length.sum / 60)
+            var Time = Math.round(dataPersonal.PlayerBase.game_length.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "WeekTimes": [
         ["Times", "周场次"],
         function () {
-            var data = dataPersonal.PlayerBase.game_total.sum
+            var Games = dataPersonal.PlayerBase.game_total.sum
             return [
-                data + " times",
-                data + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekWin": [
         ["Win", "周胜场"],
         function () {
-            var data = dataPersonal.PlayerBase.game_win.sum
+            var Win = dataPersonal.PlayerBase.game_win.sum
             return [
-                data + " times",
-                data + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekMostUsed": [
         ["Most Used Heroes", "使用最多的英雄"],
         function () {
-            var item = dataPersonal.PlayerHeroes._sumMax.game_total
-            var heroID = item[0]
-            var times = item[1]
+            var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
+            var Games = dataPersonal.PlayerHeroes._sumMax.game_total[1]
+            var HeroInf = getHeroInf(HeroID)
             return [
-                "Hero " + heroID + " was used " + times + " times",
-                "英雄 " + heroID + " 被使用了 " + times + " 次"
+                "Hero " + HeroInf.name_en + " was used " + Games + " times",
+                "英雄 " + HeroInf.name_cn + " 被使用了 " + Games + " 次"
             ]
         }
     ],
     "WeekQuickMatch_length": [
         ["Quick Match Length", "快速比赛时长"],
         function () {
-            var data = Math.round(dataPersonal.PlayerBase.game_length_QuickMatch.sum / 60)
+            var Time = Math.round(dataPersonal.PlayerBase.game_length_QuickMatch.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "week_QuickMatch_avg_length": [
         ["Quick Match Avg Length", "快速比赛平均时长"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_length_QuickMatch.sum
-            var count = dataPersonal.PlayerBase.game_total_QuickMatch.sum
-            return count > 0 ? [
-                ((sum / 60) / count).toFixed(0) + " minutes",
-                ((sum / 60) / count).toFixed(0) + " 分钟",
+            var Time = dataPersonal.PlayerBase.game_length_QuickMatch.sum
+            var Count = dataPersonal.PlayerBase.game_total_QuickMatch.sum
+            return Count > 0 ? [
+                ((Time / 60) / Count).toFixed(0) + " minutes",
+                ((Time / 60) / Count).toFixed(0) + " 分钟",
             ] : false;
         }
     ],
     "week_HeroLeague_length": [
         ["Hero League Length", "英雄联赛时长"],
         function () {
-            var data = Math.round(dataPersonal.PlayerBase.game_length_HeroLeague.sum / 60)
+            var Time = Math.round(dataPersonal.PlayerBase.game_length_HeroLeague.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "week_HeroLeague_avg_length": [
         ["Hero League Avg Length", "英雄联赛平均时长"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_length_HeroLeague.sum / 60
-            var count = dataPersonal.PlayerBase.game_total_HeroLeague.sum
-            return count > 0 ? [
-                (sum / count).toFixed(0) + " minutes",
-                (sum / count).toFixed(0) + " 分钟",
+            var Time = dataPersonal.PlayerBase.game_length_HeroLeague.sum / 60
+            var Games = dataPersonal.PlayerBase.game_total_HeroLeague.sum
+            return Games > 0 ? [
+                (Time / Games).toFixed(0) + " minutes",
+                (Time / Games).toFixed(0) + " 分钟",
             ] : false;
         }
     ],
     "week_TeamLeague_length": [
         ["Team League Length", "团队联赛时长"],
         function () {
-            var data = Math.round(dataPersonal.PlayerBase.game_length_TeamLeague.sum / 60)
+            var Time = Math.round(dataPersonal.PlayerBase.game_length_TeamLeague.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "week_TeamLeague_avg_length": [
         ["Team League Avg Length", "团队联赛平均时长"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_length_TeamLeague.sum
-            var count = dataPersonal.PlayerBase.game_total_TeamLeague.sum
-            return count > 0 ? [
-                (sum / count / 60).toFixed(0) + " minutes",
-                (sum / count / 60).toFixed(0) + " 分钟",
+            var Time = dataPersonal.PlayerBase.game_length_TeamLeague.sum
+            var Games = dataPersonal.PlayerBase.game_total_TeamLeague.sum
+            return Games > 0 ? [
+                (Time / Games / 60).toFixed(0) + " minutes",
+                (Time / Games / 60).toFixed(0) + " 分钟",
             ] : false;
         }
     ],
     "week_UnrankedDraft_length": [
         ["Unranked Draft Length", "非排名模式时长"],
         function () {
-            var data = Math.round(dataPersonal.PlayerBase.game_length_UnrankedDraft.sum / 60)
+            var Time = Math.round(dataPersonal.PlayerBase.game_length_UnrankedDraft.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "week_UnrankedDraft_avg_length": [
         ["Unranked Draft Avg Length", "非排名模式平均时长"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_length_UnrankedDraft.sum
-            var count = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
-            return count > 0 ? [
-                (sum / count / 60).toFixed(0) + " minutes",
-                (sum / count / 60).toFixed(0) + " 分钟",
+            var Time = dataPersonal.PlayerBase.game_length_UnrankedDraft.sum
+            var Games = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
+            return Games > 0 ? [
+                (Time / Games / 60).toFixed(0) + " minutes",
+                (Time / Games / 60).toFixed(0) + " 分钟",
             ] : false;
         }
     ],
     "WeekQuickMatch_total": [
         ["Quick Match Total", "快速比赛总场次"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_total_QuickMatch.sum
+            var Games = dataPersonal.PlayerBase.game_total_QuickMatch.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekHeroLeague_total": [
         ["Hero League Total", "英雄联赛总场次"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_total_HeroLeague.sum
+            var Games = dataPersonal.PlayerBase.game_total_HeroLeague.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekTeamLeague_total": [
         ["Team League Total", "团队联赛总场次"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_total_TeamLeague.sum
+            var Games = dataPersonal.PlayerBase.game_total_TeamLeague.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekUnrankedDraft_total": [
         ["Unranked Draft Total", "非排名模式总场次"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
+            var Games = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekQuickMatch_win": [
         ["Quick Match Win", "快速比赛胜场"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_QuickMatch.sum
+            var Win = dataPersonal.PlayerBase.game_win_QuickMatch.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekHeroLeague_win": [
         ["Hero League Win", "英雄联赛胜场"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_HeroLeague.sum
+            var Win = dataPersonal.PlayerBase.game_win_HeroLeague.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekTeamLeague_win": [
         ["Team League Win", "团队联赛胜场"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_TeamLeague.sum
+            var Win = dataPersonal.PlayerBase.game_win_TeamLeague.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekUnrankedDraft_win": [
         ["Unranked Draft Win", "非排名模式胜场"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_UnrankedDraft.sum
+            var Win = dataPersonal.PlayerBase.game_win_UnrankedDraft.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekQuickMatch_win_rate": [
         ["Quick Match Win Rate", "快速比赛胜率"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_QuickMatch.sum
-            var count = dataPersonal.PlayerBase.game_total_QuickMatch.sum
-            return count > 0 ? [
-                (sum / count).toFixed(2) * 100 + "%",
-                (sum / count).toFixed(2) * 100 + "%",
+            var Win = dataPersonal.PlayerBase.game_win_QuickMatch.sum
+            var Games = dataPersonal.PlayerBase.game_total_QuickMatch.sum
+            return Games > 0 ? [
+                (Win / Games).toFixed(2) * 100 + "%",
+                (Win / Games).toFixed(2) * 100 + "%",
             ] : false
         }
     ],
     "WeekHeroLeague_win_rate": [
         ["Hero League Wins Rate", "英雄联赛胜率"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_HeroLeague.sum
-            var count = dataPersonal.PlayerBase.game_total_HeroLeague.sum
-            return count > 0 ? [
-                (sum / count).toFixed(2) * 100 + "%",
-                (sum / count).toFixed(2) * 100 + "%",
+            var Win = dataPersonal.PlayerBase.game_win_HeroLeague.sum
+            var Games = dataPersonal.PlayerBase.game_total_HeroLeague.sum
+            return Games > 0 ? [
+                (Win / Games).toFixed(2) * 100 + "%",
+                (Win / Games).toFixed(2) * 100 + "%",
             ] : false
         }
     ],
     "WeekTeamLeague_win_rate": [
         ["Team League Win Rate", "团队联赛胜率"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_TeamLeague.sum
-            var count = dataPersonal.PlayerBase.game_total_TeamLeague.sum
-            return count > 0 ? [
-                (sum / count).toFixed(2) * 100 + "%",
-                (sum / count).toFixed(2) * 100 + "%",
+            var Win = dataPersonal.PlayerBase.game_win_TeamLeague.sum
+            var Games = dataPersonal.PlayerBase.game_total_TeamLeague.sum
+            return Games > 0 ? [
+                (Win / Games).toFixed(2) * 100 + "%",
+                (Win / Games).toFixed(2) * 100 + "%",
             ] : false
         }
     ],
     "WeekUnrankedDraft_win_ate": [
         ["Unranked Draft Win Rate", "非排名模式胜率"],
         function () {
-            var sum = dataPersonal.PlayerBase.game_win_UnrankedDraft.sum
-            var count = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
-            return count > 0 ? [
-                (sum / count).toFixed(2) * 100 + "%",
-                (sum / count).toFixed(2) * 100 + "%",
+            var Win = dataPersonal.PlayerBase.game_win_UnrankedDraft.sum
+            var Games = dataPersonal.PlayerBase.game_total_UnrankedDraft.sum
+            return Games > 0 ? [
+                (Win / Games).toFixed(2) * 100 + "%",
+                (Win / Games).toFixed(2) * 100 + "%",
             ] : false
         }
     ],
     "week_party_total": [
         ["Premades total", "开黑次数"],
         function () {
-            var sum = dataPersonal.PlayerBase.party_total.sum
+            var Times = dataPersonal.PlayerBase.party_total.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Times + " times",
+                Times + " 局"
             ]
         }
     ],
@@ -281,96 +281,97 @@ var counter = {
     "week_party_win": [
         ["Premades win", "开黑获胜次数"],
         function () {
-            var sum = dataPersonal.PlayerBase.party_win.sum
+            var Times = dataPersonal.PlayerBase.party_win.sum
             return [
-                sum + " times",
-                sum + " 局"
+                Times + " times",
+                Times + " 局"
             ]
         }
     ],
     "week_party_win_rate": [
         ["Premades Win Rate", "开黑胜率"],
         function () {
-            var sum = dataPersonal.PlayerBase.party_win.sum
-            var count = dataPersonal.PlayerBase.party_total.sum
-            return count > 0 ? [
-                (sum / count).toFixed(2) * 100 + "%",
-                (sum / count).toFixed(2) * 100 + "%",
+            var Times = dataPersonal.PlayerBase.party_win.sum
+            var Games = dataPersonal.PlayerBase.party_total.sum
+            return Games > 0 ? [
+                (Times / Games).toFixed(2) * 100 + "%",
+                (Times / Games).toFixed(2) * 100 + "%",
             ] : false
         }
     ],
     "week_team1_count": [
         ["Played In Team 1", "在右上方的游戏次数"],
         function () {
-            var sum = dataPersonal.PlayerBase.team1_count.sum
+            var Times = dataPersonal.PlayerBase.team1_count.sum
             return [
-                sum + " times",
-                sum + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "week_level": [
         ["Average Level", "平均等级(游戏结束时)"],
         function () {
-            var sum = dataPersonal.PlayerBase.Level.sum
-            var count = dataPersonal.PlayerBase.game_total.sum
-            if (count <= 0)
+            var Sum = dataPersonal.PlayerBase.Level.sum
+            var Games = dataPersonal.PlayerBase.game_total.sum
+            if (Games <= 0)
                 return false;
-            var avgLvl = sum / count;
+            var Level = Sum / Games;
             return [
-                avgLvl.toFixed(0),
-                avgLvl.toFixed(0) + " 级",
+                Level.toFixed(0),
+                Level.toFixed(0) + " 级",
             ]
         }
     ],
     "week_take_downs": [
         ["Take Downs", "总参与击杀"],
         function () {
-            var sum = dataPersonal.PlayerBase.Takedowns.sum
+            var Times = dataPersonal.PlayerBase.Takedowns.sum
             return [
-                sum + " times",
-                sum + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "week_solo_kills": [
         ["Solo Kills", "最后一击"],
         function () {
-            var sum = dataPersonal.PlayerBase.SoloKills.sum
+            var Times = dataPersonal.PlayerBase.SoloKills.sum
             return [
-                sum + " times",
-                sum + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "week_assists": [
         ["Assists", "助攻"],
         function () {
-            var sum = dataPersonal.PlayerBase.Assists.sum
+            var Times = dataPersonal.PlayerBase.Assists.sum
             return [
-                sum + " times",
-                sum + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "week_deaths": [
         ["Deaths", "死亡"],
         function () {
-            var sum = dataPersonal.PlayerBase.Deaths.sum
+            var Times = dataPersonal.PlayerBase.Deaths.sum
             return [
-                sum + " times",
-                sum + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "week_avg_highest_kill_streak": [
         ["Average Highest Kill Streak", "平均最高连杀"],
         function () {
-            var avg = dataPersonal.PlayerBase.HighestKillStreak.sum
-            var game = dataPersonal.PlayerBase.game_total.sum
+            var Sum = dataPersonal.PlayerBase.HighestKillStreak.sum
+            var Games = dataPersonal.PlayerBase.game_total.sum
+            var Times = (Sum / Games).toFixed(0)
             return [
-                (avg / game).toFixed(0) + " times",
-                (avg / game).toFixed(0) + " 次",
+                Times + " times",
+                Times + " 次",
             ]
         }
     ],
@@ -378,10 +379,10 @@ var counter = {
         ["Max Level Reached", "最高等级"],
         function () {
             var arr = object_to_array(dataPersonal.PlayerBase.Level_count.sum)
-            var data = arr[arr.length - 1]
+            var Level = arr[arr.length - 1]
             return [
-                data,
-                data + " 级"
+                Level,
+                Level + " 级"
             ]
         }
     ],
@@ -389,50 +390,50 @@ var counter = {
         ["Min Level Reached", "最低等级"],
         function () {
             var arr = object_to_array(dataPersonal.PlayerBase.Level_count.sum)
-            var data = arr[0]
+            var Level = arr[0]
             return [
-                data,
-                data + " 级"
+                Level,
+                Level + " 级"
             ]
         }
     ],
     "week_hero_damage": [
         ["Hero Damage", "英雄总伤害"],
         function () {
-            var sum = dataPersonal.PlayerBase.HeroDamage.sum
+            var Damage = dataPersonal.PlayerBase.HeroDamage.sum
             return [
-                sum,
-                sum + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
     "week_siege_damage": [
         ["Siege Damage", "攻城总伤害"],
         function () {
-            var sum = dataPersonal.PlayerBase.SiegeDamage.sum
+            var Damage = dataPersonal.PlayerBase.SiegeDamage.sum
             return [
-                sum,
-                sum + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
     "week_structure_damage": [
         ["Structure Damage", "建筑总伤害"],
         function () {
-            var sum = dataPersonal.PlayerBase.StructureDamage.sum
+            var Damage = dataPersonal.PlayerBase.StructureDamage.sum
             return [
-                sum,
-                sum + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
     "week_minion_damage": [
         ["Minion Damage", "小兵总伤害"],
         function () {
-            var sum = dataPersonal.PlayerBase.MinionDamage.sum
+            var Damage = dataPersonal.PlayerBase.MinionDamage.sum
             return [
-                sum,
-                sum + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
@@ -440,325 +441,325 @@ var counter = {
     "week_creep_damage": [
         ["Creep Damage", "地图机制总伤害"],
         function () {
-            var sum = dataPersonal.PlayerBase.CreepDamage.sum
+            var Damage = dataPersonal.PlayerBase.CreepDamage.sum
             return [
-                sum,
-                sum + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
     "week_summon_damage": [
         ["Summon Damage", "召唤物总伤害"],
         function () {
-            var data = dataPersonal.PlayerBase.SummonDamage.sum
+            var Damage = dataPersonal.PlayerBase.SummonDamage.sum
             return [
-                data,
-                data + " 伤害"
+                Damage,
+                Damage + " 伤害"
             ]
         }
     ],
     "week_TimeCCd_enemy_heroes": [
         ["Enemy Heroes CC Length", "控制敌方英雄总时长"],
         function () {
-            var sum = dataPersonal.PlayerBase.TimeCCdEnemyHeroes.sum
+            var Time = dataPersonal.PlayerBase.TimeCCdEnemyHeroes.sum
             return [
-                sum + " second",
-                sum + " 秒"
+                Time + " second",
+                Time + " 秒"
             ]
         }
     ],
     "week_self_healing": [
         ["Self Healing", "自我治疗"],
         function () {
-            var sum = dataPersonal.PlayerBase.SelfHealing.sum
+            var Healing = dataPersonal.PlayerBase.SelfHealing.sum
             return [
-                sum + " heal",
-                sum + " 点治疗"
+                Healing + " heal",
+                Healing + " 点治疗"
             ]
         }
     ],
     "week_experience_contribution": [
         ["Experience Contribution", "经验贡献"],
         function () {
-            var sum = dataPersonal.PlayerBase.ExperienceContribution.sum
+            var Exp = dataPersonal.PlayerBase.ExperienceContribution.sum
             return [
-                sum,
-                sum + " 经验"
+                Exp,
+                Exp + " 经验"
             ]
         }
     ],
     "week_healing": [
         ["Healing", "治疗"],
         function () {
-            var sum = dataPersonal.PlayerBase.Healing.sum
+            var Healing = dataPersonal.PlayerBase.Healing.sum
             return [
-                sum,
-                sum + " 点治疗"
+                Healing,
+                Healing + " 点治疗"
             ]
         }
     ],
     "WeekWinRate": [
         ["Win Rate", "周胜率"],
         function () {
-            var win = dataPersonal.PlayerBase.game_win.sum
-            var games = dataPersonal.PlayerBase.game_total.sum
-            if (games <= 0)
+            var Win = dataPersonal.PlayerBase.game_win.sum
+            var Games = dataPersonal.PlayerBase.game_total.sum
+            if (Games <= 0)
                 return false;
-            var rate = win / games;
+            var WinRate = (Win / Games * 100).toFixed(2);
             return [
-                rate.toFixed(2) * 100 + "%",
-                rate.toFixed(2) * 100 + "%",
+                WinRate + "%",
+                WinRate + "%",
             ]
         }
     ],
     "MrecCamp": [
         ["MercCamp Captures", "雇佣兵占领次数"],
         function () {
-            var times = dataPersonal.PlayerBase.MercCampCaptures.sum
+            var Times = dataPersonal.PlayerBase.MercCampCaptures.sum
             return [
-                times,
-                times + " 次",
+                Times,
+                Times + " 次",
             ]
         }
     ],
     "TimeSilencing": [
         ["Enemy Heroes Silenced", "沉默敌人的时间"],
         function () {
-            var times = dataPersonal.PlayerBase.TimeSilencingEnemyHeroes.sum
+            var Time = dataPersonal.PlayerBase.TimeSilencingEnemyHeroes.sum
             return [
-                times + " seconds",
-                times + " 秒",
+                Time + " seconds",
+                Time + " 秒",
             ]
         }
     ],
     "TimeRooting": [
         ["Enemy Heroes Rooted", "定身敌人的时间"],
         function () {
-            var times = dataPersonal.PlayerBase.TimeRootingEnemyHeroes.sum
+            var Time = dataPersonal.PlayerBase.TimeRootingEnemyHeroes.sum
             return [
-                times + " seconds",
-                times + " 秒",
+                Time + " seconds",
+                Time + " 秒",
             ]
         }
     ],
     "TimeStunning": [
         ["Enemy Heroes Stunned", "眩晕敌人的时间"],
         function () {
-            var times = dataPersonal.PlayerBase.TimeStunningEnemyHeroes.sum
+            var Time = dataPersonal.PlayerBase.TimeStunningEnemyHeroes.sum
             return [
-                times + " seconds",
-                times + " 秒",
+                Time + " seconds",
+                Time + " 秒",
             ]
         }
     ],
     "ClutchHealsPerformed": [
         ["Clutch Heals Performed", "关键治疗次数"],
         function () {
-            var times = dataPersonal.PlayerBase.ClutchHealsPerformed.sum
+            var Time = dataPersonal.PlayerBase.ClutchHealsPerformed.sum
             return [
-                times + " times",
-                times + " 次",
+                Time + " times",
+                Time + " 次",
             ]
         }
     ],
     "EscapesPerformed": [
         ["Escapes Performed", "死里逃生次数"],
         function () {
-            var times = dataPersonal.PlayerBase.EscapesPerformed.sum
+            var Times = dataPersonal.PlayerBase.EscapesPerformed.sum
             return [
-                times + " times",
-                times + " 次",
+                Times + " times",
+                Times + " 次",
             ]
         }
     ],
     "VengeancesPerformed": [
         ["Vengeances Performed", "复仇次数"],
         function () {
-            var times = dataPersonal.PlayerBase.VengeancesPerformed.sum
+            var Times = dataPersonal.PlayerBase.VengeancesPerformed.sum
             return [
-                times + " times",
-                times + " 次",
+                Times + " times",
+                Times + " 次",
             ]
         }
     ],
     "TeamfightEscapesPerformed": [
         ["Teamfight Escapes Performed", "团战逃脱的次数"],
         function () {
-            var times = dataPersonal.PlayerBase.TeamfightEscapesPerformed.sum
+            var Times = dataPersonal.PlayerBase.TeamfightEscapesPerformed.sum
             return [
-                times + " times",
-                times + " 次",
+                Times + " times",
+                Times + " 次",
             ]
         }
     ],
     "OutnumberedDeaths": [
         ["Outnumbered Deaths", "被Gank的次数"],
         function () {
-            var times = dataPersonal.PlayerBase.OutnumberedDeaths.sum
+            var Times = dataPersonal.PlayerBase.OutnumberedDeaths.sum
             return [
-                times + " times",
-                times + " 次",
+                Times + " times",
+                Times + " 次",
             ]
         }
     ],
     "WinsWarrior": [
         ["Wins Warrior", "战斗型英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsWarrior.sum
+            var Win = dataPersonal.PlayerBase.WinsWarrior.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsAssassin": [
         ["Wins Assassin", "刺杀型英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsAssassin.sum
+            var Win = dataPersonal.PlayerBase.WinsAssassin.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsSupport": [
         ["Wins Support", "辅助型英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsAssassin.sum
+            var Win = dataPersonal.PlayerBase.WinsAssassin.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsSpecialist": [
         ["Wins Specialist", "专业型英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsSpecialist.sum
+            var Win = dataPersonal.PlayerBase.WinsSpecialist.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsStarCraft": [
         ["Wins StarCraft", "星际英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsStarCraft.sum
+            var Win = dataPersonal.PlayerBase.WinsStarCraft.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsDiablo": [
         ["Wins Diablo", "暗黑英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsDiablo.sum
+            var Win = dataPersonal.PlayerBase.WinsDiablo.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsWarcraft": [
         ["Wins Warcraft", "魔兽英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsWarcraft.sum
+            var Win = dataPersonal.PlayerBase.WinsWarcraft.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsMale": [
         ["Wins Male", "男性英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsMale.sum
+            var Win = dataPersonal.PlayerBase.WinsMale.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "WinsFemale": [
         ["Wins Female", "女性英雄胜场"],
         function () {
-            var times = dataPersonal.PlayerBase.WinsFemale.sum
+            var Win = dataPersonal.PlayerBase.WinsFemale.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "GamesOfWarrior": [
         ["Tanks Played", "战斗型英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysWarrior.sum
+            var Games = dataPersonal.PlayerBase.PlaysWarrior.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GamesOfAssassin": [
         ["Assassins Played", "刺杀型英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysAssassin.sum
+            var Games = dataPersonal.PlayerBase.PlaysAssassin.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GamesOfSupport": [
         ["Support Played", "治疗型英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysSupport.sum
+            var Games = dataPersonal.PlayerBase.PlaysSupport.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GamesOfSpecialist": [
         ["Specialist Played", "专业型英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysSpecialist.sum
+            var Games = dataPersonal.PlayerBase.PlaysSpecialist.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GamesOfMale": [
         ["Male Played", "男性英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysMale.sum
+            var Games = dataPersonal.PlayerBase.PlaysMale.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GamesOfFemale": [
         ["Female Played", "女性英雄局数"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysFemale.sum
+            var Games = dataPersonal.PlayerBase.PlaysFemale.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WinRateOfWarrior": [
         ["Tanks WinRate", "战斗型英雄胜率"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysWarrior.sum
-            if (games <= 0)
+            var Games = dataPersonal.PlayerBase.PlaysWarrior.sum
+            if (Games <= 0)
                 return false
-            var wins = dataPersonal.PlayerBase.WinsWarrior.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.WinsWarrior.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -768,11 +769,11 @@ var counter = {
     "WinRateOfAssassin": [
         ["Assassins WinRate", "刺杀型英雄胜率"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysAssassin.sum
-            if (games <= 0)
+            var Games = dataPersonal.PlayerBase.PlaysAssassin.sum
+            if (Games <= 0)
                 return false
-            var wins = dataPersonal.PlayerBase.WinsAssassin.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.WinsAssassin.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -782,11 +783,11 @@ var counter = {
     "WinRateOfSupport": [
         ["Support WinRate", "治疗型英雄胜率"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysSupport.sum
-            if (games <= 0)
+            var Games = dataPersonal.PlayerBase.PlaysSupport.sum
+            if (Games <= 0)
                 return false
-            var wins = dataPersonal.PlayerBase.WinsSupport.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.WinsSupport.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -796,11 +797,11 @@ var counter = {
     "WinRateOfSpecialist": [
         ["Specialist WinRate", "专业型英雄胜率"],
         function () {
-            var games = dataPersonal.PlayerBase.PlaysSpecialist.sum
-            if (games <= 0)
+            var Games = dataPersonal.PlayerBase.PlaysSpecialist.sum
+            if (Games <= 0)
                 return false
-            var wins = dataPersonal.PlayerBase.WinsSpecialist.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.WinsSpecialist.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -810,185 +811,181 @@ var counter = {
     "TimesOfDtagon": [
         ["Take Dragons In This Week", "开启龙骑士次数"],
         function () {
-            var games = dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum
+            var Times = dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum
             return [
-                games + " times",
-                games + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "TimesOfDtagonShrines": [
         ["DragonSrines Taken", "占领龙骑士祭坛次数"],
         function () {
-            var games = dataPersonal.PlayerBase.DragonShrinesCaptured.sum
+            var Times = dataPersonal.PlayerBase.DragonShrinesCaptured.sum
             return [
-                games + " times",
-                games + " 次"
+                Times + " times",
+                Times + " 次"
             ]
         }
     ],
     "NumbersOfGardensSeeds": [
         ["GardensSeeds Collected", "收集花园种子总数"],
         function () {
-            var count = dataPersonal.PlayerBase.GardensSeedsCollected.sum
+            var Count = dataPersonal.PlayerBase.GardensSeedsCollected.sum
             return [
-                count,
-                count + " 个"
+                Count,
+                Count + " 个"
             ]
         }
     ],
     "DamageOfGardensPlant": [
         ["GardensPlant Damage", "恐魔总伤害量"],
         function () {
-            var dmg = dataPersonal.PlayerBase.GardensPlantDamage.sum
+            var Damage = dataPersonal.PlayerBase.GardensPlantDamage.sum
             return [
-                dmg,
-                dmg
+                Damage,
+                Damage
             ]
         }
     ],
     "DamageDoneOfAltar": [
         ["Altar Damage Done", "占领天空殿神殿造成的总伤害量"],
         function () {
-            var dmg = dataPersonal.PlayerBase.AltarDamageDone.sum
+            var Damage = dataPersonal.PlayerBase.AltarDamageDone.sum
             return [
-                dmg,
-                dmg
+                Damage,
+                Damage
             ]
         }
     ],
     "DamageToImmortal": [
         ["Damage Done To Immortal", "对不朽者总伤害量"],
         function () {
-            var dmg = dataPersonal.PlayerBase.DamageDoneToImmortal.sum
+            var Damage = dataPersonal.PlayerBase.DamageDoneToImmortal.sum
             return [
-                dmg,
-                dmg
+                Damage,
+                Damage
             ]
         }
     ],
     "GemsTurned": [
         ["Gems Turned In", "上交宝石总量"],
         function () {
-            var count = dataPersonal.PlayerBase.GemsTurnedIn.sum
+            var Count = dataPersonal.PlayerBase.GemsTurnedIn.sum
             return [
-                count,
-                count
+                Count,
+                Count
             ]
         }
     ],
     "RavenCollected": [
         ["Raven Tributes Collected", "乌鸦诅咒收集总量"],
         function () {
-            var count = dataPersonal.PlayerBase.RavenTributesCollected.sum
+            var Count = dataPersonal.PlayerBase.RavenTributesCollected.sum
             return [
-                count,
-                count
+                Count,
+                Count
             ]
         }
     ],
     "MinesCollected": [
         ["Mines Skulls Collected", "鬼灵矿收集总量"],
         function () {
-            var count = dataPersonal.PlayerBase.MinesSkullsCollected.sum
+            var Count = dataPersonal.PlayerBase.MinesSkullsCollected.sum
             return [
-                count,
-                count
+                Count,
+                Count
             ]
         }
     ],
     "DoubloonsCollected": [
         ["Black Heart Doubloons Collected", "达布隆币收集总量"],
         function () {
-            var count = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
+            var Count = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
             return [
-                count,
-                count
+                Count,
+                Count
             ]
         }
     ],
     "DoubloonsTurnedIn": [
         ["Black Heart Doubloons Turned In", "达布隆币上交总量"],
         function () {
-            var count = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
+            var Count = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
             return [
-                count,
-                count
+                Count,
+                Count
             ]
         }
     ],
     "TimesInTemple": [
         ["Time In Temple", "天空殿占领神殿总时间"],
         function () {
-            var count = dataPersonal.PlayerBase.TimeInTemple.sum
+            var Time = dataPersonal.PlayerBase.TimeInTemple.sum
             return [
-                count + " seconds",
-                count + " s"
+                Time + " seconds",
+                Time + " s"
             ]
         }
     ],
     "NukeDamage": [
         ["Nuke Damage Done", "核弹头总伤害"],
         function () {
-            var dmg = dataPersonal.PlayerBase.NukeDamageDone.sum
+            var Damage = dataPersonal.PlayerBase.NukeDamageDone.sum
             return [
-                dmg,
-                dmg
+                Damage,
+                Damage
             ]
         }
     ],
     "2_Plays_total": [
         ["The Games of 2 Premades", "两人开黑场数"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_2.sum;
-
+            var Games = dataPersonal.PlayerBase.party_total_2.sum;
             return [
-                count,
-                count
+                Games,
+                Games
             ]
         }
     ],
     "3_Plays_total": [
         ["The Games of 3 Premades", "三人开黑场数"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_3.sum;
-
+            var Games = dataPersonal.PlayerBase.party_total_3.sum;
             return [
-                count,
-                count
+                Games,
+                Games
             ]
         }
     ],
     "4_Plays_total": [
         ["The Games 4 Premades", "四人开黑场数"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_4.sum;
-
+            var Games = dataPersonal.PlayerBase.party_total_4.sum;
             return [
-                count,
-                count
+                Games,
+                Games
             ]
         }
     ],
     "5_Plays_total": [
         ["The Games 5 Premades", "五人开黑场数"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_5.sum;
-
+            var Games = dataPersonal.PlayerBase.party_total_5.sum;
             return [
-                count,
-                count
+                Games,
+                Games
             ]
         }
     ],
     "2_WinRate": [
         ["The Win Rate of 2 Premades", "两人开黑胜率"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_2.sum;
-            if (count <= 0)
+            var Games = dataPersonal.PlayerBase.party_total_2.sum;
+            if (Games <= 0)
                 return false;
-
-            var WinRate = (dataPersonal.PlayerBase.party_win_2.sum / dataPersonal.PlayerBase.party_total_2.sum * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.party_win_2.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -998,11 +995,11 @@ var counter = {
     "3_WinRate": [
         ["The Win Rate of 3 Premades", "三人开黑胜率"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_3.sum;
-            if (count <= 0)
+            var Games = dataPersonal.PlayerBase.party_total_3.sum;
+            if (Games <= 0)
                 return false;
-
-            var WinRate = (dataPersonal.PlayerBase.party_win_3.sum / dataPersonal.PlayerBase.party_total_3.sum * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.party_win_3.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1012,11 +1009,11 @@ var counter = {
     "4_WinRate": [
         ["The WinRate of 4 Premades", "四人开黑胜率"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_4.sum;
-            if (count <= 0)
+            var Games = dataPersonal.PlayerBase.party_total_4.sum;
+            if (Games <= 0)
                 return false;
-
-            var WinRate = (dataPersonal.PlayerBase.party_win_4.sum / dataPersonal.PlayerBase.party_total_4.sum * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.party_win_4.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1026,11 +1023,11 @@ var counter = {
     "5_WinRate": [
         ["The WinRate of 5 Premades", "五人开黑胜率"],
         function () {
-            var count = dataPersonal.PlayerBase.party_total_5.sum;
-            if (count <= 0)
+            var Games = dataPersonal.PlayerBase.party_total_5.sum;
+            if (Games <= 0)
                 return false;
-
-            var WinRate = (dataPersonal.PlayerBase.party_win_5.sum / dataPersonal.PlayerBase.party_total_5.sum * 100).toFixed(2)
+            var Win = dataPersonal.PlayerBase.party_win_5.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1040,10 +1037,10 @@ var counter = {
     "MapsLength": [
         ["Total Duration Played On Each Map", "地图游戏时间"],
         function () {
-            var map_time = dataPersonal.PlayerBase.maps_length.sum
+            var Time = dataPersonal.PlayerBase.maps_length.sum
             return [
-                map_time,
-                map_time
+                Time,
+                Time
             ]
 
         }
@@ -1051,10 +1048,10 @@ var counter = {
     "MapsTimes": [
         ["Times Played On Each Map ", "地图游戏次数"],
         function () {
-            var map_total = dataPersonal.PlayerBase.maps_total.sum
+            var Times = dataPersonal.PlayerBase.maps_total.sum
             return [
-                map_total,
-                map_total
+                Times,
+                Times
             ]
 
         }
@@ -1062,10 +1059,10 @@ var counter = {
     "MapsWin": [
         ["Wins On Each Map ", "地图胜场数"],
         function () {
-            var map_win = dataPersonal.PlayerBase.maps_win.sum
+            var Win = dataPersonal.PlayerBase.maps_win.sum
             return [
-                map_win,
-                map_win
+                Win,
+                Win
             ]
 
         }
@@ -1073,10 +1070,10 @@ var counter = {
     "LevelAchieve": [
         ["Team Level At End Of The Game", "游戏结束时的等级"],
         function () {
-            var level_gameEnd = dataPersonal.PlayerBase.Level_count.sum
+            var Level = dataPersonal.PlayerBase.Level_count.sum
             return [
-                level_gameEnd,
-                level_gameEnd
+                Level,
+                Level + "级"
             ]
 
         }
@@ -1084,231 +1081,231 @@ var counter = {
     "LastGameTime": [
         ["Duration Of The Last Game", "上一次游戏时间"],
         function () {
-            var duration = timestamptotime(dataPersonal.PlayerBase.last_game_time.max)
+            var Time = timestamptotime(dataPersonal.PlayerBase.last_game_time.max)
             return [
-                duration,
-                duration
+                Time,
+                Time
             ]
         }
     ],
     "WeekGlobalMostUsed": [
         ["Global Most Used Heroes", "全球使用最多的英雄"],
         function () {
-            var item = dataGlobal.PlayerHeroes._sumMax.game_total
-            var heroID = item[0]
-            var times = item[1]
+            var HeroID = dataGlobal.PlayerHeroes._sumMax.game_total[0]
+            var Games = dataGlobal.PlayerHeroes._sumMax.game_total[1]
+            var HeroInf = getHeroInf(HeroID)
             return [
-                "Hero " + heroID + " was used " + times + " times",
-                "英雄 " + heroID + " 被使用了 " + times + " 次"
+                "Hero " + HeroInf.name_en + " was used " + Games + " times",
+                "英雄 " + HeroInf.name_cn + " 被使用了 " + Games + " 次"
             ]
         }
     ],
     "WeekGlobalTimes": [
         ["Global Times", "全球场次"],
         function () {
-            var count = dataGlobal.PlayerBase.game_total.sum
+            var Games = dataGlobal.PlayerBase.game_total.sum
             return [
-                count + " times",
-                count + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "WeekGlobalLength": [
         ["Global Length", "全球时长"],
         function () {
-            var data = Math.round(dataGlobal.PlayerBase.game_length.sum / 60)
+            var Time = Math.round(dataGlobal.PlayerBase.game_length.sum / 60)
             return [
-                data + " minutes",
-                data + " 分钟"
+                Time + " minutes",
+                Time + " 分钟"
             ]
         }
     ],
     "WeekGlobalWin": [
         ["Global Win", "全球胜场"],
         function () {
-            var data = dataGlobal.PlayerBase.game_win.sum
+            var Win = dataGlobal.PlayerBase.game_win.sum
             return [
-                data + " times",
-                data + " 局"
+                Win + " times",
+                Win + " 局"
             ]
         }
     ],
     "WeekGlobalMostWinInHeroLeague": [
         ["Global Most Win Heroes In Hero League", "英雄联赛全球胜率最高的英雄"],
         function () {
-            var heroID = 0
+            var HeroID = 0
             var WinRate = 0
             for (var hero in dataGlobal.PlayerHeroes) {
                 if (dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
                     if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
                         WinRate = Rate
-                        heroID = parseInt(hero)
+                        HeroID = parseInt(hero)
                     }
                 }
             }
-            if (WinRate <= 0)
-                return false
+            var HeroInf = getHeroInf(HeroID)
+            if (WinRate <= 0 || HeroInf === undefined) return false
             return [
-                "Hero " + heroID + " Hero League WinRate is  " + WinRate + "%",
-                "英雄 " + heroID + " 英雄联赛胜率是 " + WinRate + "%"
+                "Hero " + HeroInf.name_en + " Hero League WinRate is  " + WinRate + "%",
+                "英雄 " + HeroInf.name_cn + " 英雄联赛胜率是 " + WinRate + "%"
             ]
         }
     ],
     "WeekGlobalMostWinInTeamLeague": [
         ["Global Most Win Heroes In Team League", "团队联赛全球胜率最高的英雄"],
         function () {
-            var heroID = 0
+            var HeroID = 0
             var WinRate = 0
             for (var hero in dataGlobal.PlayerHeroes) {
                 if (dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum > 0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_TeamLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum * 100).toFixed(2)
                     if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
                         WinRate = Rate
-                        heroID = parseInt(hero)
+                        HeroID = parseInt(hero)
                     }
                 }
             }
-            if (WinRate <= 0)
-                return false
+            var HeroInf = getHeroInf(HeroID)
+            if (WinRate <= 0 || HeroInf === undefined) return false
             return [
-                "Hero " + heroID + " Team League WinRate is  " + WinRate + "%",
-                "英雄 " + heroID + " 团队联赛胜率是 " + WinRate + "%"
+                "Hero " + HeroInf.name_en + " Team League WinRate is  " + WinRate + "%",
+                "英雄 " + HeroInf.name_cn + " 团队联赛胜率是 " + WinRate + "%"
             ]
         }
     ],
     "WeekGlobalMostWinInQuickMatch": [
         ["Global Most Win Heroes In Quick Match", "快速比赛全球胜率最高的英雄"],
         function () {
-            var heroID = 0
+            var HeroID = 0
             var WinRate = 0
             for (var hero in dataGlobal.PlayerHeroes) {
                 if (dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum > 0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_QuickMatch.sum / dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum * 100).toFixed(2)
                     if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
                         WinRate = Rate
-                        heroID = parseInt(hero)
+                        HeroID = parseInt(hero)
                     }
                 }
             }
-            if (WinRate <= 0)
-                return false
+            var HeroInf = getHeroInf(HeroID)
+            if (WinRate <= 0 || HeroInf === undefined) return false
             return [
-                "Hero " + heroID + " Quick Match WinRate is  " + WinRate + "%",
-                "英雄 " + heroID + " 快速比赛胜率是 " + WinRate + "%"
+                "Hero " + HeroInf.name_en + " Quick Match WinRate is  " + WinRate + "%",
+                "英雄 " + HeroInf.name_cn + " 快速比赛胜率是 " + WinRate + "%"
             ]
         }
     ],
     "WeekGlobalMostWinInUnrankedDraft": [
         ["Global Most Win Heroes In Unranked Draft", "非排名模式全球胜率最高的英雄"],
         function () {
-            var heroID = 0
+            var HeroID = 0
             var WinRate = 0
             for (var hero in dataGlobal.PlayerHeroes) {
                 if (dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 0) {
                     var Rate = (dataGlobal.PlayerHeroes[hero].game_win_UnrankedDraft.sum / dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum * 100).toFixed(2)
                     if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
                         WinRate = Rate
-                        heroID = parseInt(hero)
+                        HeroID = parseInt(hero)
                     }
                 }
             }
-            if (WinRate <= 0)
-                return false
+            var HeroInf = getHeroInf(HeroID)
+            if (WinRate <= 0 || HeroInf === undefined) return false
             return [
-                "Hero " + heroID + " Unranked Draft WinRate is  " + WinRate + "%",
-                "英雄 " + heroID + " 非排名模式胜率是 " + WinRate + "%"
+                "Hero " + HeroInf.name_en + " Unranked Draft WinRate is  " + WinRate + "%",
+                "英雄 " + HeroInf.name_cn + " 非排名模式胜率是 " + WinRate + "%"
             ]
         }
     ],
     "GlobalWinsWarrior": [
         ["Global Wins Warrior", "战斗型英雄全球胜场"],
         function () {
-            var times = dataGlobal.PlayerBase.WinsWarrior.sum
+            var Win = dataGlobal.PlayerBase.WinsWarrior.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "GlobalWinsAssassin": [
         ["Global Wins Assassin", "刺杀型英雄全球胜场"],
         function () {
-            var times = dataGlobal.PlayerBase.WinsAssassin.sum
+            var Win = dataGlobal.PlayerBase.WinsAssassin.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "GlobalWinsSupport": [
         ["Global Wins Support", "辅助型英雄全球胜场"],
         function () {
-            var times = dataGlobal.PlayerBase.WinsAssassin.sum
+            var Win = dataGlobal.PlayerBase.WinsAssassin.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "GlobalWinsSpecialist": [
         ["Global Wins Specialist", "专业型英雄全球胜场"],
         function () {
-            var times = dataGlobal.PlayerBase.WinsSpecialist.sum
+            var Win = dataGlobal.PlayerBase.WinsSpecialist.sum
             return [
-                times + " times",
-                times + " 局",
+                Win + " times",
+                Win + " 局",
             ]
         }
     ],
     "GlobalGamesOfWarrior": [
         ["Global Tanks Played", "战斗型英雄全球局数"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysWarrior.sum
+            var Games = dataGlobal.PlayerBase.PlaysWarrior.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GlobalGamesOfAssassin": [
         ["Global Assassins Played", "刺杀型英雄全球局数"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysAssassin.sum
+            var Games = dataGlobal.PlayerBase.PlaysAssassin.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "Global GamesOfSupport": [
         ["Global Plays Support", "治疗型英雄全球局数"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysSupport.sum
+            var Games = dataGlobal.PlayerBase.PlaysSupport.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GlobalGamesOfSpecialist": [
         ["Global Plays Specialist", "专业型英雄全球局数"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysSpecialist.sum
+            var Games = dataGlobal.PlayerBase.PlaysSpecialist.sum
             return [
-                games + " times",
-                games + " 局"
+                Games + " times",
+                Games + " 局"
             ]
         }
     ],
     "GlobalWinRateOfWarrior": [
         ["Global Tanks WinRate", "战斗型英雄全球胜率"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysWarrior.sum
-            if (games <= 0)
+            var Games = dataGlobal.PlayerBase.PlaysWarrior.sum
+            if (Games <= 0)
                 return false
-            var wins = dataGlobal.PlayerBase.WinsWarrior.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataGlobal.PlayerBase.WinsWarrior.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1318,11 +1315,11 @@ var counter = {
     "GlobalWinRateOfAssassin": [
         ["Global Assassins WinRate", "刺杀型英雄全球胜率"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysAssassin.sum
-            if (games <= 0)
+            var Games = dataGlobal.PlayerBase.PlaysAssassin.sum
+            if (Games <= 0)
                 return false
-            var wins = dataGlobal.PlayerBase.WinsAssassin.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataGlobal.PlayerBase.WinsAssassin.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1332,11 +1329,11 @@ var counter = {
     "GlobalWinRateOfSupport": [
         ["Global Support WinRate", "治疗型英雄全球胜率"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysSupport.sum
-            if (games <= 0)
+            var Games = dataGlobal.PlayerBase.PlaysSupport.sum
+            if (Games <= 0)
                 return false
-            var wins = dataGlobal.PlayerBase.WinsSupport.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataGlobal.PlayerBase.WinsSupport.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1346,11 +1343,11 @@ var counter = {
     "GlobalWinRateOfSpecialist": [
         ["Global Specialist WinRate", "专业型英雄全球胜率"],
         function () {
-            var games = dataGlobal.PlayerBase.PlaysSpecialist.sum
-            if (games <= 0)
+            var Games = dataGlobal.PlayerBase.PlaysSpecialist.sum
+            if (Games <= 0)
                 return false
-            var wins = dataGlobal.PlayerBase.WinsSpecialist.sum
-            var WinRate = (wins / games * 100).toFixed(2)
+            var Win = dataGlobal.PlayerBase.WinsSpecialist.sum
+            var WinRate = (Win / Games * 100).toFixed(2)
             return [
                 WinRate + "%",
                 WinRate + "%"
@@ -1363,12 +1360,12 @@ var events = {
     "ZergKiller": [
         ["Zerg Killer", "虫群杀手"], //禁区
         function () {
-            var avgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
-            var limit = avgDamage > 6000
+            var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
+            var limit = AvgDamage > 6000
             return limit ?
                 [
-                    "You made " + avgDamage + " zerg damage on average in Braxis Holdout",
-                    "平均每场布莱克西斯禁区中，你对虫群造成 " + avgDamage + " 点伤害"
+                    "You made " + AvgDamage + " zerg damage on average in Braxis Holdout",
+                    "平均每场布莱克西斯禁区中，你对虫群造成 " + AvgDamage + " 点伤害"
                 ] : false
         }
     ],
@@ -1377,14 +1374,14 @@ var events = {
         function () {
             if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
                 return false
-            var avgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
+            var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
             var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
             var limit = avgDamage <= 5000 || WinRate < GlobalWinRate
             return limit ?
                 [
-                    "You made " + avgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
-                    "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + avgDamage + " 点伤害"
+                    "You made " + AvgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
+                    "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + AvgDamage + " 点伤害"
                 ] : false
         }
     ],
@@ -1412,7 +1409,7 @@ var events = {
 
             var SupportRate = (Support / gameTotal * 100).toFixed(2)
             var SupportWinRate = (SupportWin / Support * 100).toFixed(2)
-            var limit = SupportRate > 0.5
+            var limit = Support >= 4 && SupportRate > 50
             return limit ?
                 [
                     "Among your " + gameTotal + " games you have played last week, you chose " + gameTotal + " times as Support heroes, that was " + SupportRate + " of your total games, with the " + SupportWinRate + " WinRate",
@@ -1439,7 +1436,7 @@ var events = {
     "DragonShire": [
         ["Dragon Shire", "巨龙镇"], //巨龙镇
         function () {
-            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined || dataPersonal.PlayerBase.maps_win.sum[7] === undefined)
                 return false
             var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
             var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
@@ -1476,7 +1473,7 @@ var events = {
         function () {
             var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
             var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
-            var limit = TurnedIn < 0.6 * Collected
+            var limit = Collected >= 5 && TurnedIn < 0.6 * Collected
             return limit ?
                 [
                     "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you only successfully turned in " + TurnedIn + ". You should look for more opportunities to turn in",
@@ -1568,8 +1565,7 @@ var events = {
         function () {
             var times_per = (dataPersonal.PlayerBase.ClutchHealsPerformed.sum / dataPersonal.PlayerBase.PlaysSupport.sum).toFixed(2)
             var times_glo = (dataGlobal.PlayerBase.ClutchHealsPerformed.sum / dataGlobal.PlayerBase.PlaysSupport.sum).toFixed(2)
-            var result = times_per / times_glo
-            var limit = result > 1.2
+            var limit = times_per > 1.2 * times_glo
             return limit ? [
                 "You have " + times_per + " Clutch Heals per game in the assist games, and you are the most reliable partner in the team.",
                 "你在辅助型局中，平均每场有 " + times_per + " 次关键治疗，是团队中最可靠的伙伴",
@@ -1580,24 +1576,24 @@ var events = {
         ["Servent Of Spider Queen", "蛛后的仆人"],
         function () {
             var TurnedIn = (dataPersonal.PlayerBase.GemsTurnedIn.sum / dataPersonal.PlayerBase.maps_total.sum[5]).toFixed(0)
-            var limit = TurnedIn > 40
+            var GlobalTurnedIn = (dataGlobal.PlayerBase.GemsTurnedIn.sum / dataGlobal.PlayerBase.maps_total.sum[5]).toFixed(0)
+            var limit = TurnedIn > 1.2 * GlobalTurnedIn
             return limit ? [
-                "On Tomb Of The Spider Queen, you Turned In " + TurnedIn + " per game, you are the very loyal servant of The sipder queen.",
+                "On Tomb Of The Spider Queen, you turned in " + TurnedIn + " per game, you are the very loyal servant of The sipder queen.",
                 "蛛后墓地图中，你平均每场上交了 " + TurnedIn + " 宝石，蛛后的忠心的仆从就是你啦",
             ] : false
         }
     ],
-    "TheLoverHero": [
-        ["The Hero", "本命英雄"],
+    "HeroOfLife": [
+        ["Hero Of Life", "本命英雄"],
         function () {
-            var item = dataPersonal.PlayerHeroes._sumMax.game_total
-            var heroID = item[0]
-            var times = item[1]
-            var WinRate = (dataPersonal.PlayerHeroes[heroID].game_win.sum / dataPersonal.PlayerHeroes[heroID].game_total.sum * 100).toFixed(2)
-            var limit = WinRate > 50
+            var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
+            var Games = dataPersonal.PlayerHeroes._sumMax.game_total[1]
+            var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var limit = WinRate > 50 && Games >= 10
             return limit ? [
-                "You played Hero " + heroID + " for" + times + "times, with " + WinRate + "% winning rate.",
-                "你使用了英雄 " + heroID + " 上场了 " + times + "次，胜率达到了" + WinRate + "%",
+                "You have played Hero " + HeroID + " for" + Games + "times, with " + WinRate + "% winning rate.",
+                "你使用了英雄 " + HeroID + " 上场了 " + Games + "次，胜率达到了" + WinRate + "%",
             ] : false
         }
     ],
@@ -1678,7 +1674,7 @@ var events = {
         function () {
             var HeroID = 3
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1695,7 +1691,7 @@ var events = {
         function () {
             var HeroID = 10
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1711,7 +1707,7 @@ var events = {
         function () {
             var HeroID = 14
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1727,7 +1723,7 @@ var events = {
         function () {
             var HeroID = 16
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 50
                 return limit ? [
@@ -1762,7 +1758,7 @@ var events = {
         function () {
             var HeroID = 17
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1785,7 +1781,7 @@ var events = {
         function () {
             var HeroID = 22
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
@@ -1801,7 +1797,7 @@ var events = {
         function () {
             var HeroID = 24
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1823,7 +1819,7 @@ var events = {
         function () {
             var HeroID = 26
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 55
                 return limit ? [
@@ -1839,7 +1835,7 @@ var events = {
         function () {
             var HeroID = 35
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
@@ -1861,7 +1857,7 @@ var events = {
         function () {
             var HeroID = 38
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 5 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1883,7 +1879,7 @@ var events = {
         function () {
             var HeroID = 46
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1899,7 +1895,7 @@ var events = {
         function () {
             var HeroID = 53
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1921,7 +1917,7 @@ var events = {
         function () {
             var HeroID = 56
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games > 7 && HeroInf.WinRate > 50
                 return limit ? [
@@ -1943,7 +1939,7 @@ var events = {
         function () {
             var HeroID = 59
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1965,7 +1961,7 @@ var events = {
         function () {
             var HeroID = 60
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
@@ -1987,7 +1983,7 @@ var events = {
         function () {
             var HeroID = 66
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 58
                 return limit ? [
@@ -2009,7 +2005,7 @@ var events = {
         function () {
             var HeroID = 70
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
@@ -2031,7 +2027,7 @@ var events = {
         function () {
             var HeroID = 74
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
@@ -2053,7 +2049,7 @@ var events = {
         function () {
             var HeroID = 77
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 57
                 return limit ? [
@@ -2075,7 +2071,7 @@ var events = {
         function () {
             var HeroID = 78
             var HeroInf = getHeroInf(HeroID)
-            if (!HeroInf) return false
+            if (HeroInf.Games === undefined) return false
             if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
                 var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 57
                 return limit ? [
@@ -2425,19 +2421,19 @@ var events = {
                 "在阴影中屠杀敌人的快感侵蚀着你的灵魂。这周隐身系英雄，泽拉图、诺娃、萨穆罗、瓦莉拉多次被你征召",
             ] : false
         }
-    ],
+    ],//经验用Exp还是XP表示
     "ExperienceContributionWinRate": [
         ["Where is my XP ?", "经验值都去哪了？"],//经验贡献
         function () {
             var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
-            var XP = Math.round(dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
-            var GlobalXP = Math.round(dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
-            if (HeroInf.WinRate > HeroInf.GlobalWinRate || XP >= GlobalXP)
+            var Exp = Math.round(dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
+            var GlobalExp = Math.round(dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
+            if (WinRate > GlobalWinRate || Exp >= GlobalExp)
                 return false
             return [
-                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is " + XP + ", and the average global XP contribution  is " + GlobalXP,
-                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 " + XP + "，全球平均每场玩家贡献的经验值是 " + GlobalXP,
+                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is " + Exp + ", and the average global XP contribution  is " + GlobalExp,
+                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 " + Exp + "，全球平均每场玩家贡献的经验值是 " + GlobalExp,
             ]
         }
     ],
@@ -2457,16 +2453,25 @@ var events = {
         }
     ],
 }
+
+var HeroInf = { 1: ['Zeratul', '泽拉图'], 2: ['Valla', '维拉'], 3: ['Uther', '乌瑟尔'], 4: ['Tyrande', '泰兰德'], 5: ['Tyrael', '泰瑞尔'], 6: ['Tassadar', '塔萨达尔'], 7: ['Stitches', '缝合怪'], 8: ['Sonya', '桑娅'], 9: ['SgtHammer', '重锤军士'], 10: ['Raynor', '雷诺'], 11: ['Nova', '诺娃'], 12: ['Nazeebo', '纳兹波'], 13: ['Muradin', '穆拉丁'], 14: ['Malfurion', '玛法里奥'], 15: ['Kerrigan', '凯瑞甘'], 16: ['Illidan', '伊利丹'], 17: ['Gazlowe', '加兹鲁维'], 18: ['Falstad', '弗斯塔德'], 19: ['etc', '精英牛头人酋长'], 20: ['Diablo', '迪亚波罗'], 21: ['Arthas', '阿尔萨斯'], 22: ['Abathur', '阿巴瑟'], 23: ['Tychus', '泰凯斯'], 24: ['LiLi', '丽丽'], 25: ['Brightwing', '光明之翼'], 26: ['Murky', '奔波尔霸'], 27: ['Zagara', '扎加拉'], 28: ['Rehgar', '雷加尔'], 29: ['Chen', '陈'], 30: ['Azmodan', '阿兹莫丹'], 31: ['Anubarak', '阿努巴拉克'], 32: ['Jaina', '吉安娜'], 33: ['Thrall', '萨尔'], 34: ['LostVikings', '失落的维京人'], 35: ['Sylvanas', '希尔瓦娜斯'], 36: ['Kaelthas', '凯尔萨斯'], 37: ['Johanna', '乔汉娜'], 38: ['Butcher', '屠夫'], 39: ['Leoric', '李奥瑞克'], 40: ['Kharazim', '卡拉辛姆'], 41: ['Rexxar', '雷克萨'], 42: ['LtMorales', '莫拉莉斯中尉'], 43: ['Artanis', '阿塔尼斯'], 44: ['Cho', '古'], 45: ['Gall', '加尔'], 46: ['Lunara', '露娜拉'], 47: ['Greymane', '格雷迈恩'], 48: ['LiMing', '李敏'], 49: ['Xul', '祖尔'], 50: ['Dehaka', '德哈卡'], 51: ['Tracer', '猎空'], 52: ['Chromie', '克罗米'], 53: ['Medivh', '麦迪文'], 54: ['Guldan', '古尔丹'], 55: ['Auriel', '奥莉尔'], 56: ['Alarak', '阿拉纳克'], 57: ['Zarya', '查莉娅'], 58: ['Samuro', '萨穆罗'], 59: ['Varian', '瓦里安'], 60: ['Ragnaros', '拉格纳罗斯'], 61: ['Zuljin', '祖尔金'], 62: ['Valeera', '瓦莉拉'], 63: ['Lucio', '卢西奥'], 64: ['Probius', '普罗比斯'], 65: ['Cassia', '卡西娅'], 66: ['Genji', '源氏'], 67: ['DVa', 'D.Va'], 68: ['Malthael', '马萨伊尔'], 69: ['Stukov', '斯托科夫'], 70: ['Garrosh', '加尔鲁什'], 71: ['Kelthuzad', '克尔苏加德'], 72: ['Ana', '安娜'], 73: ['Junkrat', '狂鼠'], 74: ['Alexstrasza', '阿莱克丝塔萨'], 75: ['Hanzo', '半藏'], 76: ['Blaze', '布雷泽'], 77: ['Maiev', '玛维'] }
 function getHeroInf(HeroID) {
-    if (dataPersonal.PlayerHeroes[HeroID] === undefined)
+    if (HeroInf[HeroID] === undefined)
         return false
+    if (dataPersonal.PlayerHeroes[HeroID] === undefined)
+        return {
+            "name_en": HeroInf[HeroID][0],
+            "name_cn": HeroInf[HeroID][1],
+        }
     var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
     var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
     var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
     return {
         "Games": Games,
         "WinRate": WinRate,
-        "GlobalWinRate": GlobalWinRate
+        "GlobalWinRate": GlobalWinRate,
+        "name_en": HeroInf[HeroID][0],
+        "name_cn": HeroInf[HeroID][1],
     }
 }
 
