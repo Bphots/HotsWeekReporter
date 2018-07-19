@@ -1679,12 +1679,11 @@ var events = {
             var HeroID = 3
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "We are St. Cleveland! You have played Uther for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Uther's global winning rate: " + GlobalWinRate + "%. The emotional revenge must not be allowed to occupy our consciousness.",
-                    "我们是圣骑士！本周你使用乌瑟尔完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，乌瑟尔全球胜率：" + GlobalWinRate + "%。不要让仇恨蒙蔽了我们的双眼！"
+                    "We are St. Cleveland! You have played Uther for " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Uther's global winning rate: " + HeroInf.GlobalWinRate + "%. The emotional revenge must not be allowed to occupy our consciousness.",
+                    "我们是圣骑士！本周你使用乌瑟尔完成了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，乌瑟尔全球胜率：" + HeroInf.GlobalWinRate + "%。不要让仇恨蒙蔽了我们的双眼！"
                 ] : false
             }
             else
@@ -1697,16 +1696,14 @@ var events = {
             var HeroID = 10
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "Yippee-ki-yay! You have played Raynor for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Raynor's global winning rate: " + GlobalWinRate + "%. Call on the good old Hyperion and blast the hell out of everything!",
-                    "好极了！本周你使用雷诺完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，雷诺全球胜率：" + GlobalWinRate + "%。召唤休伯利安号，把敌人炸个稀巴烂！"
+                    "Yippee-ki-yay! You have played Raynor for " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Raynor's global winning rate: " + HeroInf.GlobalWinRate + "%. Call on the good old Hyperion and blast the hell out of everything!",
+                    "好极了！本周你使用雷诺完成了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，雷诺全球胜率：" + HeroInf.GlobalWinRate + "%。召唤休伯利安号，把敌人炸个稀巴烂！"
                 ] : false
             }
-            else
-                return false
+            else return false
         }
     ],
     "Malfurion": [
@@ -1715,16 +1712,14 @@ var events = {
             var HeroID = 14
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "Even the lowliest spirit can destroy the most powerful of demons! You have played Malfurion " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Malfurion's global winning rate: " + GlobalWinRate + "%. Let our enemies beware!",
-                    "即使最弱小的精灵也能消灭最强大的恶魔！本周你使用玛法里奥完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，玛法里奥全球胜率：" + GlobalWinRate + "%。小心，我们的敌人要注意到你了。"
+                    "Even the lowliest spirit can destroy the most powerful of demons! You have played Malfurion " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Malfurion's global winning rate: " + HeroInf.GlobalWinRate + "%. Let our enemies beware!",
+                    "即使最弱小的精灵也能消灭最强大的恶魔！本周你使用玛法里奥完成了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，玛法里奥全球胜率：" + HeroInf.GlobalWinRate + "%。小心，我们的敌人要注意到你了。"
                 ] : false
             }
-            else
-                return false
+            else return false
         }
     ],
     "Illidan": [
@@ -1733,20 +1728,31 @@ var events = {
             var HeroID = 16
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate > 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 50
                 return limit ? [
-                    "You are not prepared! You have played Illidan for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Illidan's global winning rate: " + GlobalWinRate + "%. At sometimes , the hand of fate must be forced.",
-                    "你们这是自寻死路！本周你使用伊利丹进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中"
+                    "They are not prepared! You have played Illidan for " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Illidan's global winning rate: " + HeroInf.GlobalWinRate + "%. At sometimes , the hand of fate must be forced.",
+                    "他们这是自寻死路！本周你使用伊利丹进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，伊利丹全球胜率：" + HeroInf.GlobalWinRate + "%。有时候，命运之手必须掌握在自己手中"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 50
-                return limit ? [
-                    "Feeling the...! And you have neither! You have have played Illidan for " + Games + " times, your winning rate is only " + WinRate + "%, Illidan's global winning rate is " + GlobalWinRate + "%. His hatred is unending!",
-                    "感受辶...英雄阵亡！本周你使用伊利丹进行了 " + Games + "场游戏，胜率竟然才 " + WinRate + "%，伊利丹全球胜率：" + GlobalWinRate + "%。他心中的怒火无法平息无法平息！"
-                ] : false
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 50
+                var rand = parseInt(Math.random() * 3)
+                var event = [
+                    [
+                        "Feeling the...! And you have neither! You have have played Illidan for " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Illidan's global winning rate is " + HeroInf.GlobalWinRate + "%. His hatred is unending!",
+                        "感受辶...英雄阵亡！本周你使用伊利丹进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%，伊利丹全球胜率：" + HeroInf.GlobalWinRate + "%。他心中的怒火无法平息无法平息！"
+                    ],
+                    [
+                        "You are...! And you have neither! You have have played Illidan for " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Illidan's global winning rate is " + HeroInf.GlobalWinRate + "%. His hatred is unending!",
+                        "你们辶...英雄阵亡！本周你使用伊利丹进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%，伊利丹全球胜率：" + HeroInf.GlobalWinRate + "%。他心中的怒火无法平息无法平息！"
+                    ],
+                    [
+                        "Feeling the...! And you have neither! You have have played Illidan for " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Illidan's global winning rate is " + HeroInf.GlobalWinRate + "%. His hatred is unending!",
+                        "如此弓...英雄阵亡！本周你使用伊利丹进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%，伊利丹全球胜率：" + HeroInf.GlobalWinRate + "%。他心中的怒火无法平息无法平息！"
+                    ]
+                ]
+                return limit ? event[rand] : false
             }
 
         }
@@ -1757,19 +1763,18 @@ var events = {
             var HeroID = 17
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "Time is money, friend. And you own them both! You have played Gazlowe for " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Gazlowe's global winning rate: " + GlobalWinRate + "%. Does this turn you on?",
-                    "时间就是金钱我的朋友，你全都要！本周你使用加兹鲁维完成了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，加兹鲁维全球胜率：" + GlobalWinRate + "%。地精科技，震撼人心！这让你兴奋起来了么？"
+                    "Time is money, friend. And you own them both! You have played Gazlowe for " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Gazlowe's global winning rate: " + HeroInf.GlobalWinRate + "%. Does this turn you on?",
+                    "时间就是金钱我的朋友，你全都要！本周你使用加兹鲁维完成了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，加兹鲁维全球胜率：" + HeroInf.GlobalWinRate + "%。地精科技，震撼人心！这让你兴奋起来了么？"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 40
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 40
                 return limit ? [
-                    "Time is money, friend! And you're out of both! You have played Gazlowe for " + Games + " times, your winning rate is only " + WinRate + "%, Gazlowe's global winning rate is " + GlobalWinRate + "%. Out of the way you nubgoblin. (Gazlowe's armor said)",
-                    "时间就是金钱我的朋友，而你两样都没有！本周你使用加兹鲁维完成了 " + Games + "场游戏，胜率才 " + WinRate + "%，加兹鲁维全球胜率：" + GlobalWinRate + "%。你这地精还不如客厅克星！"
+                    "Time is money, friend! And you're out of both! You have played Gazlowe for " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Gazlowe's global winning rate is " + HeroInf.GlobalWinRate + "%. Out of the way you nubgoblin. (Gazlowe's armor said)",
+                    "时间就是金钱我的朋友，而你两样都没有！本周你使用加兹鲁维完成了 " + HeroInf.Games + "场游戏，胜率才 " + HeroInf.WinRate + "%，加兹鲁维全球胜率：" + HeroInf.GlobalWinRate + "%。你这地精还不如客厅克星！"
                 ] : false
             }
 
@@ -1781,12 +1786,11 @@ var events = {
             var HeroID = 22
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
-                    "Evolution Complete! Abathur appeared in the " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Abathur's global winning rate: " + GlobalWinRate + "%, good play! ",
-                    "进化成功！阿巴瑟登场了 " + Games + " 次，胜率达到了 " + WinRate + "%，阿巴瑟全球胜率：" + GlobalWinRate + "%，玩的不错！",
+                    "Evolution Complete! Abathur appeared in the " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Abathur's global winning rate: " + HeroInf.GlobalWinRate + "%, good play! ",
+                    "进化成功！阿巴瑟登场了 " + HeroInf.Games + " 次，胜率达到了 " + HeroInf.WinRate + "%，阿巴瑟全球胜率：" + HeroInf.GlobalWinRate + "%，玩的不错！",
                 ] : false
             }
             else return false
@@ -1798,19 +1802,18 @@ var events = {
             var HeroID = 24
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "Life is an adventure! You have played LiLi " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than LiLi's global winning rate: " + GlobalWinRate + "%. Read for adventure?",
-                    "生命在于冒险！本周你使用丽丽进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。准备好去冒险了吗？"
+                    "Life is an adventure! You have played LiLi " + HeroInf.Games + " times , your winning rate is up to " + HeroInf.WinRate + "%, which higher than LiLi's global winning rate: " + HeroInf.GlobalWinRate + "%. Read for adventure?",
+                    "生命在于冒险！本周你使用丽丽进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%, 丽丽全球胜率：" + HeroInf.GlobalWinRate + "%。准备好去冒险了吗？"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 45
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 45
                 return limit ? [
-                    "(Sighs) you have played LiLi " + Games + " games, your winning rate is only " + WinRate + "%, LiLi's global winning rate is " + GlobalWinRate + "%. You make her a saaaad panda!",
-                    "哈，你这家伙就像只软脚虾。本周你使用丽丽进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 丽丽全球胜率：" + GlobalWinRate + "%。哦～真没用～"
+                    "(Sighs) you have played LiLi " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, LiLi's global winning rate is " + HeroInf.GlobalWinRate + "%. You make her a saaaad panda!",
+                    "哈，你这家伙就像只软脚虾！本周你使用丽丽进行了 " + HeroInf.Games + " 场游戏，胜率才 " + HeroInf.WinRate + "%, 丽丽全球胜率：" + HeroInf.GlobalWinRate + "%。哦～真没用～"
                 ] : false
             }
         }
@@ -1821,12 +1824,11 @@ var events = {
             var HeroID = 26
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (Wins > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate > 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 55
                 return limit ? [
-                    "Wrlgmmglglgm! You have played Murky " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Murky's global winning rate: " + GlobalWinRate + "%. Rmlg! Grlmmrlm!",
-                    "Wrlgmmglglgm！你玩了 " + Games + " 局小鱼人，胜率达到了 " + WinRate + "%，小鱼人的全球胜率是 " + GlobalWinRate + "%。Rmlg！Grlmmrlm！",
+                    "Wrlgmmglglgm! You have played Murky " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Murky's global winning rate: " + HeroInf.GlobalWinRate + "%. Rmlg! Grlmmrlm!",
+                    "Wrlgmmglglgm！你玩了 " + HeroInf.Games + " 局小鱼人，胜率达到了 " + HeroInf.WinRate + "%，小鱼人的全球胜率是 " + HeroInf.GlobalWinRate + "%。Rmlg！Grlmmrlm！",
                 ] : false
             }
             else return false
@@ -1838,19 +1840,18 @@ var events = {
             var HeroID = 35
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
-                    "The Dark Lady watches over you. You have played Sylvanas " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Sylvanas's global winning rate: " + GlobalWinRate + "%. Victory for the Forsaken!",
-                    "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。胜利属于被遗忘着！"
+                    "The Dark Lady watches over you. You have played Sylvanas " + HeroInf.Games + " times , your winning rate is up to " + HeroInf.WinRate + "%, which higher than Sylvanas's global winning rate: " + HeroInf.GlobalWinRate + "%. Victory for the Forsaken!",
+                    "黑暗女王注视着你。本周你使用希尔瓦娜斯进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%, 希尔瓦娜斯全球胜率：" + HeroInf.GlobalWinRate + "%。胜利属于被遗忘着！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 43
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 43
                 return limit ? [
-                    "I have no time for games! You have used Sylvanas to have " + Games + " games, your winning rate is only " + WinRate + "%, Sylvanas's global winning rate is " + GlobalWinRate + "%. Do not try my patience!",
-                    "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 希尔瓦娜斯全球胜率：" + GlobalWinRate + "%。不要考验我的耐心！"
+                    "I have no time for games! You have used Sylvanas to have " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Sylvanas's global winning rate is " + HeroInf.GlobalWinRate + "%. Do not try my patience!",
+                    "我可没时间陪你玩游戏！本周你使用希尔瓦娜斯进行了 " + HeroInf.Games + " 场游戏，胜率才 " + HeroInf.WinRate + "%, 希尔瓦娜斯全球胜率：" + HeroInf.GlobalWinRate + "%。不要考验我的耐心！"
                 ] : false
             }
         }
@@ -1861,19 +1862,18 @@ var events = {
             var HeroID = 38
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 5 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 5 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + WinRate + "%, while the Butcher's global winning rate is " + GlobalWinRate + "%",
-                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + WinRate + "%,而全球屠夫平均胜率是 " + GlobalWinRate + "%",
+                    "There is no doubt that you have mastered the skills of using the Butcher's Slayer. Your Butcher's winning percentage is " + HeroInf.WinRate + "%, while the Butcher's global winning rate is " + HeroInf.GlobalWinRate + "%",
+                    "毫无疑问，你掌握了如何使用屠龙刀的技巧，你的屠夫的胜率是 " + HeroInf.WinRate + "%,而全球屠夫平均胜率是 " + HeroInf.GlobalWinRate + "%",
                 ] : false
             }
             else {
-                var limit = Games >= 5 && WinRate <= 45
+                var limit = HeroInf.Games >= 5 && HeroInf.WinRate <= 45
                 return limit ? [
-                    "Your Butcher's WinRate is " + WinRate + "%, while the Butcher's global winning rate: " + GlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. P.S. At the beginning of game Butcher should try to eat XP or Gank.",
-                    "你的屠夫的胜率是 " + WinRate + "%,而全球屠夫平均胜率是 " + GlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
+                    "Your Butcher's WinRate is " + HeroInf.WinRate + "%, while the Butcher's global winning rate: " + HeroInf.GlobalWinRate + "%. Mastering the right way to eat meat is the only way for  Butcher to win. P.S. At the beginning of game Butcher should try to eat XP or Gank.",
+                    "你的屠夫的胜率是 " + HeroInf.WinRate + "%,而全球屠夫平均胜率是 " + HeroInf.GlobalWinRate + "%,掌握正确的吃肉方法才是屠夫的取胜之道。PS:前期屠夫可以尝试多吃线攒肉游走抓单",
                 ] : false
             }
         }
@@ -1884,12 +1884,11 @@ var events = {
             var HeroID = 46
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    " Hahahahaha! Hahahahaha! You have played Lunara " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Lunara's global winning rate: " + GlobalWinRate + "%. The forest doesn't need protection, but you do (^_^)v ",
-                    " 哈哈哈哈哈，哈哈哈哈哈！本周你使用露娜拉进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，露娜拉全球胜率：" + GlobalWinRate + "%。森林不需要保护，但你需要(^_^)v "
+                    " Hahahahaha! Hahahahaha! You have played Lunara " + HeroInf.Games + " times , your winning rate is up to " + HeroInf.WinRate + "%, which higher than Lunara's global winning rate: " + HeroInf.GlobalWinRate + "%. The forest doesn't need protection, but you do (^_^)v ",
+                    " 哈哈哈哈哈，哈哈哈哈哈！本周你使用露娜拉进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，露娜拉全球胜率：" + HeroInf.GlobalWinRate + "%。森林不需要保护，但你需要(^_^)v "
                 ] : false
             }
             else return false
@@ -1901,19 +1900,18 @@ var events = {
             var HeroID = 53
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "You are the Prophet! You have played Medivh " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Medivh's global winning rate: " + GlobalWinRate + "%. What can I say? Coooooooool play!",
-                    "你就是先知！本周你使用麦迪文进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%。我还能说什么，麦迪斌玩的不错！"
+                    "You are the Prophet! You have played Medivh " + HeroInf.Games + " times , your winning rate is up to " + HeroInf.WinRate + "%, which higher than Medivh's global winning rate: " + HeroInf.GlobalWinRate + "%. What can I say? Coooooooool play!",
+                    "你就是先知！本周你使用麦迪文进行了 " + HeroInf.Games + " 场游戏，胜率高达 " + HeroInf.WinRate + "%, 麦迪文全球胜率：" + HeroInf.GlobalWinRate + "%。我还能说什么，麦迪斌玩的不错！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 40
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 40
                 return limit ? [
-                    "That's stupid! I foresee the future, seeing the burning shadows that are about to swallow the world, You have used Medivh to have " + Games + " games, your winning rate is only " + WinRate + "%, Medivh's global winning rate is " + GlobalWinRate + "%.",
-                    "那可真蠢，我预见到了未来，看到了即将吞噬这个世界的燃烧著的阴影。本周你使用麦迪文进行了 " + Games + " 场游戏，胜率才 " + WinRate + "%, 麦迪文全球胜率：" + GlobalWinRate + "%。下一位忠奸人就是你了！"
+                    "That's stupid! I foresee the future, seeing the burning shadows that are about to swallow the world, You have used Medivh to have " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Medivh's global winning rate is " + HeroInf.GlobalWinRate + "%.",
+                    "那可真蠢，我预见到了未来，看到了即将吞噬这个世界的燃烧著的阴影。本周你使用麦迪文进行了 " + HeroInf.Games + " 场游戏，胜率才 " + HeroInf.WinRate + "%, 麦迪文全球胜率：" + HeroInf.GlobalWinRate + "%。下一位忠奸人就是你了！"
                 ] : false
             }
         }
@@ -1924,19 +1922,18 @@ var events = {
             var HeroID = 56
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games > 7 && WinRate > 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games > 7 && HeroInf.WinRate > 50
                 return limit ? [
-                    "General Performance, I personally appeared " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alarak's global winning rate: " + GlobalWinRate + "%, next time I will consider helping you again. ",
-                    "表现还行，我亲自登场了 " + Games + " 次，胜率达到了 " + WinRate + "%，全球的高阶领主平均胜率是 " + GlobalWinRate + "%，下次我会考虑再帮你的",
+                    "General Performance, I personally appeared " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Alarak's global winning rate: " + HeroInf.GlobalWinRate + "%, next time I will consider helping you again. ",
+                    "表现还行，我亲自登场了 " + HeroInf.Games + " 次，胜率达到了 " + HeroInf.WinRate + "%，全球的高阶领主平均胜率是 " + HeroInf.GlobalWinRate + "%，下次我会考虑再帮你的",
                 ] : false
             }
             else {
-                var limit = Games > 7 && WinRate <= 50
+                var limit = HeroInf.Games > 7 && HeroInf.WinRate <= 50
                 return limit ? [
-                    "Such a shame, I personally appeared " + Games + " times, your winning rate is only " + WinRate + "%, Alarak's global winning rate is " + GlobalWinRate + "%, Plz do not pick me again! ",
-                    "真是丢人现眼，我亲自登场了 " + Games + " 次，胜率才 " + WinRate + "%，全球的高阶领主平均胜率都有 " + GlobalWinRate + "%，不要再让我登场了！",
+                    "Such a shame, I personally appeared " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Alarak's global winning rate is " + HeroInf.GlobalWinRate + "%, Plz do not pick me again! ",
+                    "真是丢人现眼，我亲自登场了 " + HeroInf.Games + " 次，胜率才 " + HeroInf.WinRate + "%，全球的高阶领主平均胜率都有 " + HeroInf.GlobalWinRate + "%，不要再让我登场了！",
                 ] : false
             }
         }
@@ -1947,19 +1944,18 @@ var events = {
             var HeroID = 59
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "Glory for the Alliance! You have played Varian " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Varian's global winning rate: " + GlobalWinRate + "%. Justice is at hand! For Azeroth!",
-                    "联盟的荣耀！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。正义就在眼前！为了艾泽拉斯！"
+                    "Glory for the Alliance! You have played Varian " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Varian's global winning rate: " + HeroInf.GlobalWinRate + "%. Justice is at hand! For Azeroth!",
+                    "联盟的荣耀！本周你使用瓦里安进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%, 瓦里安全球胜率：" + HeroInf.GlobalWinRate + "%。正义就在眼前！为了艾泽拉斯！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 45
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 45
                 return limit ? [
-                    "Let's see how you fight! You have used Varian to have " + Games + " games, your winning rate is only " + WinRate + "%, Varian' global winning rate is " + GlobalWinRate + "%. Do what a king must do!",
-                    "让我来看看你是如何战斗的！本周你使用瓦里安进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 瓦里安全球胜率：" + GlobalWinRate + "%。做一个国王应该做的事！"
+                    "Let's see how you fight! You have used Varian to have " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Varian' global winning rate is " + HeroInf.GlobalWinRate + "%. Do what a king must do!",
+                    "让我来看看你是如何战斗的！本周你使用瓦里安进行了 " + HeroInf.Games + " 场游戏，胜率只有 " + HeroInf.WinRate + "%, 瓦里安全球胜率：" + HeroInf.GlobalWinRate + "%。做一个国王应该做的事！"
                 ] : false
             }
         }
@@ -1970,19 +1966,18 @@ var events = {
             var HeroID = 60
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 55
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 55
                 return limit ? [
-                    "By fire be PURGED! You have played Ragnaros " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Ragnaros's global winning rate: " + GlobalWinRate + "%. Burn those bugs with fire!",
-                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
+                    "By fire be PURGED! You have played Ragnaros " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Ragnaros's global winning rate: " + HeroInf.GlobalWinRate + "%. Burn those bugs with fire!",
+                    "让火焰净化一切！本周你使用拉格纳罗斯进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%, 拉格纳罗斯全球胜率：" + HeroInf.GlobalWinRate + "%。用火焰把那些虫子燃烧殆尽！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate <= 45
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate <= 45
                 return limit ? [
-                    "DIE, INSECT! You have used Ragnaros to have " + Games + " games, your winning rate is only " + WinRate + "%, Ragnaros' global winning rate is " + GlobalWinRate + "%. Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy's back.",
-                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + Games + " 场游戏，胜率只有 " + WinRate + "%, 拉格纳罗斯全球胜率：" + GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择"
+                    "DIE, INSECT! You have used Ragnaros to have " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Ragnaros' global winning rate is " + HeroInf.GlobalWinRate + "%. Calculating the timing of the pit, sometimes it is a good choice to use D in the enemy's back.",
+                    "死吧，虫子！本周你使用拉格纳罗斯进行了 " + HeroInf.Games + " 场游戏，胜率只有 " + HeroInf.WinRate + "%, 拉格纳罗斯全球胜率：" + HeroInf.GlobalWinRate + "%。掌握上炕的时机，有时候绕后上炕也是一个不错的选择"
                 ] : false
             }
         }
@@ -1993,19 +1988,18 @@ var events = {
             var HeroID = 66
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate > 58
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 58
                 return limit ? [
-                    "Play to win! You have played Genji " + Games + " times , your winning rate is up to " + WinRate + "%, which higher than Genji's global winning rate: " + GlobalWinRate + "%. You are a qualified Happy Darter.",
-                    "玩游戏就是要赢！本周你使用源氏进行了 " + Games + " 场游戏，胜率竟然达到了 " + WinRate + "%, 源氏全球胜率：" + GlobalWinRate + "%。你是一位合格的快乐镖男！"
+                    "Play to win! You have played Genji " + HeroInf.Games + " times , your winning rate is up to " + HeroInf.WinRate + "%, which higher than Genji's global winning rate: " + HeroInf.GlobalWinRate + "%. You are a qualified Happy Darter.",
+                    "玩游戏就是要赢！本周你使用源氏进行了 " + HeroInf.Games + " 场游戏，胜率竟然达到了 " + HeroInf.WinRate + "%, 源氏全球胜率：" + HeroInf.GlobalWinRate + "%。你是一位合格的快乐镖男！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 4
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 4
                 return limit ? [
-                    "Poor insect! You have played Genji " + Games + " games, I can't believe your winning rate is only " + WinRate + "%, Genji's global winning rate is " + GlobalWinRate + "%. You need healing!",
-                    "卑微的苍蝇！本周你使用源氏进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 源氏全球胜率：" + GlobalWinRate + "%。哼，啊嚯噶！"
+                    "Poor insect! You have played Genji " + HeroInf.Games + " games, I can't believe your winning rate is only " + HeroInf.WinRate + "%, Genji's global winning rate is " + HeroInf.GlobalWinRate + "%. You need healing!",
+                    "卑微的苍蝇！本周你使用源氏进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%, 源氏全球胜率：" + HeroInf.GlobalWinRate + "%。哼，啊嚯噶！"
                 ] : false
             }
         }
@@ -2016,19 +2010,18 @@ var events = {
             var HeroID = 70
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
-                    "For Hellscream! You have played Garrosh " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Garrosh's global winning rate: " + GlobalWinRate + "%. You scream, I screams, we all scream for Hellscream!",
-                    "为了地狱咆哮！本周你使用加尔鲁什进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，加尔鲁什全球胜率：" + GlobalWinRate + "%。拿出你的血性跟我一起怒吼，向敌人释放你心中的地狱咆哮！"
+                    "For Hellscream! You have played Garrosh " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Garrosh's global winning rate: " + HeroInf.GlobalWinRate + "%. You scream, I screams, we all scream for Hellscream!",
+                    "为了地狱咆哮！本周你使用加尔鲁什进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，加尔鲁什全球胜率：" + HeroInf.GlobalWinRate + "%。拿出你的血性跟我一起怒吼，向敌人释放你心中的地狱咆哮！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 50
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 50
                 return limit ? [
-                    "You will serve the Horde, or be crushed beneath it! You have played Garrosh " + Games + " times, your winning rate is only " + WinRate + "%, Garrosh's global winning rate is " + GlobalWinRate + "%. Do you want to receive his little surprise party?",
-                    "要么为部落效忠，要么被部落碾碎！本周你使用加尔鲁什完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，加尔鲁什全球胜率：" + GlobalWinRate + "%。你也想收到加尔鲁什的惊喜派对吗？"
+                    "You will serve the Horde, or be crushed beneath it! You have played Garrosh " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Garrosh's global winning rate is " + HeroInf.GlobalWinRate + "%. Do you want to receive his little surprise party?",
+                    "要么为部落效忠，要么被部落碾碎！本周你使用加尔鲁什完成了 " + HeroInf.Games + " 场游戏，胜率只有 " + HeroInf.WinRate + "%，加尔鲁什全球胜率：" + HeroInf.GlobalWinRate + "%。你也想收到加尔鲁什的惊喜派对吗？"
                 ] : false
             }
         }
@@ -2039,19 +2032,18 @@ var events = {
             var HeroID = 74
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate >= 50
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate >= 50
                 return limit ? [
-                    "New life blooms! You have played Alexstrasza " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Alexstrasza's global winning rate: " + GlobalWinRate + "%. You bring life and hope!",
-                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + Games + " 场游戏，胜率达到了 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。你带来了生命和希望！"
+                    "New life blooms! You have played Alexstrasza " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Alexstrasza's global winning rate: " + HeroInf.GlobalWinRate + "%. You bring life and hope!",
+                    "新的生命将在烈焰中绽放！本周你使用阿莱克丝塔萨进行了 " + HeroInf.Games + " 场游戏，胜率达到了 " + HeroInf.WinRate + "%，阿莱克丝塔萨全球胜率：" + HeroInf.GlobalWinRate + "%。你带来了生命和希望！"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 50
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 50
                 return limit ? [
-                    "Take heart, heroes, life will always blossom from the darkest soil! You have played Alexstrasza " + Games + " times, your winning rate is only " + WinRate + "%, Alexstrasza's global winning rate is " + GlobalWinRate + "%. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.",
-                    "振作起来，英雄们，生命总会在最黑暗的地方绽放！本周你使用阿莱克丝塔萨完成了 " + Games + " 场游戏，胜率只有 " + WinRate + "%，阿莱克丝塔萨全球胜率：" + GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望"
+                    "Take heart, heroes, life will always blossom from the darkest soil! You have played Alexstrasza " + HeroInf.Games + " times, your winning rate is only " + HeroInf.WinRate + "%, Alexstrasza's global winning rate is " + HeroInf.GlobalWinRate + "%. Life is good, life is beautiful, life is even strange. What it certainly is not, however, is a highway. Do not lose hope.",
+                    "振作起来，英雄们，生命总会在最黑暗的地方绽放！本周你使用阿莱克丝塔萨完成了 " + HeroInf.Games + " 场游戏，胜率只有 " + HeroInf.WinRate + "%，阿莱克丝塔萨全球胜率：" + HeroInf.GlobalWinRate + "%。生命很美好，生命很美丽，生命甚至有各种机缘，但再怎么样，生命也不会一帆风顺的，别失去希望"
                 ] : false
             }
         }
@@ -2062,19 +2054,18 @@ var events = {
             var HeroID = 77
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate > 57
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 57
                 return limit ? [
-                    "You are Maiev Master! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Maiev's global winning rate: " + GlobalWinRate + "%. You are a qualified Happy Darter.",
-                    "玛维的取胜技巧已被你掌握，本周你使用玛维进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。"
+                    "You are Maiev Master! You have played Maiev " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Maiev's global winning rate: " + HeroInf.GlobalWinRate + "%. You are a qualified Happy Darter.",
+                    "玛维的取胜技巧已被你掌握，本周你使用玛维进行了 " + HeroInf.Games + " 场游戏，胜率高达 " + HeroInf.WinRate + "%, 玛维全球胜率：" + HeroInf.GlobalWinRate + "%。"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 43
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 43
                 return limit ? [
-                    "The hunter is nothing without the hunted. You have played Maiev " + Games + " games, your winning rate is only " + WinRate + "%, Maiev's global winning rate is " + GlobalWinRate + "%.The key is master the time of her abilities E and D,and the accuracy of her Q.",
-                    "一个猎手失去了猎物就会一无所有。本周你使用玛维进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 玛维全球胜率：" + GlobalWinRate + "%。用好玛维的 E 和 D ，并且提高 Q 的精确度，能提高不少胜率！"
+                    "The hunter is nothing without the hunted. You have played Maiev " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Maiev's global winning rate is " + HeroInf.GlobalWinRate + "%.The key is master the time of her abilities E and D,and the accuracy of her Q.",
+                    "一个猎手失去了猎物就会一无所有。本周你使用玛维进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%, 玛维全球胜率：" + HeroInf.GlobalWinRate + "%。用好玛维的 E 和 D ，并且提高 Q 的精确度，能提高不少胜率！"
                 ] : false
             }
         }
@@ -2085,19 +2076,18 @@ var events = {
             var HeroID = 78
             var HeroInf = getHeroInf(HeroID)
             if (!HeroInf) return false
-            var Games = HeroInf["Games"], WinRate = HeroInf["WinRate"], GlobalWinRate = HeroInf["GlobalWinRate"]
-            if (WinRate > GlobalWinRate) {
-                var limit = Games >= 10 && WinRate > 57
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate) {
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate > 57
                 return limit ? [
-                    "En taro Adun! You have played Maiev " + Games + " times, your winning rate is up to " + WinRate + "%, which higher than Fenix's global winning rate: " + GlobalWinRate + "%. Never underestimate the strength of a dragoon.",
-                    "En taro Adun！本周你使用菲尼克斯进行了 " + Games + " 场游戏，胜率高达 " + WinRate + "%, 菲尼克斯全球胜率：" + GlobalWinRate + "%。不要低估一名龙骑士的战斗力"
+                    "En taro Adun! You have played Maiev " + HeroInf.Games + " times, your winning rate is up to " + HeroInf.WinRate + "%, which higher than Fenix's global winning rate: " + HeroInf.GlobalWinRate + "%. Never underestimate the strength of a dragoon.",
+                    "En taro Adun！本周你使用菲尼克斯进行了 " + HeroInf.Games + " 场游戏，胜率高达 " + HeroInf.WinRate + "%, 菲尼克斯全球胜率：" + HeroInf.GlobalWinRate + "%。不要低估一名龙骑士的战斗力"
                 ] : false
             }
             else {
-                var limit = Games >= 10 && WinRate < 43
+                var limit = HeroInf.Games >= 10 && HeroInf.WinRate < 43
                 return limit ? [
-                    "En taro Adun! You have played Maiev " + Games + " games, your winning rate is only " + WinRate + "%, Fenix's global winning rate is " + GlobalWinRate + "%. Drop your weapon! You have 15 seconds to comply!",
-                    "En taro Adun！本周你使用菲尼克斯进行了 " + Games + " 场游戏，胜率竟然才 " + WinRate + "%, 菲尼克斯全球胜率：" + GlobalWinRate + "%。放下武器，你还有15秒可以投降！"
+                    "En taro Adun! You have played Maiev " + HeroInf.Games + " games, your winning rate is only " + HeroInf.WinRate + "%, Fenix's global winning rate is " + HeroInf.GlobalWinRate + "%. Drop your weapon! You have 15 seconds to comply!",
+                    "En taro Adun！本周你使用菲尼克斯进行了 " + HeroInf.Games + " 场游戏，胜率竟然才 " + HeroInf.WinRate + "%, 菲尼克斯全球胜率：" + HeroInf.GlobalWinRate + "%。放下武器，你还有15秒可以投降！"
                 ] : false
             }
         }
@@ -2443,7 +2433,7 @@ var events = {
             var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(2)
             var XP = Math.round(dataPersonal.PlayerBase.ExperienceContribution.sum / dataPersonal.PlayerBase.game_total.sum)
             var GlobalXP = Math.round(dataGlobal.PlayerBase.ExperienceContribution.sum / dataGlobal.PlayerBase.game_total.sum)
-            if (WinRate > GlobalWinRate || XP >= GlobalXP)
+            if (HeroInf.WinRate > HeroInf.GlobalWinRate || XP >= GlobalXP)
                 return false
             return [
                 "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is " + XP + ", and the average global XP contribution  is " + GlobalXP,
