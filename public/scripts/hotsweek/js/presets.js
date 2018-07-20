@@ -1357,8 +1357,182 @@ var counter = {
 }
 
 var events = {
+// const TOWERS_OF_DOOM = 2;
+// const BATTLEFIELD_OF_ETERNITY = 4;
+// const GARDEN_OF_TERROR = 11;
+// const VOLSKAYA_FOUNDRY = 14;
+    "ServentOfSpiderQueen": [
+        ["Servent Of Spider Queen", "蛛后的仆人"],
+        function () {
+            var TurnedIn = (dataPersonal.PlayerBase.GemsTurnedIn.sum / dataPersonal.PlayerBase.maps_total.sum[5]).toFixed(1)
+            var GlobalTurnedIn = (dataGlobal.PlayerBase.GemsTurnedIn.sum / dataGlobal.PlayerBase.maps_total.sum[5]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[5] / dataPersonal.PlayerBase.maps_total.sum[5] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[5] / dataGlobal.PlayerBase.maps_total.sum[5] * 100).toFixed(2)
+            var limit = TurnedIn > 1.2 * GlobalTurnedIn && WinRate > 1.2 * GlobalWinRate
+            return limit ? [
+                "On Tomb Of The Spider Queen, you turned in " + TurnedIn + " per game, which contributes your winning rate to " + WinRate + "%, you are the very loyal servant of The sipder queen.",
+                "蛛后墓地图中，你平均每场上交了 " + TurnedIn + " 个宝石，使你的胜率达到了 " + WinRate + "%，蛛后的忠心的仆从就是你啦",
+            ] : false
+        }
+    ],
+    "GemsToTheQueen": [
+        ["Gems to the Queen", "给女王的贡品"],//蛛后墓
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[5] === undefined)
+                return false
+            var myGems = (dataPersonal.PlayerBase.GemsTurnedIn.sum / dataPersonal.PlayerBase.maps_total.sum[5]).toFixed(1)
+            var GlobalGems = (dataGlobal.PlayerBase.GemsTurnedIn.sum / dataGlobal.PlayerBase.maps_total.sum[5]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[5] / dataPersonal.PlayerBase.maps_total.sum[5] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[5] / dataGlobal.PlayerBase.maps_total.sum[5] * 100).toFixed(2)
+            var limit = myGems < GlobalGems && WinRate < GlobalWinRate
+            return limit ?
+                [
+                    "On Tomb Of The Spider Queen, your winning rate is "+ WinRate + "%, you turned in " + myShrine + " gems per game, and the global turned in per game is " + GlobalGems
+                     + ", Seizing the opportunity to summon Spdier is able to move towards the victory of the game",
+                    "你在蛛后墓的地图胜率是 " + WinRate + "%，你平均每场上交了 " + myShrine + " 个宝石，而全球平均上交了 " + GlobalGems + " 个宝石，抓住机会召唤织网者能够向游戏的胜利迈进"
+                ] : false
+        }
+    ],
+    "InfernalShrines": [
+        ["Infernal Shrines", "炼狱圣坛"],//炼狱圣坛3
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[3] === undefined)
+                return false
+            var myShrine = (dataPersonal.PlayerBase.DamageDoneToShrineMinions.sum / dataPersonal.PlayerBase.maps_total.sum[3]).toFixed(1)//炼狱圣坛祭坛内对小兵伤害
+            var GlobalShrine = (dataGlobal.PlayerBase.DamageDoneToShrineMinions.sum / dataGlobal.PlayerBase.maps_total.sum[3]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[3] / dataPersonal.PlayerBase.maps_total.sum[3] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[3] / dataGlobal.PlayerBase.maps_total.sum[3] * 100).toFixed(2)
+            //var WarriorRate[3] 等待支持
+            var limit = myShrine < GlobalShrine && WinRate < GlobalWinRate
+            return limit ?
+                [
+                    "On Purgatory Altar, The winning rate is " + WinRate + "%, and you average  made " + myShrine + " points damage to the Shrine minions, and the global average made " + GlobalShrine +
+                    " points damage , you can consider selecting a hero with strong ability to take Shrine minions.",
+                    "你在炼狱圣坛的地图胜率是 " + WinRate + "%，你平均每场对祭坛内的召唤物造成了 " + myShrine + " 点伤害，而全球平均水平造成了 " + GlobalShrine + " 点伤害，可以考虑在这张地图选取占点能力强的英雄"
+                ] : false
+        }
+    ],
+    "SkyTemple": [
+        ["Sky Temple", "天空殿"],//天空殿 6
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[6] === undefined)
+                return false
+            var myAltarDamage = (dataPersonal.PlayerBase.AltarDamageDone.sum / dataPersonal.PlayerBase.maps_total.sum[6]).toFixed(1)
+            var GlobalAltarDamage = (dataGlobal.PlayerBase.AltarDamageDone.sum / dataGlobal.PlayerBase.maps_total.sum[6]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[6] / dataPersonal.PlayerBase.maps_total.sum[6] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[6] / dataGlobal.PlayerBase.maps_total.sum[6] * 100).toFixed(2)
+            //var SupportRate[6] 等待支持
+            var limit = myAltarDamage < GlobalAltarDamage && WinRate < GlobalWinRate
+            return limit ?
+                [
+                    "On Sky Temple your winning rate is " + WinRate + "%, the average altar damage you make per game is " + myAltarDamage + " , and the global average damage is " + GlobalAltarDamage
+                     + ", try to pick the Prophase or strong Team fight Hero, it’s hard to be reversed when you take advantages  in this map.",
+                    "你在天空殿的地图胜率是 " + WinRate + "%，你平均每场造成的祭坛伤害是 " + myAltarDamage + " ，而全球平均伤害是 " + GlobalAltarDamage + "，尝试选取前期或者打团能力强的英雄，天空殿前期占领优势的时候很难被逆转"
+                ] : false
+        }
+    ],
+    "DragonRider": [
+        ["Dragon Rider", "龙骑士"],//巨龙镇7
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
+                return false
+            var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(2)
+            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(2)
+            var limit = myDragon > 2 * GlobalDragon
+            var times = Math.round(myDragon / GlobalDragon)
+            return limit ?
+                [
+                    "You are a real DragonRider with the " + times + " times to take dragon ,and the global average is " + GlobalDragon + "times",
+                    "你开龙的次数是全球平均水平的 " + times + " 倍呢！真是个名副其实的龙骑士！"
+                ] : false
+        }
+    ],
+    "DragonShire": [
+        ["Dragon Shire", "巨龙镇"], //巨龙镇7
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined || dataPersonal.PlayerBase.maps_win.sum[7] === undefined)
+                return false
+            var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[7] / dataPersonal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[7] / dataGlobal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
+            var ShrinesCaptured = (dataPersonal.PlayerBase.DragonShrinesCaptured.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptured.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
+            return [
+                "On Dragon Shire, your winning rate is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
+                + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
+                "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon + " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
+            ]
+        }
+    ],
+    "Miser": [
+        ["Miser", "吝啬鬼"],//黑心湾 8
+        function () {
+            var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
+            var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
+            var limit = Collected >= 5 && TurnedIn < 0.6 * Collected
+            return limit ?
+                [
+                    "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you only successfully turned in " + TurnedIn + ". You should look for more opportunities to turn in",
+                    "黑心湾地图中，你收集了 " + Collected + " 个达布隆币" + ",但是你只成功上交了 " + TurnedIn + " 个达布隆币，你应该多寻找机会上交"
+                ] : false
+        }
+    ],
+    "MinesSkull": [
+        ["Mines Skull", "鬼灵矿"],//鬼灵矿9
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[9] === undefined)
+                return false
+            var mySkull = (dataPersonal.PlayerBase.MinesSkullsCollected.sum / dataPersonal.PlayerBase.maps_total.sum[9]).toFixed(1)
+            var GlobalSkull = (dataGlobal.PlayerBase.MinesSkullsCollected.sum / dataGlobal.PlayerBase.maps_total.sum[9]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[9] / dataPersonal.PlayerBase.maps_total.sum[9] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[9] / dataGlobal.PlayerBase.maps_total.sum[9] * 100).toFixed(2)
+            var limit = mySkull < GlobalSkull && WinRate < GlobalWinRate
+            return limit ?
+                [
+                    "On MinesSkull, your winning rate is "+ WinRate + "%, you collect " + mySkull + " Skull per game, and the global collect per game is " + GlobalSkull
+                    + ", Taking the map mechanism is the fastest way to win",
+                    "你在鬼灵矿的地图胜率是 " + WinRate + "%，你平均每场收集了 " + mySkull + " 个矿石，而全球平均收集了 " + GlobalSkull + " 个矿石，争夺地图机制才是最快的取胜方法"
+                ] : false
+        }
+    ],
+    "UselessRavenTributes": [
+        ["Useless Raven Tributes", "无用的乌鸦诅咒"],//诅咒谷 10
+        function () {
+            var Collected = dataPersonal.PlayerBase.RavenTributesCollected.sum
+            var Damage = dataPersonal.PlayerBase.CurseDamageDone.sum
+            var Collected_gol = dataGlobal.PlayerBase.RavenTributesCollected.sum
+            var Damage_gol = dataPersonal.PlayerBase.CurseDamageDone.sum
+            var limit = Collected > 0.8 * Collected_gol && Damage < 0.5 * Damage_gol
+            return limit ?
+                [
+                    "On Curse Valley, your curse damage was " + Damage + ", and the global average was " + Damage_gol + ". Use the curse time to get the maximum curse damage, such as pushing the line, pushing the tower, etc..",
+                    "诅咒谷地图中，你的诅咒伤害是 " + Damage + " ,而全球平均水平是 " + Damage_gol + " 要善用诅咒时间来获取最大的诅咒伤害，比如跟推吃线、推塔等等"
+                ] : false
+        }
+    ],
+    "GardenOfTerror": [
+        ["Garden Of Terror", "恐魔园"], //恐魔园
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[11] === undefined)
+                return false
+            var mySeeds = (dataPersonal.PlayerBase.GardensSeedsCollected.sum / dataPersonal.PlayerBase.maps_total.sum[11]).toFixed(1)//预留
+            var GlobalSeeds = (dataGlobal.PlayerBase.GardensSeedsCollected.sum / dataGlobal.PlayerBase.maps_total.sum[11]).toFixed(1)//预留
+            var myDamage = (dataPersonal.PlayerBase.GardensPlantDamage.sum / dataPersonal.PlayerBase.maps_total.sum[11]).toFixed(1)
+            var GlobalDamage = (dataGlobal.PlayerBase.GardensPlantDamage.sum / dataGlobal.PlayerBase.maps_total.sum[11]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[11] / dataPersonal.PlayerBase.maps_total.sum[11] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[11] / dataGlobal.PlayerBase.maps_total.sum[11] * 100).toFixed(2)
+            var limit =  WinRate <= GlobalWinRate && mySeeds < GlobalSeeds
+            return limit ?
+                [
+                    "On the Garden Of Terror,your winning rate is " + WinRate + "%, your Terror caused " + myDamage + " point damage, and the global average damage is " + GlobalDamage
+                    + ", make good use of Garden Terror W and Q, the Terror's damage can be increased by the W-controlled defensive tower, and the Terror's Q can be used to seal the road.",
+                    "你这周恐魔园地图胜率是 " + WinRate + "%，你控制的恐魔造成了 " + myDamage + " 点伤害，而全球平均伤害量是 " + GlobalDamage + " 个，善用恐魔的 W 和 Q，恐魔攻击被 W 控制的防御塔能增加伤害，恐魔的 Q 可以用来封路"
+                ] : false
+        }
+    ],
     "ZergKiller": [
-        ["Zerg Killer", "虫群杀手"], //禁区
+        ["Zerg Killer", "虫群杀手"], //禁区12
         function () {
             var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
             var limit = AvgDamage > 6000
@@ -1374,14 +1548,34 @@ var events = {
         function () {
             if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
                 return false
-            var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
+            var AvgDamage = (dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12]).toFixed(1)
+            var GlobalAvgDamage = (dataGlobal.PlayerBase.DamageDoneToZerg.sum / dataGlobal.PlayerBase.maps_total.sum[12]).toFixed(1)
             var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
             var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
-            var limit = avgDamage <= 5000 || WinRate < GlobalWinRate
+            var limit =  WinRate <= GlobalWinRate
             return limit ?
                 [
-                    "You made " + AvgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
-                    "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + AvgDamage + " 点伤害"
+                    "In Braxis Holdout, Your winning rate  is " + WinRate + "%, you made " + AvgDamage + " Zerg damage per game, and the global damage to the Zerg is " + GlobalAvgDamage + " per game, The speed of cleaning up the Zerg is the key to success(priority to deal with Hydralisks)",
+                    "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + AvgDamage + " 点伤害，而全球平均对虫群造成的伤害是 " + GlobalAvgDamage + " 点伤害，对虫群的清理速度是成败的关键（优先处理刺蛇）"
+                ] : false
+        }
+    ],
+    // const WARHEAD_JUNCTION = 13;
+    "WarheadJunction": [
+        ["Warhead Junction", "弹头枢纽"], //弹头枢纽
+        function () {
+            if (dataPersonal.PlayerBase.maps_total.sum[13] === undefined)
+                return false
+            var mynuke = (dataPersonal.PlayerBase.NukeDamageDone.sum / dataPersonal.PlayerBase.maps_total.sum[13]).toFixed(1)
+            var Globalnuke = (dataGlobal.PlayerBase.NukeDamageDone.sum / dataGlobal.PlayerBase.maps_total.sum[13]).toFixed(1)
+            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[13] / dataPersonal.PlayerBase.maps_total.sum[13] * 100).toFixed(2)
+            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[13] / dataGlobal.PlayerBase.maps_total.sum[13] * 100).toFixed(2)
+            var limit =  WinRate <= GlobalWinRate && mynuke < Globalnuke
+            return limit ?
+                [
+                    "On the Warhead Junction, your winning rate is "+ WinRate + "%, you have caused " + mynuke + " Nuke damage, and the global average Nuke damage is " + Globalnuke
+                    + ", collecting nuclear warheads to destroy towers may increase your winning rate",
+                    "你这周弹头枢纽站地图胜率是 " + WinRate + "%，你造成了 " + mynuke + " 点核弹头伤害，而全球平均核弹头伤害量是 " + Globalnuke + " 个，收集核弹头用来摧毁建筑可能会提高你的弹头枢纽站的胜率"
                 ] : false
         }
     ],
@@ -1417,40 +1611,6 @@ var events = {
                 ] : false
         }
     ],
-    "DragonRider": [
-        ["Dragon Rider", "龙骑士"],//巨龙镇
-        function () {
-            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined)
-                return false
-            var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(2)
-            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(2)
-            var limit = myDragon > 2 * GlobalDragon
-            var times = Math.round(myDragon / GlobalDragon)
-            return limit ?
-                [
-                    "You are a real DragonRider with the " + times + " times to take dragon ,and the global average is " + GlobalDragon + "times",
-                    "你开龙的次数是全球平均水平的 " + times + " 倍呢！真是个名副其实的龙骑士！"
-                ] : false
-        }
-    ],
-    "DragonShire": [
-        ["Dragon Shire", "巨龙镇"], //巨龙镇
-        function () {
-            if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined || dataPersonal.PlayerBase.maps_win.sum[7] === undefined)
-                return false
-            var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            var WinRate = (dataPersonal.PlayerBase.maps_win.sum[7] / dataPersonal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
-            var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[7] / dataGlobal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
-            var ShrinesCaptured = (dataPersonal.PlayerBase.DragonShrinesCaptured.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptured.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            return [
-                "This week, your winning rate of Dragon Shire is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
-                + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
-                "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon + " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
-            ]
-        }
-    ],
     "Premades": [
         ["The King Of Premades", "开黑小能手"],
         function () {
@@ -1468,34 +1628,7 @@ var events = {
                 ] : false
         }
     ],
-    "Miser": [
-        ["Miser", "吝啬鬼"],//黑心湾
-        function () {
-            var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
-            var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
-            var limit = Collected >= 5 && TurnedIn < 0.6 * Collected
-            return limit ?
-                [
-                    "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you only successfully turned in " + TurnedIn + ". You should look for more opportunities to turn in",
-                    "黑心湾地图中，你收集了 " + Collected + " 个达布隆币" + ",但是你只成功上交了 " + TurnedIn + " 个达布隆币，你应该多寻找机会上交"
-                ] : false
-        }
-    ],
-    "UselessRavenTributes": [
-        ["Useless Raven Tributes", "无用的乌鸦诅咒"],//诅咒谷
-        function () {
-            var Collected = dataPersonal.PlayerBase.RavenTributesCollected.sum
-            var Damage = dataPersonal.PlayerBase.CurseDamageDone.sum
-            var Collected_gol = dataGlobal.PlayerBase.RavenTributesCollected.sum
-            var Damage_gol = dataPersonal.PlayerBase.CurseDamageDone.sum
-            var limit = Collected > 0.8 * Collected_gol && Damage < 0.5 * Damage_gol
-            return limit ?
-                [
-                    "On Curse Valley, your curse damage was " + Damage + ", and the global average was " + Damage_gol + ". Use the curse time to get the maximum curse damage, such as pushing the line, pushing the tower, etc..",
-                    "诅咒谷地图中，你的诅咒伤害是 " + Damage + " ,而全球平均水平是 " + Damage_gol + " 要善用诅咒时间来获取最大的诅咒伤害，比如跟推吃线、推塔等等"
-                ] : false
-        }
-    ],
+
     "PartyWinRate": [
         ["Good Bro", "好兄弟"],
         function () {
@@ -1569,18 +1702,6 @@ var events = {
             return limit ? [
                 "You have " + times_per + " Clutch Heals per game in the assist games, and you are the most reliable partner in the team.",
                 "你在辅助型局中，平均每场有 " + times_per + " 次关键治疗，是团队中最可靠的伙伴",
-            ] : false
-        }
-    ],
-    "ServentOfSpiderQueen": [
-        ["Servent Of Spider Queen", "蛛后的仆人"],
-        function () {
-            var TurnedIn = (dataPersonal.PlayerBase.GemsTurnedIn.sum / dataPersonal.PlayerBase.maps_total.sum[5]).toFixed(0)
-            var GlobalTurnedIn = (dataGlobal.PlayerBase.GemsTurnedIn.sum / dataGlobal.PlayerBase.maps_total.sum[5]).toFixed(0)
-            var limit = TurnedIn > 1.2 * GlobalTurnedIn
-            return limit ? [
-                "On Tomb Of The Spider Queen, you turned in " + TurnedIn + " per game, you are the very loyal servant of The sipder queen.",
-                "蛛后墓地图中，你平均每场上交了 " + TurnedIn + " 宝石，蛛后的忠心的仆从就是你啦",
             ] : false
         }
     ],
