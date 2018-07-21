@@ -1458,11 +1458,20 @@ var events = {
             var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[7] / dataGlobal.PlayerBase.maps_total.sum[7] * 100).toFixed(2)
             var ShrinesCaptured = (dataPersonal.PlayerBase.DragonShrinesCaptured.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
             var GlobalShrinesCaptured = (dataGlobal.PlayerBase.DragonShrinesCaptured.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
-            return [
-                "On Dragon Shire, your winning rate is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
-                + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
-                "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon + " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
-            ]
+            if(WinRate > 50 ) {
+                return [
+                    "On Dragon Shire, your winning rate is " + WinRate + "%, the global winning rate is " + GlobalWinRate + "%, you averaged take " + myDragon + " times dragon, the global average is " + GlobalDragon + " times, You average capture the Shirines "
+                    + ShrinesCaptured + " times, the global average is " + GlobalShrinesCaptured + " times",
+                    "你这周巨龙镇地图胜率是 " + WinRate + "%，全球胜率是 " + GlobalWinRate + "%，你平均每场开了 " + myDragon + " 次龙，全球平均开龙 " + GlobalDragon + " 次龙，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，全球平均占领祭坛 " + GlobalShrinesCaptured + " 次",
+                ]
+            }
+            if(WinRate < 50 && ( ShrinesCaptured < GlobalShrinesCaptured || myDragon < GlobalDragon) ) {
+                return [
+                    "On Dragon Shire, your winning rate is " + WinRate + "%, you averaged take " + myDragon + " times dragon, You average capture the Shirines "
+                    + ShrinesCaptured + " times, captures Shrines and catching time to ride Dragon are key to success",
+                    "你这周巨龙镇地图胜率是 " + WinRate + "%，，你平均每场开了 " + myDragon + " 次龙，，你平均每场占领了祭坛 " + ShrinesCaptured + " 次，占领祭坛、抓住机会开龙都是致胜的武器",
+                ]
+            }
         }
     ],
     "Miser": [
@@ -1560,7 +1569,6 @@ var events = {
                 ] : false
         }
     ],
-    // const WARHEAD_JUNCTION = 13;
     "WarheadJunction": [
         ["Warhead Junction", "弹头枢纽"], //弹头枢纽
         function () {
@@ -1628,7 +1636,6 @@ var events = {
                 ] : false
         }
     ],
-
     "PartyWinRate": [
         ["Good Bro", "好兄弟"],
         function () {
@@ -2209,7 +2216,6 @@ var events = {
             }
         }
     ],
-
     /*   //大饼
     "Zeratul": [//泽拉图 id:1  I appears the veil of the future, and behold only……oblivion. 
         //我挑开了未来的面纱，却只看到了……湮灭。
@@ -2275,18 +2281,27 @@ var events = {
         ["Energetic", "精力充沛"],
         function () {
             var games = dataPersonal.PlayerBase.game_total.sum
+            var WinRate = (dataPersonal.PlayerBase.game_win.sum / dataPersonal.PlayerBase.game_total.sum).toFixed(2)
             if (games < 10)
                 return false
             if (10 < games < 100) {
-                return [
-                    "Coooooool！ You played " + games + " times",
-                    "风暴暖暖！你总共玩了 " + games + " 局",
-                ]
+                if(WinRate > 50) {
+                    return [
+                        "Coooooool！You played " + games + " times, and your winning rate is " +WinRate+ "%",
+                        "风暴暖暖！你总共玩了 " + games + " 局，胜率达到了 " + WinRate + "%",
+                    ]
+                }
+                else{
+                    return [
+                        "Coooooool！You played " + games + " times, but your winning rate is " +WinRate+ "%, take a break when you feel tired",
+                        "风暴暖暖！你总共玩了 " + games + " 局，但是你的胜率只有 " + WinRate + "%，合理安排下游戏时间，适当休息下可能会提高胜率哦",
+                    ]
+                }
             }
             if (games > 100) {
                 return [
-                    "Amazing！ You played " + games + " times",
-                    "肝帝就是你啦！你总共玩了 " + games + " 局",
+                    "Amazing！You played " + games + " times, and your winning rate is " +WinRate+ "%",
+                    "肝帝就是你啦！你总共玩了 " + games + " 局，胜率达到了 " + WinRate + "%",
                 ]
             }
         }
@@ -2553,8 +2568,8 @@ var events = {
             if (WinRate > GlobalWinRate || Exp >= GlobalExp)
                 return false
             return [
-                "This week,your winning rate is " + WinRate + "%, your average XP contribution per game is " + Exp + ", and the average global XP contribution  is " + GlobalExp,
-                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 " + Exp + "，全球平均每场玩家贡献的经验值是 " + GlobalExp,
+                "This week,your winning rate is " + WinRate + "%, your average Exp contribution per game is " + Exp + ", and the average global Exp contribution  is " + GlobalExp + " Exp,which can give your team level and talent advantages.",
+                "你这周的胜率是 " + WinRate + "%，你平均每场为团队贡献的经验值是 " + Exp + " Exp，全球平均每场玩家贡献的经验值是 " + GlobalExp + " Exp,经验值能拉开等级差，也能带来天赋优势",
             ]
         }
     ],
@@ -2568,8 +2583,8 @@ var events = {
             if (WinRate > GlobalWinRate || Camp >= GlobalCamp)
                 return false
             return [
-                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalXP + " times",
-                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 " + Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalXP + " 次",
+                "This week,your winning rate is " + WinRate + "%, your average Camp Captures per game is " + Camp + " times, and the average global Camp Captures is " + GlobalCamp + " times, you can earn more benefits when Camp tie down your enemies,",
+                "你这周的胜率是 " + WinRate + "%，你平均每场占领了 " + Camp + " 次雇佣兵营地，全球平均每场玩家占领雇佣兵营地次数是 " + GlobalCamp + " 次，多利用雇佣兵牵制对手，趁机夺取机制",
             ]
         }
     ],
