@@ -85,14 +85,14 @@ var main = function () {
 	counter = window.counter
 	events = window.events
 	document.write('<h2>Player: ' + playerInfo.name + ' (from region ' + playerInfo.region + ')</h2>' + "<br />")
-	for (var i in counter) {
-		var item = counter[i]
-		var title = item[0]
-		var content = item[1]()
-		if (content !== false) {
-			document.write(title[lang] + ': ' + content[lang] + "<br />")
-		}
-	}
+    for (var i in counter) {
+        var content = counter[i]()
+        if(content !== false) {
+            for(var j of content) {
+                document.write(j + "<br />")
+            }
+        }
+    }
 	for (var i in events) {
 		var item = events[i]
 		var title = item[0]

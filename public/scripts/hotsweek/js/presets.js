@@ -57,17 +57,18 @@ var counter = {
     "WeekMostUsed": function() {
         var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
         var HeroInf = getHeroInf(HeroID)
+        console.log(HeroInf)
         var res = [
             [
                 ["Most Used", HeroInf.name_en],
-                [HeroInf.name_en + " Plays", HeroInf.Play + " times"],
+                [HeroInf.name_en + " Plays", HeroInf.Games + " times"],
                 [HeroInf.name_en + " Length", HeroInf.Time + " mins"],
                 [HeroInf.name_en + " Win", HeroInf.Win + " times"],
                 [HeroInf.name_en + " Winrate", HeroInf.WinRate + "%"],
             ],
             [
                 ["最常使用", HeroInf.name_cn],
-                [HeroInf.name_cn + "场次", HeroInf.Play + " 次"],
+                [HeroInf.name_cn + "场次", HeroInf.Games + " 次"],
                 [HeroInf.name_cn + "时长", HeroInf.Time + " 分钟"],
                 [HeroInf.name_cn + "获胜", HeroInf.Win + " 次"],
                 [HeroInf.name_cn + "胜率", HeroInf.WinRate + "%"],
@@ -78,17 +79,18 @@ var counter = {
     "WeekGlobalMostUsed": function() {
         var HeroID = dataGlobal.PlayerHeroes._sumMax.game_total[0]
         var HeroInf = getHeroInf(HeroID)
+        console.log(HeroInf)
         var res = [
             [
                 ["Most Used", HeroInf.name_en],
-                [HeroInf.name_en + " Plays", HeroInf.GlobalPlay + " times"],
+                [HeroInf.name_en + " Plays", HeroInf.GlobalGames + " times"],
                 [HeroInf.name_en + " Length", HeroInf.GlobalTime + " mins"],
                 [HeroInf.name_en + " Win", HeroInf.GlobalWin + " times"],
                 [HeroInf.name_en + " Winrate", HeroInf.GlobalWinRate + "%"],
             ],
             [
                 ["全球最常使用", HeroInf.name_cn],
-                [HeroInf.name_cn + "场次", HeroInf.GlobalPlay + " 次"],
+                [HeroInf.name_cn + "场次", HeroInf.GlobalGames + " 次"],
                 [HeroInf.name_cn + "时长", HeroInf.GlobalTime + " 分钟"],
                 [HeroInf.name_cn + "获胜", HeroInf.GlobalWin + " 次"],
                 [HeroInf.name_cn + "胜率", HeroInf.GlobalWinRate + "%"],
@@ -1850,7 +1852,6 @@ var events = {
       }
     ],
     "HeroOfLife": [
-<<<<<<< HEAD
         ["Hero Of Life", "本命英雄"],
         function () {
             var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
@@ -1863,19 +1864,6 @@ var events = {
                 "你使用了英雄 " + HeroInf.name_cn + " 上场了 " + Games + "次，胜率达到了" + WinRate + "%",
             ] : false
         }
-=======
-      ["Hero Of Life", "本命英雄"],
-      function() {
-        var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
-        var Games = dataPersonal.PlayerHeroes._sumMax.game_total[1]
-        var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
-        var limit = WinRate > 60 && Games >= 10
-        return limit ? [
-          "You have played Hero " + HeroID + " for" + Games + "times, with " + WinRate + "% winning rate.",
-          "你使用了英雄 " + HeroID + " 上场了 " + Games + "次，胜率达到了" + WinRate + "%",
-        ] : false
-      }
->>>>>>> ea205333c093339d5cc612cb793388ba42031f3e
     ],
     "MyLifeforaier": [
       ["My Life For Aier", "为了艾尔"],
@@ -2724,11 +2712,21 @@ function getHeroInf(HeroID) {
             "name_cn": HeroInf[HeroID][1],
         }
     var Games = dataPersonal.PlayerHeroes[HeroID].game_total.sum
+    var Win = dataPersonal.PlayerHeroes[HeroID].game_win.sum
+    var Time = dataPersonal.PlayerHeroes[HeroID].game_length.sum
     var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+    var GlobalGames = dataGlobal.PlayerHeroes[HeroID].game_total.sum
+    var GlobalWin = dataGlobal.PlayerHeroes[HeroID].game_win.sum
+    var GlobalTime = dataGlobal.PlayerHeroes[HeroID].game_length.sum
     var GlobalWinRate = (dataGlobal.PlayerHeroes[HeroID].game_win.sum / dataGlobal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
     return {
         "Games": Games,
+        "Win": Win,
         "WinRate": WinRate,
+        "Time": Time,
+        "GlobalGames": GlobalGames,
+        "GlobalTime": GlobalTime,
+        "GlobalWin": GlobalWin,
         "GlobalWinRate": GlobalWinRate,
         "name_en": HeroInf[HeroID][0],
         "name_cn": HeroInf[HeroID][1],
