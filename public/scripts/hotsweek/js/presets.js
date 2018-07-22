@@ -1718,10 +1718,11 @@ var events = {
             var HeroID = dataPersonal.PlayerHeroes._sumMax.game_total[0]
             var Games = dataPersonal.PlayerHeroes._sumMax.game_total[1]
             var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
+            var HeroInf = getHeroInf(HeroID)
             var limit = WinRate > 50 && Games >= 10
             return limit ? [
-                "You have played Hero " + HeroID + " for" + Games + "times, with " + WinRate + "% winning rate.",
-                "你使用了英雄 " + HeroID + " 上场了 " + Games + "次，胜率达到了" + WinRate + "%",
+                "You have played Hero " + HeroInf.name_en + " for" + Games + "times, with " + WinRate + "% winning rate.",
+                "你使用了英雄 " + HeroInf.name_cn + " 上场了 " + Games + "次，胜率达到了" + WinRate + "%",
             ] : false
         }
     ],
@@ -2611,6 +2612,52 @@ function getHeroInf(HeroID) {
     }
 }
 
+
+var Top3 = function () {//击杀 ，阵亡，KDA，雇佣兵，经验
+    var herolist = []
+    for (var hero in dataPersonal.PlayerHeroes) {
+        if (dataPersonal.PlayerHeroes[hero].game_total.sum > 0) {
+            herolist.pust([dataPersonal.PlayerHeroes[hero].game_total.sum, hero])
+        }
+    }
+    herolist.sort(function ([a, b], [c, d]) { return a < c })
+    var top3 = []
+
+    for (var i = 0; i < 3; i++) {
+        if (i >= herolist.length)
+            break;
+        var Kills = 0//dataPersonal.PlayerBase.Takedowns.sum
+        var Games = 0
+        var GlobalKills = 0//dataGlobal.PlayerBase.Takedowns.sum
+        var inf = {
+            "heroID": herolist[i][1],
+            "items": [
+                {
+                    "title": "击杀",
+                    "point": 0,
+                },
+                {
+                    "title": "阵亡",
+                    "point": 0,
+                },
+                {
+                    "title": "KDA",
+                    "point": 0,
+                },
+                {
+                    "title": "雇佣兵",
+                    "point": 0,
+                },
+                {
+                    "title": "经验",
+                    "point": 0,
+                },
+            ],
+        }
+        top3.push(inf)
+    }
+    return top3
+}
 
 // Todo: 排行榜，等待接口支持
 var ranking = {}
