@@ -2736,4 +2736,50 @@ function getHeroInf(HeroID) {
   }
 }
 
+var Top3 = function () {//击杀 ，阵亡，KDA，雇佣兵，经验
+    var herolist = []
+    for (var hero in dataPersonal.PlayerHeroes) {
+        if (dataPersonal.PlayerHeroes[hero].game_total.sum > 0) {
+            herolist.pust([dataPersonal.PlayerHeroes[hero].game_total.sum, hero])
+        }
+    }
+    herolist.sort(function ([a, b], [c, d]) { return a < c })
+    var top3 = []
+
+    for (var i = 0; i < 3; i++) {
+        if (i >= herolist.length)
+            break;
+        var Kills = 0//dataPersonal.PlayerBase.Takedowns.sum
+        var Games = 0
+        var GlobalKills = 0//dataGlobal.PlayerBase.Takedowns.sum
+        var inf = {
+            "heroID": herolist[i][1],
+            "items": [
+                {
+                    "title": "击杀",
+                    "point": 0,
+                },
+                {
+                    "title": "阵亡",
+                    "point": 0,
+                },
+                {
+                    "title": "KDA",
+                    "point": 0,
+                },
+                {
+                    "title": "雇佣兵",
+                    "point": 0,
+                },
+                {
+                    "title": "经验",
+                    "point": 0,
+                },
+            ],
+        }
+        top3.push(inf)
+    }
+    return top3
+}
+
 var ranking = {}

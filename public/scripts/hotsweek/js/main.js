@@ -11,13 +11,13 @@ var urlRanking = 'https://www.bphots.com/week/api/report/ranking/' + weekNumber
 var urlPersonal = 'https://www.bphots.com/week/api/report/personal/' + weekNumber + '/' + playerID
 
 var fetchData = function (url, params = null) {
-    return new Promise((resolve, reject) => {
-        fetch(url).then(response => response.json()).then((data) => {
-            resolve(data)
-        }, (error) => {
-            reject(error)
-        })
-    })
+	return new Promise((resolve, reject) => {
+		fetch(url).then(response => response.json()).then((data) => {
+			resolve(data)
+		}, (error) => {
+			reject(error)
+		})
+	})
 }
 
 var parseFields = function (data) {
@@ -59,15 +59,15 @@ var matchPresets = function (_data) {
 }
 
 Promise.all([
-    fetchData(urlPresets),
-    fetchData(urlGlobal),
-    fetchData(urlRanking),
-    fetchData(urlPersonal),
+	fetchData(urlPresets),
+	fetchData(urlGlobal),
+	fetchData(urlRanking),
+	fetchData(urlPersonal),
 ]).then(function ({
-    0: presets,
-    1: dataGlobal,
-    2: dataRanking,
-    3: dataPersonal
+	0: presets,
+	1: dataGlobal,
+	2: dataRanking,
+	3: dataPersonal
 }) {
     window.playerInfo = dataPersonal.PlayerInfo
     window.presets = presets
