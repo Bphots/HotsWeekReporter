@@ -1682,68 +1682,20 @@ var events = {
     ["The Light Of Support", "辅助之光"],
     function () {
       var Support = dataPersonal.PlayerBase.PlaysSupport.sum
-      var GlobalSupport = dataGlobal.PlayerBase.PlaysSupport.sum
       var SupportWin = dataPersonal.PlayerBase.WinsSupport.sum
       var gameTotal = dataPersonal.PlayerBase.game_total.sum
-      var ClutchHeals = dataPersonal.PlayerBase.ClutchHealsPerformed.sum
-      var ClutchHealsAvg = (dataPersonal.PlayerBase.ClutchHealsPerformed.sum / Support).toFixed(2)
-      var TeamFightHealing = (dataPersonal.PlayerBase.TeamfightHealingDone.sum / Support).toFixed(2)
-      var GlobalTeamFightHealing = (dataGlobal.PlayerBase.TeamfightHealingDone.sum / GlobalSupport).toFixed(2)
-
       if (gameTotal <= 0 || Support <= 0)
         return false;
 
       var SupportRate = (Support / gameTotal * 100).toFixed(2)
       var SupportWinRate = (SupportWin / Support * 100).toFixed(2)
-      var limit = Support >= 7 && SupportRate > 50 && TeamFightHealing > 1.2 * GlobalTeamFightHealing && ClutchHealsAvg > 2
+      var limit = Support >= 4 && SupportRate > 50
       return limit ? [
-        "Among your " + gameTotal + " games you have played last week, you chose " + gameTotal + " times as Support heroes, that was " + SupportRate + " of your total games, with the " + SupportWinRate + " % WinRate,and ClutchHeals "
-        + ClutchHeals + " times,The Healing of TeamFight is " + TeamFightHealing + ", hard work!",
-        "上周你在 " + gameTotal + " 局里，玩了 " + Support + " 局辅助型英雄，占了总局数的 " + SupportRate + "%" + "，您的胜率是 " + SupportWinRate + "%，关键治疗了 " + ClutchHeals + " 次，团战中治疗量是 " + TeamFightHealing + "，辛苦了！"
+        "Among your " + gameTotal + " games you have played last week, you chose " + gameTotal + " times as Support heroes, that was " + SupportRate + " of your total games, with the " + SupportWinRate + " WinRate",
+        "上周你在 " + gameTotal + " 局里，玩了 " + Support + " 局辅助，占了总局数的 " + SupportRate + "%" + "，您辅助的胜率是 " + SupportWinRate
       ] : false
     }
   ],
-    "TheHeartOfAssassin": [
-        ["The Heart Of Assassin", "刺客之心"],
-        function () {
-            var Assassin = dataPersonal.PlayerBase.PlaysAssassin.sum
-            var AssassinWin = dataPersonal.PlayerBase.WinsAssassin.sum
-            var gameTotal = dataPersonal.PlayerBase.game_total.sum
-            var TeamFightDamage = (dataPersonal.PlayerBase.TeamfightHeroDamage.sum / Assassin).toFixed(2)
-            var GlobalTeamFightDamage = (dataGlobal.PlayerBase.TeamfightHeroDamage.sum / GlobalAssassin).toFixed(2)
-            if (gameTotal <= 0 || Assassin <= 0)
-                return false;
-
-            var AssassinRate = (Assassin / gameTotal * 100).toFixed(2)
-            var AssassinWinRate = (AssassinWin / Assassin * 100).toFixed(2)
-            var limit = Assassin >= 10 && SupportRate > 55  && TeamFightDamage > 1.2 * GlobalTeamFightDamage
-            return limit ? [
-                "Among your " + gameTotal + " games you have played last week, you chose " + gameTotal + " times as Assassin heroes, that was " + AssassinRate + " of your total games, with the " + AssassinWinRate + " % WinRate The Damage of TeamFight is "
-                + TeamFightDamage + ", nice job!",
-                "上周你在 " + gameTotal + " 局里，玩了 " + Assassin + " 局刺杀型英雄，占了总局数的 " + AssassinRate + "%" + "，您的胜率是 " + AssassinWinRate + "%，团战中对英雄造成的伤害量是 " + TeamFightDamage + "，干得不错！"
-            ] : false
-        }
-    ],
-    // "TheWallOfTeam": [
-    //     ["The Wall Of Team", "团队之盾"],
-    //     function () {
-    //         var Warrior = dataPersonal.PlayerBase.PlaysWarrior.sum
-    //         var WarriorWin = dataPersonal.PlayerBase.WinsWarrior.sum
-    //         var gameTotal = dataPersonal.PlayerBase.game_total.sum
-    //         var TeamFightDamage = (dataPersonal.PlayerBase.TeamfightHeroDamage.sum / Warrior).toFixed(2)
-    //         var GlobalTeamFightDamage = (dataGlobal.PlayerBase.TeamfightHeroDamage.sum / GlobalWarrior).toFixed(2)
-    //         if (gameTotal <= 0 || Warrior <= 0)
-    //             return false;
-    //
-    //         var WarriorRate = (Warrior / gameTotal * 100).toFixed(2)
-    //         var WarriorWinRate = (WarriorWin / Warrior * 100).toFixed(2)
-    //         var limit = Warrior >= 10 && WarriorRate > 55  && TeamFightDamage > 1.2 * GlobalTeamFightDamage
-    //         return limit ? [
-    //             "Among your " + gameTotal + " games you have played last week, you chose " + gameTotal + " times as Warrior heroes, that was " + WarriorRate + " of your total games, with the " + WarriorWinRate + " WinRate",
-    //             "上周你在 " + gameTotal + " 局里，玩了 " + Warrior + " 局战斗型英雄，占了总局数的 " + WarriorRate + "%" + "，您的胜率是 " + WarriorWinRate
-    //         ] : false
-    //     }
-    // ],
   "DragonRider": [
     ["Dragon Rider", "龙骑士"], //巨龙镇
     function () {
@@ -1857,9 +1809,8 @@ var events = {
   "ControlMan": [
     ["Control Man", "掌控者"],
     function () {
-      var data = dataPersonal.PlayerBase.TimeCCdEnemyHeroes.sum
-      var games = dataPersonal.PlayerBase.game_total.sum
-      var limit = ( data / games ) > 50
+      var data = Math.round(dataPersonal.PlayerBase.TimeCCdEnemyHeroes.sum)
+      var limit = data > 150
       return limit ? [
         "You have controlled enemy hero for " + data + " seconds",
         "这周你控制了敌方英雄 " + data + " 秒",
