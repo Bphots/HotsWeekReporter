@@ -1750,13 +1750,25 @@ var events = {
     function () {
       var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
       var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
-      var limit = Collected >= 5 && TurnedIn < 0.6 * Collected
+      var limit = Collected >= 3 && TurnedIn < 0.6 * Collected
       return limit ? [
         "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you only successfully turned in " + TurnedIn + ". You should look for more opportunities to turn in",
         "黑心湾地图中，你收集了 " + Collected + " 个达布隆币" + ",但是你只成功上交了 " + TurnedIn + " 个达布隆币，你应该多寻找机会上交"
       ] : false
     }
   ],
+  "Hunter": [
+     ["Hunter", "猎人"], //黑心湾
+     function () {
+        var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
+        var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
+        var limit =  TurnedIn > 2 * Collected && TurnedIn > 20
+        return limit ? [
+           "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you  successfully turned in " + TurnedIn + " . Superb game strategy! Hunt the rich!",
+           "黑心湾地图中，你收集了 " + Collected + " 个达布隆币" + ",但是上交了高达 " + TurnedIn + " 个达布隆币，高超的游戏策略！狩猎敌方富人！"
+         ] : false
+        }
+    ],
   "UselessRavenTributes": [
     ["Useless Raven Tributes", "无用的乌鸦诅咒"], //诅咒谷
     function () {
