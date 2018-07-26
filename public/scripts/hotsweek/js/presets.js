@@ -10,7 +10,7 @@ var timestamptotime = function (time) {
   var date = new Date(time * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
   var Y = date.getFullYear() + "-";
   var M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-";
-  var D = date.getDate() + " ";
+  var D = date.getDate()< 10 ? "0" + date.getDate() + "  " : date.getDate()+ " ";
   var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
   var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
   var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
@@ -61,14 +61,14 @@ var counter = {
       [
         ["Most Used", HeroInf.name_en],
         [HeroInf.name_en + " Plays", HeroInf.Play + " times"],
-        [HeroInf.name_en + " Length", HeroInf.Time + " mins"],
+        [HeroInf.name_en + " Length", HeroInf.Length + " mins"],
         [HeroInf.name_en + " Win", HeroInf.Win + " times"],
         [HeroInf.name_en + " Winrate", HeroInf.WinRate + "%"],
       ],
       [
         ["最常使用", HeroInf.name_cn],
         [HeroInf.name_cn + "场次", HeroInf.Play + " 次"],
-        [HeroInf.name_cn + "时长", HeroInf.Time + " 分钟"],
+        [HeroInf.name_cn + "时长", HeroInf.Length + " 分钟"],
         [HeroInf.name_cn + "获胜", HeroInf.Win + " 次"],
         [HeroInf.name_cn + "胜率", HeroInf.WinRate + "%"],
       ],
@@ -82,14 +82,14 @@ var counter = {
       [
         ["Most Used", HeroInf.name_en],
         [HeroInf.name_en + " Plays", HeroInf.GlobalPlay + " times"],
-        [HeroInf.name_en + " Length", HeroInf.GlobalTime + " mins"],
+        [HeroInf.name_en + " Length", HeroInf.GlobalLength + " mins"],
         [HeroInf.name_en + " Win", HeroInf.GlobalWin + " times"],
         [HeroInf.name_en + " Winrate", HeroInf.GlobalWinRate + "%"],
       ],
       [
         ["全球最常使用", HeroInf.name_cn],
         [HeroInf.name_cn + "场次", HeroInf.GlobalPlay + " 次"],
-        [HeroInf.name_cn + "时长", HeroInf.GlobalTime + " 分钟"],
+        [HeroInf.name_cn + "时长", HeroInf.GlobalLength + " 分钟"],
         [HeroInf.name_cn + "获胜", HeroInf.GlobalWin + " 次"],
         [HeroInf.name_cn + "胜率", HeroInf.GlobalWinRate + "%"],
       ],
@@ -1399,7 +1399,7 @@ var counter = {
     for (var hero in dataGlobal.PlayerHeroes) {
       if (dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 0) {
         var Rate = (dataGlobal.PlayerHeroes[hero].game_win_HeroLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum * 100).toFixed(2)
-        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
+        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_HeroLeague.sum > 5) {
           WinRate = Rate
           HeroID = parseInt(hero)
         }
@@ -1424,7 +1424,7 @@ var counter = {
     for (var hero in dataGlobal.PlayerHeroes) {
       if (dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum > 0) {
         var Rate = (dataGlobal.PlayerHeroes[hero].game_win_TeamLeague.sum / dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum * 100).toFixed(2)
-        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
+        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_TeamLeague.sum > 5) {
           WinRate = Rate
           HeroID = parseInt(hero)
         }
@@ -1449,7 +1449,7 @@ var counter = {
     for (var hero in dataGlobal.PlayerHeroes) {
       if (dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum > 0) {
         var Rate = (dataGlobal.PlayerHeroes[hero].game_win_QuickMatch.sum / dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum * 100).toFixed(2)
-        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_UnrankedDraft.sum > 5) {
+        if (Rate > WinRate && dataGlobal.PlayerHeroes[hero].game_total_QuickMatch.sum > 5) {
           WinRate = Rate
           HeroID = parseInt(hero)
         }
@@ -1654,12 +1654,12 @@ var events = {
   "HoldoutRate": [
     ["Braxis Holdout", "布莱克西斯禁区"], //禁区
     function () {
-      if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined)
+      if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined || dataPersonal.PlayerBase.maps_total.sum[12] <= 5)
         return false
       var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
       var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
       var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
-      var limit = AvgDamage <= 5000 || WinRate < GlobalWinRate
+      var limit = AvgDamage <= 5000 || parseInt(WinRate) < parseInt(GlobalWinRate)
       return limit ? [
         "You made " + AvgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
         "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + AvgDamage + " 点伤害"
@@ -1673,8 +1673,8 @@ var events = {
       var GlobalWinRate = (dataGlobal.PlayerBase.game_win.sum / dataGlobal.PlayerBase.game_total.sum * 100).toFixed(0)
       var limit = WinRate > 1.3 * GlobalWinRate
       return limit ? [
-        "Your win rate (" + WinRate + "%) is far higher than the global",
-        "你的胜率 (" + WinRate + "%) 远远高于全球水平"
+        "Your win rate " + WinRate + "% is far higher than the global",
+        "你的胜率 " + WinRate + "% 远远高于全球水平"
       ] : false
     }
   ],
@@ -1790,8 +1790,8 @@ var events = {
       var globalHeroDamage = Math.round(dataGlobal.PlayerBase.HeroDamage.sum / dataGlobal.PlayerBase.game_total.sum)
       var limit = myHeroDamage > 1.5 * globalHeroDamage
       return limit ? [
-        "Your average HeroDamage (" + myHeroDamage + ") is far higher than the global average (" + globalHeroDamage + ") ",
-        "你的场均英雄伤害 (" + myHeroDamage + ") 远远高于全球平均水平( " + globalHeroDamage + ") "
+        "Your average HeroDamage " + myHeroDamage + " is far higher than the global average " + globalHeroDamage,
+        "你的场均英雄伤害 " + myHeroDamage + " 远远高于全球平均水平 " + globalHeroDamage
       ] : false
     }
   ],
@@ -1810,7 +1810,8 @@ var events = {
     ["Control Man", "掌控者"],
     function () {
       var data = Math.round(dataPersonal.PlayerBase.TimeCCdEnemyHeroes.sum)
-      var limit = data > 150
+      var games = dataPersonal.PlayerBase.game_total.sum
+      var limit = (data / games) > 50
       return limit ? [
         "You have controlled enemy hero for " + data + " seconds",
         "这周你控制了敌方英雄 " + data + " 秒",
@@ -2044,7 +2045,7 @@ var events = {
     }
   ],
   "Abathur": [
-    ["Evolution Complete!", "进化完成"],
+    ["Evolution Complete!", "进化完成"],//阿巴瑟 22
     function () {
       var HeroID = 22
       var HeroInf = getHeroInf(HeroID)
@@ -2080,7 +2081,7 @@ var events = {
     }
   ],
   "Murky": [
-    ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"],
+    ["Grglrgl！Lrgl grgrmrmlgr!", "Grglrgl！Lrgl grgrmrmlgr！"], //鱼人 26
     function () {
       var HeroID = 26
       var HeroInf = getHeroInf(HeroID)
@@ -2173,7 +2174,7 @@ var events = {
     }
   ],
   "Alarak": [
-    ["Krisol thok aran!", "骚骚可浪"],
+    ["Krisol thok aran!", "骚骚可浪"],//坚果 56
     function () {
       var HeroID = 56
       var HeroInf = getHeroInf(HeroID)
@@ -2194,7 +2195,7 @@ var events = {
     }
   ],
   "Varian": [
-    ["High King", "至高王"], //瓦里安
+    ["High King", "至高王"], //瓦里安 59
     function () {
       var HeroID = 59
       var HeroInf = getHeroInf(HeroID)
@@ -2215,7 +2216,7 @@ var events = {
     }
   ],
   "Ragnaros": [
-    ["The Firelord", "炎魔之王"], //螺丝
+    ["The Firelord", "炎魔之王"], //螺丝 60
     function () {
       var HeroID = 60
       var HeroInf = getHeroInf(HeroID)
@@ -2236,7 +2237,7 @@ var events = {
     }
   ],
   "Genji": [
-    ["Happy Darter", "快乐镖男"], //源氏
+    ["Happy Darter", "快乐镖男"], //源氏 66
     function () {
       var HeroID = 66
       var HeroInf = getHeroInf(HeroID)
@@ -2257,7 +2258,7 @@ var events = {
     }
   ],
   "Garrosh": [
-    ["Hellscream", "地狱咆哮"], //加尔鲁什
+    ["Hellscream", "地狱咆哮"], //加尔鲁什 70
     function () {
       var HeroID = 70
       var HeroInf = getHeroInf(HeroID)
@@ -2278,7 +2279,7 @@ var events = {
     }
   ],
   "Alexstrasza": [
-    ["Life-Binder", "生命缚誓者"], //阿莱克丝塔萨
+    ["Life-Binder", "生命缚誓者"], //阿莱克丝塔萨 74
     function () {
       var HeroID = 74
       var HeroInf = getHeroInf(HeroID)
@@ -2299,7 +2300,7 @@ var events = {
     }
   ],
   "Maiev": [
-    ["Where is Illidan?", "伊利丹在哪？"], //玛维 //Warden
+    ["Where is Illidan?", "伊利丹在哪？"], //玛维 //Warden 77
     function () {
       var HeroID = 77
       var HeroInf = getHeroInf(HeroID)
@@ -2320,7 +2321,7 @@ var events = {
     }
   ],
   "Fenix": [
-    ["Phoenix", "凤凰骑士"], //菲尼克斯
+    ["Phoenix", "凤凰骑士"], //菲尼克斯 78
     function () {
       var HeroID = 78
       var HeroInf = getHeroInf(HeroID)
@@ -2710,13 +2711,13 @@ var HeroInf = { 1: ['Zeratul', '泽拉图'], 2: ['Valla', '维拉'], 3: ['Uther'
 
 function getHeroInf(HeroID) {
   if (HeroInf[HeroID] === undefined) return false
-  if (dataPersonal.PlayerHeroes[HeroID] != undefined) {
+  if (dataPersonal.PlayerHeroes[HeroID] !== undefined) {
     var Play = dataPersonal.PlayerHeroes[HeroID].game_total.sum
     var Length = dataPersonal.PlayerHeroes[HeroID].game_length.sum
     var Win = dataPersonal.PlayerHeroes[HeroID].game_win.sum
     var WinRate = Play ? (Win / Play * 100).toFixed(2) : 0
   }
-  if (dataGlobal.PlayerHeroes[HeroID] != undefined) {
+  if (dataGlobal.PlayerHeroes[HeroID] !== undefined) {
     var GlobalPlay = dataGlobal.PlayerHeroes[HeroID].game_total.sum
     var GlobalLength = dataGlobal.PlayerHeroes[HeroID].game_length.sum
     var GlobalWin = dataGlobal.PlayerHeroes[HeroID].game_win.sum
