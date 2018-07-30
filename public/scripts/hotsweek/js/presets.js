@@ -1644,7 +1644,7 @@ var events = {
     ["Zerg Killer", "虫群杀手"], //禁区
     function () {
       var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
-      var limit = AvgDamage > 6000
+      var limit = AvgDamage > 8000
       return limit ? [
         "You made " + AvgDamage + " zerg damage on average in Braxis Holdout",
         "平均每场布莱克西斯禁区中，你对虫群造成 " + AvgDamage + " 点伤害"
@@ -1654,18 +1654,19 @@ var events = {
   "HoldoutRate": [
     ["Braxis Holdout", "布莱克西斯禁区"], //禁区
     function () {
-      if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined || dataPersonal.PlayerBase.maps_total.sum[12] <= 5)
+      if (dataPersonal.PlayerBase.maps_total.sum[12] === undefined || dataPersonal.PlayerBase.maps_total.sum[12] < 5 || dataPersonal.PlayerBase.maps_win.sum[12] === undefined)
         return false
       var AvgDamage = Math.round(dataPersonal.PlayerBase.DamageDoneToZerg.sum / dataPersonal.PlayerBase.maps_total.sum[12])
       var WinRate = (dataPersonal.PlayerBase.maps_win.sum[12] / dataPersonal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
       var GlobalWinRate = (dataGlobal.PlayerBase.maps_win.sum[12] / dataGlobal.PlayerBase.maps_total.sum[12] * 100).toFixed(2)
-      var limit = AvgDamage <= 5000 || parseInt(WinRate) < parseInt(GlobalWinRate)
+      var limit = AvgDamage <= 4000 || parseInt(WinRate) < parseInt(GlobalWinRate)
       return limit ? [
         "You made " + AvgDamage + " zerg damage on average in Braxis Holdout,and you winning rate is " + WinRate + "%",
         "你这周布莱克西斯禁区地图胜率是 " + WinRate + "%，你对虫群造成 " + AvgDamage + " 点伤害"
       ] : false
     }
   ],
+
   "WinRate": [
     ["Amazing Win Rate", "令人惊讶的胜率"],
     function () {
@@ -1714,7 +1715,7 @@ var events = {
   "DragonShire": [
     ["Dragon Shire", "巨龙镇"], //巨龙镇
     function () {
-      if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined || dataPersonal.PlayerBase.maps_win.sum[7] === undefined)
+      if (dataPersonal.PlayerBase.maps_total.sum[7] === undefined || dataPersonal.PlayerBase.maps_win.sum[7] === undefined || dataPersonal.PlayerBase.maps_total.sum[7] < 5 )
         return false
       var myDragon = (dataPersonal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataPersonal.PlayerBase.maps_total.sum[7]).toFixed(1)
       var GlobalDragon = (dataGlobal.PlayerBase.DragonNumberOfDragonCaptures.sum / dataGlobal.PlayerBase.maps_total.sum[7]).toFixed(1)
@@ -1758,17 +1759,17 @@ var events = {
     }
   ],
   "Hunter": [
-     ["Hunter", "猎人"], //黑心湾
-     function () {
-        var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
-        var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
-        var limit =  TurnedIn > 2 * Collected && TurnedIn > 20
-        return limit ? [
-           "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you  successfully turned in " + TurnedIn + " . Superb game strategy! Hunt the rich!",
+    ["Hunter", "猎人"], //黑心湾
+    function () {
+       var Collected = dataPersonal.PlayerBase.BlackheartDoubloonsCollected.sum
+       var TurnedIn = dataPersonal.PlayerBase.BlackheartDoubloonsTurnedIn.sum
+       var limit =  TurnedIn > 2 * Collected && TurnedIn > 20
+       return limit ? [
+          "On Black Heart Bay, you collected " + Collected + " Doubloons Coins " + ", but you  successfully turned in " + TurnedIn + " . Superb game strategy! Hunt the rich!",
            "黑心湾地图中，你收集了 " + Collected + " 个达布隆币" + ",但是上交了高达 " + TurnedIn + " 个达布隆币，高超的游戏策略！狩猎敌方富人！"
-         ] : false
-        }
-    ],
+       ] : false
+    }
+   ],
   "UselessRavenTributes": [
     ["Useless Raven Tributes", "无用的乌鸦诅咒"], //诅咒谷
     function () {
@@ -1802,8 +1803,8 @@ var events = {
       var globalHeroDamage = Math.round(dataGlobal.PlayerBase.HeroDamage.sum / dataGlobal.PlayerBase.game_total.sum)
       var limit = myHeroDamage > 1.5 * globalHeroDamage
       return limit ? [
-        "Your average HeroDamage " + myHeroDamage + " is far higher than the global average " + globalHeroDamage,
-        "你的场均英雄伤害 " + myHeroDamage + " 远远高于全球平均水平 " + globalHeroDamage
+        "Your average HeroDamage (" + myHeroDamage + ") is far higher than the global average (" + globalHeroDamage + ") ",
+        "你的场均英雄伤害 (" + myHeroDamage + ") 远远高于全球平均水平( " + globalHeroDamage + ") "
       ] : false
     }
   ],
@@ -1875,7 +1876,7 @@ var events = {
       var Games = dataPersonal.PlayerHeroes._sumMax.game_total[1]
       var WinRate = (dataPersonal.PlayerHeroes[HeroID].game_win.sum / dataPersonal.PlayerHeroes[HeroID].game_total.sum * 100).toFixed(2)
       var HeroInf = getHeroInf(HeroID)
-      var limit = WinRate > 60 && Games >= 10
+      var limit = WinRate > 55 && Games >= 10
       return limit ? [
         "You have played Hero " + HeroInf.name_en + " for " + Games + " times, with " + WinRate + "% winning rate.",
         "你使用了英雄 " + HeroInf.name_cn + " 上场了 " + Games + " 次，胜率达到了" + WinRate + "%",
